@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lockstep Arcade - Multiplayer Gaming Platform</title>
+    <meta name="description" content="Lockstep Arcade - A multiplayer gaming platform featuring classic games reimagined with modern netcode. Currently featuring Lemmings with ranked matches and cooperative challenges.">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">Lockstep Arcade</div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#features">Features</a>
+                <a href="#screenshots">Screenshots</a>
+                <a href="#download">Download</a>
+                <a href="#signup">Beta Access</a>
+                <a href="changelog.html">Changelog</a>
+            </div>
+        </div>
+    </nav>
+
+    <header id="home" class="hero">
+        <img src="banner.jpg" alt="Lockstep Arcade Banner" class="banner-image">
+        <div class="container hero-content">
+            <h1>Welcome to Lockstep Arcade</h1>
+            <p class="lead">A multiplayer gaming platform featuring classic games reimagined with deterministic lockstep netcode</p>
+            <div class="cta-buttons">
+                <a href="#download" class="btn btn-primary">Download Now</a>
+                <a href="#signup" class="btn btn-secondary">Request Beta Access</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="about" class="section">
+        <div class="container">
+            <h2>About Lockstep Arcade</h2>
+            <p>Lockstep Arcade is a shared multiplayer lobby system designed to host multiple classic games, all running on the same deterministic lockstep network architecture. This means smooth, synchronized gameplay across all players with minimal bandwidth usage.</p>
+
+            <div class="game-info">
+                <h3>Currently Available: Lemmings</h3>
+                <p>Experience the classic puzzle-strategy game reimagined for competitive and cooperative multiplayer! Guide your lemmings from start to exit, managing limited resources and competing against up to 3 other players.</p>
+            </div>
+
+            <div class="key-points">
+                <div class="point">
+                    <h4>Up to 4 Players</h4>
+                    <p>Compete or cooperate with friends in real-time</p>
+                </div>
+                <div class="point">
+                    <h4>Multiple Game Modes</h4>
+                    <p>Friendly matches, ranked competitive play, and cooperative challenges</p>
+                </div>
+                <div class="point">
+                    <h4>Lockstep Network Architecture</h4>
+                    <p>Deterministic simulation ensures perfect synchronization with minimal data transfer</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="section section-alt">
+        <div class="container">
+            <h2>Features</h2>
+            <div class="features-grid">
+                <div class="feature">
+                    <h3>Friendly Games</h3>
+                    <p>Create custom rooms and play casual matches with friends</p>
+                </div>
+                <div class="feature">
+                    <h3>Ranked Matches</h3>
+                    <p>Compete for glory in ranked play with Glicko2 rating system and leaderboards</p>
+                </div>
+                <div class="feature">
+                    <h3>Cooperative Challenges</h3>
+                    <p>Team up to tackle difficult maps and compete for high scores</p>
+                </div>
+                <div class="feature">
+                    <h3>Shared Lobby</h3>
+                    <p>See who's online, browse active games, and join matches seamlessly</p>
+                </div>
+                <div class="feature">
+                    <h3>Classic Gameplay</h3>
+                    <p>Familiar Lemmings mechanics with new orders like raise ground and upward dig</p>
+                </div>
+                <div class="feature">
+                    <h3>Active Development</h3>
+                    <p>Regular updates with new features, maps, and improvements</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="screenshots" class="section">
+        <div class="container">
+            <h2>Screenshots</h2>
+            <div class="screenshots-grid">
+                <div class="screenshot">
+                    <img src="screenshot1.png" alt="Lemmings Gameplay Screenshot 1">
+                </div>
+                <div class="screenshot">
+                    <img src="screenshot2.png" alt="Lemmings Gameplay Screenshot 2">
+                </div>
+                <div class="screenshot">
+                    <img src="screenshot3.png" alt="Lemmings Gameplay Screenshot 3">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="download" class="section section-alt">
+        <div class="container">
+            <h2>Download</h2>
+            <div class="download-box">
+                <h3>Current Version: 0.0.7</h3>
+                <p>Download the latest client release for Windows</p>
+                <a href="lemmings_client_release_0.0.7.zip" class="btn btn-primary btn-large" download>
+                    Download Lockstep Arcade v0.0.7
+                </a>
+                <p class="download-note">File size: ~5.2 MB</p>
+
+                <div class="important-notice">
+                    <h4>Important: Credentials Required</h4>
+                    <p>The game requires a credentials file to connect to the dedicated server. After downloading, please <a href="#signup">request beta access</a> below to receive your credentials.bin file via email.</p>
+                </div>
+
+                <div class="installation-link">
+                    <p><a href="setup.html">View Installation Instructions</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="signup" class="section">
+        <div class="container">
+            <h2>Request Beta Access</h2>
+            <p class="section-intro">Sign up to receive your credentials file and get notified about updates and new features. The game is currently in early development, and we're looking for players to test and provide feedback!</p>
+
+            <form action="https://api.web3forms.com/submit" method="POST" class="signup-form" id="signupform">
+                <input type="hidden" name="access_key" value="2f3c7147-e4fb-4008-babd-8de206ece816">
+                <input type="hidden" name="subject" value="New Beta Access Request - Lockstep Arcade">
+                <input type="hidden" name="from_name" value="Lockstep Arcade Website">
+
+                <div class="form-group">
+                    <label for="name">Name *</label>
+                    <input type="text" id="name" name="name" required placeholder="Your name">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="player_name">Preferred Player Name</label>
+                    <input type="text" id="player_name" name="player_name" maxlength="30" placeholder="In-game name (max 30 characters)">
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Additional Information (Optional)</label>
+                    <textarea id="message" name="message" rows="4" placeholder="Tell us about your gaming experience, feedback ideas, or anything else you'd like to share..."></textarea>
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <label>
+                        <input type="checkbox" name="notifications" value="yes" checked>
+                        I want to receive email notifications about updates and new features
+                    </label>
+                </div>
+
+                <div class="h-captcha" data-captcha="true"></div>
+
+                <button type="submit" class="btn btn-primary btn-large">Request Beta Access</button>
+            </form>
+
+            <p class="form-note">We'll send you a credentials.bin file via email within 24-48 hours. Make sure to check your spam folder!</p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Lockstep Arcade</h4>
+                    <p>Multiplayer gaming reimagined with modern netcode</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Links</h4>
+                    <ul>
+                        <li><a href="setup.html">Installation Guide</a></li>
+                        <li><a href="changelog.html">Changelog</a></li>
+                        <li><a href="#download">Download</a></li>
+                        <li><a href="#signup">Beta Access</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>System Requirements</h4>
+                    <ul>
+                        <li>Windows 10/11</li>
+                        <li>Active internet connection</li>
+                        <li>Mouse for controls</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

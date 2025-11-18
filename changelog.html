@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Changelog - Lockstep Arcade</title>
+    <meta name="description" content="Version history and changelog for Lockstep Arcade">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">Lockstep Arcade</div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="index.html#features">Features</a>
+                <a href="index.html#screenshots">Screenshots</a>
+                <a href="index.html#download">Download</a>
+                <a href="index.html#signup">Beta Access</a>
+                <a href="changelog.html">Changelog</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="section">
+        <div class="container">
+            <h2>Changelog</h2>
+            <p class="section-intro">Track the evolution of Lockstep Arcade through our version history</p>
+
+            <div class="changelog-container">
+                <div class="version-block current-version">
+                    <div class="version-header">
+                        <h3>Version 0.0.7</h3>
+                        <span class="version-badge">Current</span>
+                    </div>
+                    <ul class="changelog-list">
+                        <li>A bunch of tweaks and adjustments to lemming behaviours</li>
+                        <li>Lobby reworked significantly, again</li>
+                        <li>Player names are now tracked persistently on the server side</li>
+                        <li>Added co-op map and a set of co-op challenges based on this map, with a highscore table</li>
+                        <li>Average exit times are tracked, in addition to total number exited, and serves as a tie breaker for same number exited</li>
+                        <li>Added the possibility to play ranked matches, with player ratings updated based on results (using Glicko2), and a player rankings page</li>
+                        <li>Bug fixes</li>
+                    </ul>
+                </div>
+
+                <div class="version-block">
+                    <div class="version-header">
+                        <h3>Version 0.0.6</h3>
+                    </div>
+                    <ul class="changelog-list">
+                        <li>Game network and simulation continues in the background (to prevent the game freezing for other participants), if the user locks the application by holding left mouse on the window taskbar and dragging the window</li>
+                        <li>Tweak to separate lemmings that end up on exactly the same pixel</li>
+                        <li>Second map, and the possibility to select a map when creating a room in the lobby</li>
+                        <li>Support for horizontal and/or vertical wrap around at world boundaries (optional, per map)</li>
+                        <li>Lobby reworked significantly, in particular with it now clearer when you are in a game room</li>
+                        <li>It is now possible to abort a game and return to the lobby (good if you are losing and there is no way to catch up!)</li>
+                        <li>Team info is shown with the game settings</li>
+                        <li>The results of the last game played are shown in each game room</li>
+                        <li>Game desynch checks are now made automatically</li>
+                        <li>Wrapped worlds are also rendered wrapped, with tiled rendering</li>
+                    </ul>
+                </div>
+
+                <div class="version-block">
+                    <div class="version-header">
+                        <h3>Version 0.0.5</h3>
+                    </div>
+                    <ul class="changelog-list">
+                        <li>Removes the (confusing) concept of game waiting lists and shuffling around through this on game exit (players now just come back to exactly the same place in the lobby when leaving game)</li>
+                        <li>Fixes an issue with slot assignment that meant that two players could be assigned the same slot</li>
+                        <li>Fixed the player count in the lobby</li>
+                        <li>Added 'raise ground' order</li>
+                        <li>Bridge order duration increased</li>
+                        <li>Step height increased (from 2 to 4 pixels)</li>
+                        <li>Added some delay to digging, for dig sideways, with actual digging triggered after this delay or when the lemming first gets blocked by something</li>
+                        <li>Added upward dig</li>
+                        <li>Added raise ground order</li>
+                        <li>Added horizontal bridge</li>
+                        <li>Adjusted texture scaling mode for world rendering to work better for pixel width stuff like bridges</li>
+                        <li>Direction filter is now set by holding left and right arrow keys (with mouse cursor reflecting this)</li>
+                        <li>Arrow keys no longer control camera movement (but WASD is still available for this)</li>
+                        <li>Added sound feedback on order given</li>
+                        <li>Increased selection distance</li>
+                        <li>Falling lemmings (which won't take orders) are rendered in a darkened colour</li>
+                        <li>'Rooms' are created and joined in the lobby (renamed from 'games')</li>
+                        <li>Added ready check boxes</li>
+                        <li>Player name limited to 30 chars</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="changelog-footer">
+                <p>More updates coming soon! <a href="index.html#signup">Sign up for beta access</a> to stay informed about new releases.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Lockstep Arcade</h4>
+                    <p>Multiplayer gaming reimagined with modern netcode</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Links</h4>
+                    <ul>
+                        <li><a href="setup.html">Installation Guide</a></li>
+                        <li><a href="changelog.html">Changelog</a></li>
+                        <li><a href="index.html#download">Download</a></li>
+                        <li><a href="index.html#signup">Beta Access</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>System Requirements</h4>
+                    <ul>
+                        <li>Windows 10/11</li>
+                        <li>Active internet connection</li>
+                        <li>Mouse for controls</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Lockstep Arcade. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        .changelog-container {
+            max-width: 900px;
+            margin: 2rem auto;
+        }
+
+        .version-block {
+            background-color: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--border-color);
+        }
+
+        .current-version {
+            border-left-color: var(--primary-color);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .version-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .version-header h3 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin: 0;
+        }
+
+        .version-badge {
+            background-color: var(--success-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .changelog-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .changelog-list li {
+            padding: 0.75rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .changelog-list li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .changelog-footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            background-color: var(--bg-alt);
+            border-radius: 12px;
+        }
+
+        .changelog-footer p {
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+
+        .changelog-footer a {
+            color: var(--primary-color);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .changelog-footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .version-block {
+                padding: 1.5rem;
+            }
+
+            .version-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .version-header h3 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</body>
+</html>
