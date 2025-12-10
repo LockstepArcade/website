@@ -36,7 +36,7 @@
                     <div class="step-number">3</div>
                     <div class="step-content">
                         <h3>Extract the Archive</h3>
-                        <p>Unzip the game release archive into its own directory. You should then have <code>client.exe</code>, <code>entry.png</code>, and some other files, all in the same directory.</p>
+                        <p>Unzip the game release archive into its own directory. You should then have <code>LockstepArcade.exe</code>, <code>README.md</code>, and a <code>data</code> directory, all in the same directory.</p>
                     </div>
                 </div>
 
@@ -52,7 +52,7 @@
                     <div class="step-number">5</div>
                     <div class="step-content">
                         <h3>Launch the Game</h3>
-                        <p>Double-click <code>client.exe</code> to start the game client. You should now be connected to the lobby!</p>
+                        <p>Double-click <code>LockstepArcade.exe</code> to start the game client.</p>
                     </div>
                 </div>
             </div>
@@ -92,6 +92,37 @@
                             <li>Then click "Run anyway"</li>
                         </ol>
                     </div>
+                </div>
+
+                <div class="troubleshoot-item">
+                    <h4>Mac Security Warnings</h4>
+                    <p>Browsers on macOS will mark dowloads as 'quarantined', which prevents you from running them directly. There are two ways to work around this:</p>
+
+                    <div class="code-block">
+                        <strong>Through the graphical UI:</strong>
+                        <ol>
+                            <li>Right click on the game executable and select 'Open'</li>
+                            <li>If the exe is quarantined then this will fail, but you then get a notification in the system settings, through which you can unblock the file</li>
+                            <li>Open System Settings</li>
+                            <li>Click Privacy & Security, scroll down, and click the Open Anyway button to confirm your intent to open or install the app</li>
+                            <li>After this, you should be able to run the game executable</li>
+                        </ol>
+                    </div>
+
+                    <div class="code-block">
+                        <strong>Through the terminal:</strong>
+                        <ol>
+                            <li>Open the macOS terminal</li>
+                            <li>Change directory to the directory containing the game executable</li>
+                            <li>Run the following command: ```xattr -d com.apple.quarantine LockstepArcade</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="troubleshoot-item">
+                    <h4>Easy Install Scripts</h4>
+                    <p>'Easy install' scripts are also provided for Windows and Mac, on the <a href="download/">downloads page</a>.</p>
+                    <p>(These download and extract the game archive directly from a terminal or powershell window and avoid issues with security blocks for brower downloads.)</p>
                 </div>
 
                 <div class="troubleshoot-item">
