@@ -98,6 +98,17 @@ def ensure_dir(path):
     path.mkdir(parents=True, exist_ok=True)
 
 
+def build_install_script(version):
+    """Build the macOS install shell script."""
+    return f"""#!/bin/bash
+cd ~/Downloads
+curl -LO https://locksteparcade.com/lockstep_arcade_{version}_mac.zip
+unzip -o lockstep_arcade_{version}_mac.zip -d lockstep_arcade_{version}
+rm lockstep_arcade_{version}_mac.zip
+open lockstep_arcade_{version}
+"""
+
+
 def clean_generated_files():
     """Remove generated HTML files and subdirectories from docs/.
 
@@ -108,10 +119,10 @@ def clean_generated_files():
 
     print("Cleaning generated files...")
 
-    # Remove all .html files in docs/
-    for html_file in DOCS_DIR.glob("*.html"):
-        print(f"  Removing {html_file.name}")
-        html_file.unlink()
+    # Remove all .html and .sh files in docs/
+    for generated_file in list(DOCS_DIR.glob("*.html")) + list(DOCS_DIR.glob("*.sh")):
+        print(f"  Removing {generated_file.name}")
+        generated_file.unlink()
 
     # Remove subdirectories (download/, signup/, changelog/, etc.)
     # These only contain generated index.html files
@@ -198,6 +209,12 @@ def build_site():
         # Write output
         with open(output_path, "w", encoding="utf-8") as f:
             f.write(output)
+
+    # Generate install script
+    print("Building install_mac.sh...")
+    install_script = build_install_script(version)
+    with open(DOCS_DIR / "install_mac.sh", "w", encoding="utf-8", newline="\n") as f:
+        f.write(install_script)
 
     print("\nBuild complete!")
     print(f"Output directory: {DOCS_DIR}")
