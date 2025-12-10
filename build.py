@@ -98,8 +98,33 @@ def ensure_dir(path):
     path.mkdir(parents=True, exist_ok=True)
 
 
+def clean_generated_files():
+    """Remove generated HTML files and subdirectories from docs/.
+
+    Preserves assets: images, CSS, zip files, CNAME, etc.
+    """
+    if not DOCS_DIR.exists():
+        return
+
+    print("Cleaning generated files...")
+
+    # Remove all .html files in docs/
+    for html_file in DOCS_DIR.glob("*.html"):
+        print(f"  Removing {html_file.name}")
+        html_file.unlink()
+
+    # Remove subdirectories (download/, signup/, changelog/, etc.)
+    # These only contain generated index.html files
+    for item in DOCS_DIR.iterdir():
+        if item.is_dir():
+            print(f"  Removing {item.name}/")
+            shutil.rmtree(item)
+
+
 def build_site():
     """Build the entire site."""
+    clean_generated_files()
+
     print("Loading configuration...")
     config = load_config()
 
@@ -124,6 +149,7 @@ def build_site():
     ensure_dir(DOCS_DIR)
     ensure_dir(DOCS_DIR / "download")
     ensure_dir(DOCS_DIR / "signup")
+    ensure_dir(DOCS_DIR / "changelog")
 
     # Common variables for all pages
     common_vars = {
@@ -143,7 +169,7 @@ def build_site():
         ("download.html", DOCS_DIR / "download" / "index.html", "../"),
         ("signup.html", DOCS_DIR / "signup" / "index.html", "../"),
         ("setup.html", DOCS_DIR / "setup.html", ""),
-        ("changelog.html", DOCS_DIR / "changelog.html", ""),
+        ("changelog.html", DOCS_DIR / "changelog" / "index.html", "../"),
     ]
 
     for template_name, output_path, path_prefix in pages:
