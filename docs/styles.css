@@ -309,6 +309,14 @@ body {
     color: var(--text-light);
 }
 
+.download-buttons-home {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
 .important-notice {
     background-color: #fef3c7;
     border-left: 4px solid var(--accent-color);

@@ -1,6 +1,7 @@
 {
     "version": "0.0.9",
-    "download_size": "~7.5 MB",
+    "download_size_windows": "~7.5 MB",
+    "download_size_mac": "~7.5 MB",
     "discord_url": "https://discord.gg/byJzJdQCVd",
     "web3forms_key": "2f3c7147-e4fb-4008-babd-8de206ece816",
     "current_year": "2025",

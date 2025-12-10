@@ -103,11 +103,16 @@
             <h2>Download</h2>
             <div class="download-box">
                 <h3>Current Version: {version}</h3>
-                <p>Download the latest client release for Windows</p>
-                <a href="lockstep_arcade_{version}.zip" class="btn btn-primary btn-large" download>
-                    Download Lockstep Arcade v{version}
-                </a>
-                <p class="download-note">File size: {download_size}</p>
+                <p>Download the latest client release for Windows or macOS</p>
+                <div class="download-buttons-home">
+                    <a href="lockstep_arcade_{version}.zip" class="btn btn-primary btn-large" download>
+                        Download for Windows
+                    </a>
+                    <a href="lockstep_arcade_{version}_mac.zip" class="btn btn-primary btn-large" download>
+                        Download for macOS
+                    </a>
+                </div>
+                <p class="download-note">File size: Windows ({download_size_windows}) | macOS ({download_size_mac})</p>
 
                 <div class="important-notice">
                     <h4>Important: Credentials Required</h4>

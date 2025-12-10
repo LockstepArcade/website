@@ -105,7 +105,8 @@ def build_site():
 
     # Extract config values
     version = config["version"]
-    download_size = config["download_size"]
+    download_size_windows = config["download_size_windows"]
+    download_size_mac = config["download_size_mac"]
     discord_url = config["discord_url"]
     web3forms_key = config["web3forms_key"]
     current_year = config["current_year"]
@@ -127,7 +128,8 @@ def build_site():
     # Common variables for all pages
     common_vars = {
         "version": version,
-        "download_size": download_size,
+        "download_size_windows": download_size_windows,
+        "download_size_mac": download_size_mac,
         "discord_url": discord_url,
         "web3forms_key": web3forms_key,
         "current_year": current_year,
