@@ -15,4 +15,4 @@ Remove-Item $zipFile
 Write-Host "Opening folder..."
 Start-Process explorer.exe $extractDir
 
-Write-Host "Done! Run client.exe to play."
+Write-Host "Done! Run LockstepArcade.exe to play."

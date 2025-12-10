@@ -54,6 +54,35 @@
                 </div>
             </div>
 
+            <div class="easy-install-section">
+                <h3>Easy Install (Recommended)</h3>
+                <p>Copy and paste one of these commands to automatically download and extract the game. This avoids browser security warnings.</p>
+
+                <div class="install-options">
+                    <div class="install-option">
+                        <h4>Windows (PowerShell)</h4>
+                        <p>Open PowerShell and paste this command:</p>
+                        <div class="command-box">
+                            <code id="windows-command">irm https://locksteparcade.com/install_windows.ps1 | iex</code>
+                            <button class="copy-btn" onclick="copyCommand('windows-command', this)">Copy</button>
+                        </div>
+                        <img src="../install_windows.png" alt="PowerShell install command" class="install-screenshot">
+                    </div>
+
+                    <div class="install-option">
+                        <h4>macOS (Terminal)</h4>
+                        <p>Open Terminal and paste this command:</p>
+                        <div class="command-box">
+                            <code id="mac-command">curl -sL https://locksteparcade.com/install_mac.sh | bash</code>
+                            <button class="copy-btn" onclick="copyCommand('mac-command', this)">Copy</button>
+                        </div>
+                        <img src="../install_mac.png" alt="Terminal install command" class="install-screenshot">
+                    </div>
+                </div>
+
+                <p class="install-note">The script downloads the game to your Downloads folder, extracts it, and opens the folder for you.</p>
+            </div>
+
             <div class="credentials-notice">
                 <h3>&#9888;&#65039; Credentials Required</h3>
                 <p>The game requires a <code>credentials.bin</code> file to connect to the dedicated server.</p>
@@ -480,6 +509,102 @@
             margin: 0;
         }
 
+        .easy-install-section {
+            max-width: 800px;
+            margin: 2rem auto;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .easy-install-section > h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.8rem;
+        }
+
+        .easy-install-section > p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .install-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .install-option {
+            background-color: var(--bg-alt);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .install-option h4 {
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .install-option > p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .command-box {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: #1e293b;
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+
+        .command-box code {
+            flex: 1;
+            color: #e2e8f0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            word-break: break-all;
+        }
+
+        .copy-btn {
+            flex-shrink: 0;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: background-color 0.2s;
+        }
+
+        .copy-btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .copy-btn.copied {
+            background-color: var(--success-color);
+        }
+
+        .install-screenshot {
+            width: 100%;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        .install-note {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0;
+        }
+
         @media (max-width: 768px) {
             .download-hero {
                 padding: 2rem 1.5rem;
@@ -503,5 +628,19 @@
             }
         }
     </style>
+
+    <script>
+    function copyCommand(elementId, button) {
+        const code = document.getElementById(elementId);
+        navigator.clipboard.writeText(code.textContent).then(function() {
+            button.textContent = 'Copied!';
+            button.classList.add('copied');
+            setTimeout(function() {
+                button.textContent = 'Copy';
+                button.classList.remove('copied');
+            }, 2000);
+        });
+    }
+    </script>
 </body>
 </html>
