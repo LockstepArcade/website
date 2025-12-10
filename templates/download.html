@@ -52,7 +52,6 @@
                             <code id="windows-command">irm https://locksteparcade.com/install_windows.ps1 | iex</code>
                             <button class="copy-btn" onclick="copyCommand('windows-command', this)">Copy</button>
                         </div>
-                        <img src="../install_windows.png" alt="PowerShell install command" class="install-screenshot">
                     </div>
 
                     <div class="install-option">
@@ -62,7 +61,6 @@
                             <code id="mac-command">curl -sL https://locksteparcade.com/install_mac.sh | bash</code>
                             <button class="copy-btn" onclick="copyCommand('mac-command', this)">Copy</button>
                         </div>
-                        <img src="../install_mac.png" alt="Terminal install command" class="install-screenshot">
                     </div>
                 </div>
 
@@ -539,12 +537,6 @@
 
         .copy-btn.copied {
             background-color: var(--success-color);
-        }
-
-        .install-screenshot {
-            width: 100%;
-            border-radius: 6px;
-            border: 1px solid var(--border-color);
         }
 
         .install-note {
