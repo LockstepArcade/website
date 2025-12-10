@@ -102,10 +102,20 @@ def build_install_script_mac(version):
     """Build the macOS install shell script."""
     return f"""#!/bin/bash
 cd ~/Downloads
+
+echo "Downloading Lockstep Arcade {version}..."
 curl -LO https://locksteparcade.com/lockstep_arcade_{version}_mac.zip
+
+echo "Extracting..."
 unzip -o lockstep_arcade_{version}_mac.zip -d lockstep_arcade_{version}
+
+echo "Cleaning up..."
 rm lockstep_arcade_{version}_mac.zip
+
+echo "Opening folder..."
 open lockstep_arcade_{version}
+
+echo "Done! Run LockstepArcade to play."
 """
 
 
@@ -128,7 +138,7 @@ Remove-Item $zipFile
 Write-Host "Opening folder..."
 Start-Process explorer.exe $extractDir
 
-Write-Host "Done! Run client.exe to play."
+Write-Host "Done! Run LockstepArcade.exe to play."
 """
 
 
