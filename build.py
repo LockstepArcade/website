@@ -98,7 +98,7 @@ def ensure_dir(path):
     path.mkdir(parents=True, exist_ok=True)
 
 
-def build_install_script(version):
+def build_install_script_mac(version):
     """Build the macOS install shell script."""
     return f"""#!/bin/bash
 cd ~/Downloads
@@ -106,6 +106,29 @@ curl -LO https://locksteparcade.com/lockstep_arcade_{version}_mac.zip
 unzip -o lockstep_arcade_{version}_mac.zip -d lockstep_arcade_{version}
 rm lockstep_arcade_{version}_mac.zip
 open lockstep_arcade_{version}
+"""
+
+
+def build_install_script_windows(version):
+    """Build the Windows install PowerShell script."""
+    return f"""$ProgressPreference = 'SilentlyContinue'
+$downloadDir = "$env:USERPROFILE\\Downloads"
+$zipFile = "$downloadDir\\lockstep_arcade_{version}.zip"
+$extractDir = "$downloadDir\\lockstep_arcade_{version}"
+
+Write-Host "Downloading Lockstep Arcade {version}..."
+Invoke-WebRequest -Uri "https://locksteparcade.com/lockstep_arcade_{version}.zip" -OutFile $zipFile
+
+Write-Host "Extracting..."
+Expand-Archive -Path $zipFile -DestinationPath $extractDir -Force
+
+Write-Host "Cleaning up..."
+Remove-Item $zipFile
+
+Write-Host "Opening folder..."
+Start-Process explorer.exe $extractDir
+
+Write-Host "Done! Run client.exe to play."
 """
 
 
@@ -119,10 +142,11 @@ def clean_generated_files():
 
     print("Cleaning generated files...")
 
-    # Remove all .html and .sh files in docs/
-    for generated_file in list(DOCS_DIR.glob("*.html")) + list(DOCS_DIR.glob("*.sh")):
-        print(f"  Removing {generated_file.name}")
-        generated_file.unlink()
+    # Remove all generated files in docs/
+    for pattern in ["*.html", "*.sh", "*.ps1"]:
+        for generated_file in DOCS_DIR.glob(pattern):
+            print(f"  Removing {generated_file.name}")
+            generated_file.unlink()
 
     # Remove subdirectories (download/, signup/, changelog/, etc.)
     # These only contain generated index.html files
@@ -210,11 +234,14 @@ def build_site():
         with open(output_path, "w", encoding="utf-8") as f:
             f.write(output)
 
-    # Generate install script
+    # Generate install scripts
     print("Building install_mac.sh...")
-    install_script = build_install_script(version)
     with open(DOCS_DIR / "install_mac.sh", "w", encoding="utf-8", newline="\n") as f:
-        f.write(install_script)
+        f.write(build_install_script_mac(version))
+
+    print("Building install_windows.ps1...")
+    with open(DOCS_DIR / "install_windows.ps1", "w", encoding="utf-8", newline="\n") as f:
+        f.write(build_install_script_windows(version))
 
     print("\nBuild complete!")
     print(f"Output directory: {DOCS_DIR}")
