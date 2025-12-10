@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Changelog - Lockstep Arcade</title>
+    <meta name="description" content="Version history and changelog for Lockstep Arcade">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+{navbar}
+
+    <section class="section">
+        <div class="container">
+            <h2>Changelog</h2>
+            <p class="section-intro">Track the evolution of Lockstep Arcade through our version history</p>
+
+            <div class="changelog-container">
+{changelog_html}
+            </div>
+
+            <div class="changelog-footer">
+                <p>More updates coming soon! <a href="signup/">Sign up for beta access</a> to stay informed about new releases.</p>
+            </div>
+        </div>
+    </section>
+
+{footer}
+
+    <style>
+        .changelog-container {
+            max-width: 900px;
+            margin: 2rem auto;
+        }
+
+        .version-block {
+            background-color: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--border-color);
+        }
+
+        .current-version {
+            border-left-color: var(--primary-color);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .version-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .version-header h3 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin: 0;
+        }
+
+        .version-badge {
+            background-color: var(--success-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .changelog-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .changelog-list li {
+            padding: 0.75rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .changelog-list li:before {
+            content: "\2022";
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .changelog-footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            background-color: var(--bg-alt);
+            border-radius: 12px;
+        }
+
+        .changelog-footer p {
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+
+        .changelog-footer a {
+            color: var(--primary-color);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .changelog-footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .version-block {
+                padding: 1.5rem;
+            }
+
+            .version-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .version-header h3 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</body>
+</html>

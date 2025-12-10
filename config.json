@@ -1,0 +1,85 @@
+{
+    "version": "0.0.9",
+    "download_size": "~7.5 MB",
+    "discord_url": "https://discord.gg/byJzJdQCVd",
+    "web3forms_key": "2f3c7147-e4fb-4008-babd-8de206ece816",
+    "current_year": "2025",
+
+    "releases": [
+        {
+            "version": "0.0.9",
+            "current": true,
+            "changes": [
+                "fixed bug with local recording files only being scanned on application startup",
+                "fixed bug with imgui error on highscore table page",
+                "fixed detail issue with local recording file state when going from highscore table to game result",
+                "game data moved into a 'data' subdirectory",
+                "game client executable renamed to 'LockstepArcade.exe'/'LockstepArcade'",
+                "game release archive renamed"
+            ]
+        },
+        {
+            "version": "0.0.8",
+            "changes": [
+                "main menu added to UI at startup",
+                "\"Connect to server\" goes to the multiplayer UI that would previously be accessed directly on client start",
+                "possibility to download recordings (through game results tab), which can then be replayed through \"Recording replay\" on the main menu at client startup",
+                "fixed some issues with game results display",
+                "fixed an issue with the game incorrectly reporting 'tied result' at game end",
+                "various UI tweaks",
+                "added a build for MacOS"
+            ]
+        },
+        {
+            "version": "0.0.7",
+            "changes": [
+                "A bunch of tweaks and adjustments to lemming behaviours",
+                "Lobby reworked significantly, again",
+                "Player names are now tracked persistently on the server side",
+                "Added co-op map and a set of co-op challenges based on this map, with a highscore table",
+                "Average exit times are tracked, in addition to total number exited, and serves as a tie breaker for same number exited",
+                "Added the possibility to play ranked matches, with player ratings updated based on results (using Glicko2), and a player rankings page",
+                "Bug fixes"
+            ]
+        },
+        {
+            "version": "0.0.6",
+            "changes": [
+                "Game network and simulation continues in the background (to prevent the game freezing for other participants), if the user locks the application by holding left mouse on the window taskbar and dragging the window",
+                "Tweak to separate lemmings that end up on exactly the same pixel",
+                "Second map, and the possibility to select a map when creating a room in the lobby",
+                "Support for horizontal and/or vertical wrap around at world boundaries (optional, per map)",
+                "Lobby reworked significantly, in particular with it now clearer when you are in a game room",
+                "It is now possible to abort a game and return to the lobby (good if you are losing and there is no way to catch up!)",
+                "Team info is shown with the game settings",
+                "The results of the last game played are shown in each game room",
+                "Game desynch checks are now made automatically",
+                "Wrapped worlds are also rendered wrapped, with tiled rendering"
+            ]
+        },
+        {
+            "version": "0.0.5",
+            "changes": [
+                "Removes the (confusing) concept of game waiting lists and shuffling around through this on game exit (players now just come back to exactly the same place in the lobby when leaving game)",
+                "Fixes an issue with slot assignment that meant that two players could be assigned the same slot",
+                "Fixed the player count in the lobby",
+                "Added 'raise ground' order",
+                "Bridge order duration increased",
+                "Step height increased (from 2 to 4 pixels)",
+                "Added some delay to digging, for dig sideways, with actual digging triggered after this delay or when the lemming first gets blocked by something",
+                "Added upward dig",
+                "Added raise ground order",
+                "Added horizontal bridge",
+                "Adjusted texture scaling mode for world rendering to work better for pixel width stuff like bridges",
+                "Direction filter is now set by holding left and right arrow keys (with mouse cursor reflecting this)",
+                "Arrow keys no longer control camera movement (but WASD is still available for this)",
+                "Added sound feedback on order given",
+                "Increased selection distance",
+                "Falling lemmings (which won't take orders) are rendered in a darkened colour",
+                "'Rooms' are created and joined in the lobby (renamed from 'games')",
+                "Added ready check boxes",
+                "Player name limited to 30 chars"
+            ]
+        }
+    ]
+}

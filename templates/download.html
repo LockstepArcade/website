@@ -8,19 +8,7 @@
     <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="container">
-            <div class="nav-brand">Lockstep Arcade</div>
-            <div class="nav-links">
-                <a href="../index.html">Home</a>
-                <a href="../../index.html#features">Features</a>
-                <a href="../index.html#screenshots">Screenshots</a>
-                <a href="../download/">Download</a>
-                <a href="../signup/">Beta Access</a>
-                <a href="../../changelog.html">Changelog</a>
-            </div>
-        </div>
-    </nav>
+{navbar}
 
     <section class="section">
         <div class="container">
@@ -29,7 +17,7 @@
 
             <div class="download-hero">
                 <div class="version-info">
-                    <div class="version-badge-large">v0.0.9</div>
+                    <div class="version-badge-large">v{version}</div>
                     <p class="version-date">Latest Release</p>
                 </div>
 
@@ -37,32 +25,27 @@
                     <h3>Lockstep Arcade Client</h3>
                     <p>Full multiplayer game client with Lemmings</p>
 
-                    <a href="../lockstep_arcade_0.0.9.zip" class="btn btn-primary btn-large btn-download" download>
-                        <span class="download-icon">⬇</span>
+                    <a href="../lockstep_arcade_{version}.zip" class="btn btn-primary btn-large btn-download" download>
+                        <span class="download-icon">&#11015;</span>
                         Download for Windows
                     </a>
 
-                    <p class="file-info">Version 0.0.9 • ~7.5 MB • Windows 10/11</p>
+                    <p class="file-info">Version {version} | {download_size} | Windows 10/11</p>
                 </div>
             </div>
 
             <div class="credentials-notice">
-                <h3>⚠️ Credentials Required</h3>
+                <h3>&#9888;&#65039; Credentials Required</h3>
                 <p>The game requires a <code>credentials.bin</code> file to connect to the dedicated server.</p>
                 <p>If you don't have credentials yet, <a href="../signup/">request beta access here</a> and we'll send you the file via email.</p>
             </div>
 
             <div class="whats-new-section">
-                <h3>What's New in v0.0.9</h3>
+                <h3>What's New in v{version}</h3>
                 <ul class="feature-list">
-                    <li>fixed bug with local recording files only being scanned on application startup</li>
-                    <li>fixed bug with imgui error on highscore table page</li>
-                    <li>fixed detail issue with local recording file state when going from highscore table to game result</li>
-                    <li>game data moved into a 'data' subdirectory</li>
-                    <li>game client executable renamed to 'LockstepArcade.exe'/'LockstepArcade'</li>
-                    <li>game release archive renamed</li>
+{whats_new_html}
                 </ul>
-                <p><a href="../changelog.html" class="changelog-link">View Full Changelog →</a></p>
+                <p><a href="../changelog.html" class="changelog-link">View Full Changelog &#8594;</a></p>
             </div>
 
             <div class="quick-start">
@@ -85,7 +68,7 @@
                         <span>Run <code>client.exe</code> to play!</span>
                     </div>
                 </div>
-                <p class="help-link"><a href="../setup.html">Need detailed installation help? View full setup guide →</a></p>
+                <p class="help-link"><a href="../setup.html">Need detailed installation help? View full setup guide &#8594;</a></p>
             </div>
 
             <div class="system-requirements-box">
@@ -130,36 +113,7 @@
         </div>
     </section>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>Lockstep Arcade</h4>
-                    <p>Multiplayer gaming reimagined with modern netcode</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Links</h4>
-                    <ul>
-                        <li><a href="../setup.html">Installation Guide</a></li>
-                        <li><a href="../changelog.html">Changelog</a></li>
-                        <li><a href="download.html">Download</a></li>
-                        <li><a href="../signup/">Beta Access</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>System Requirements</h4>
-                    <ul>
-                        <li>Windows 10/11</li>
-                        <li>Active internet connection</li>
-                        <li>Mouse for controls</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+{footer}
 
     <style>
         .download-hero {
@@ -297,7 +251,7 @@
         }
 
         .feature-list li:before {
-            content: "✓";
+            content: "\2713";
             position: absolute;
             left: 0;
             color: var(--success-color);
