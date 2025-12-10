@@ -190,11 +190,12 @@ def build_site():
     navbar_template = load_partial("navbar.html")
     footer_template = load_partial("footer.html")
 
-    # Ensure docs directory exists
+    # Ensure docs directories exist
     ensure_dir(DOCS_DIR)
     ensure_dir(DOCS_DIR / "download")
     ensure_dir(DOCS_DIR / "signup")
     ensure_dir(DOCS_DIR / "changelog")
+    ensure_dir(DOCS_DIR / "setup")
 
     # Common variables for all pages
     common_vars = {
@@ -213,7 +214,7 @@ def build_site():
         ("index.html", DOCS_DIR / "index.html", ""),
         ("download.html", DOCS_DIR / "download" / "index.html", "../"),
         ("signup.html", DOCS_DIR / "signup" / "index.html", "../"),
-        ("setup.html", DOCS_DIR / "setup.html", ""),
+        ("setup.html", DOCS_DIR / "setup" / "index.html", "../"),
         ("changelog.html", DOCS_DIR / "changelog" / "index.html", "../"),
     ]
 
