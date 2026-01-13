@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Installation Guide - Lockstep Arcade</title>
-    <meta name="description" content="Complete installation and setup guide for Lockstep Arcade">
+    <title>Getting Started - Lockstep Arcade</title>
+    <meta name="description" content="Information about getting started with Lockstep Arcade">
     <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
@@ -28,140 +28,91 @@
 
     <section class="section">
         <div class="container">
-            <h2>Installation Guide</h2>
-            <p class="section-intro">Follow these steps to get Lockstep Arcade up and running on your system</p>
+            <h2>Getting Started</h2>
 
-            <div class="setup-container">
-                <div class="setup-section">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h3>Get Your Credentials</h3>
-                        <p>You will need a <code>credentials.bin</code> file to connect to the server. If you don't have one yet, <a href="signup/">request beta access</a> and we'll send you the file via email.</p>
-                    </div>
-                </div>
+            <div class="guide-section">
+                <h3>Using the Lobby</h3>
 
-                <div class="setup-section">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h3>Download the Game</h3>
-                        <p><a href="download/">Download the latest release</a> and save the ZIP file to a location of your choice.</p>
-                    </div>
-                </div>
+                <p>When you start the client you will see a server overview, showing any game rooms which have been created, and players that are online.</p>
 
-                <div class="setup-section">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h3>Extract the Archive</h3>
-                        <p>Unzip the game release archive into its own directory. You should then have <code>LockstepArcade.exe</code>, <code>README.md</code>, and a <code>data</code> directory, all in the same directory.</p>
-                    </div>
-                </div>
-
-                <div class="setup-section">
-                    <div class="step-number">4</div>
-                    <div class="step-content">
-                        <h3>Add Your Credentials</h3>
-                        <p>Copy your connection credential file (<code>credentials.bin</code>) into the same directory as <code>client.exe</code>.</p>
-                    </div>
-                </div>
-
-                <div class="setup-section">
-                    <div class="step-number">5</div>
-                    <div class="step-content">
-                        <h3>Launch the Game</h3>
-                        <p>Double-click <code>LockstepArcade.exe</code> to start the game client.</p>
-                    </div>
+                <div class="info-box">
+                    <h4>Joining or Creating Games</h4>
+                    <ul>
+                        <li>Click on a game room to see details about the game settings on the right hand side</li>
+                        <li>You can either join an existing room (if there is one), or create a new game room (by clicking the relevant button)</li>
+                        <li>When in a game room, all players need to click to indicate they are ready</li>
+                        <li>The host (player at the top of the players in room list) can then start the game</li>
+                    </ul>
                 </div>
             </div>
 
             <div class="guide-section">
-                <h3>Troubleshooting</h3>
+                <h3>Game Controls</h3>
 
-                <div class="troubleshoot-item">
-                    <h4>Windows Security Warnings</h4>
-                    <p>Sometimes Windows marks files downloaded from the internet as potentially unsafe. If Windows blocks the download or you can't extract/run the game, follow these steps:</p>
-
-                    <div class="code-block">
-                        <strong>For the ZIP file:</strong>
-                        <ol>
-                            <li>Right-click the downloaded zip file</li>
-                            <li>Select "Properties"</li>
-                            <li>At the bottom, check the box next to "Unblock"</li>
-                            <li>Click "Apply" then "OK"</li>
-                            <li>Now extract the zip file</li>
-                        </ol>
+                <div class="controls-grid">
+                    <div class="control-item">
+                        <h4>Camera Movement</h4>
+                        <p><strong>Middle Mouse + Drag:</strong> Pan the view around</p>
+                        <p><strong>Mouse Wheel:</strong> Zoom in and out</p>
+                        <p><strong>WASD Keys:</strong> Alternative camera movement</p>
                     </div>
 
-                    <div class="code-block">
-                        <strong>If the .exe is blocked after extraction:</strong>
-                        <ol>
-                            <li>Right-click the game executable</li>
-                            <li>Select "Properties"</li>
-                            <li>Check "Unblock" at the bottom</li>
-                            <li>Click "Apply" then "OK"</li>
-                        </ol>
+                    <div class="control-item">
+                        <h4>Giving Orders</h4>
+                        <p><strong>Click order in bar:</strong> Select an order from the top bar</p>
+                        <p><strong>Function Keys:</strong> Quick-select orders</p>
+                        <p><strong>Click near lemming:</strong> Give the selected order</p>
+                        <p><strong>Left/Right Arrow:</strong> Hold to set directional filter</p>
                     </div>
 
-                    <div class="code-block">
-                        <strong>If Windows SmartScreen appears:</strong>
-                        <ol>
-                            <li>Click "More info"</li>
-                            <li>Then click "Run anyway"</li>
-                        </ol>
+                    <div class="control-item">
+                        <h4>Other Controls</h4>
+                        <p><strong>F11:</strong> Toggle fullscreen/windowed mode</p>
                     </div>
                 </div>
 
-                <div class="troubleshoot-item">
-                    <h4>Mac Security Warnings</h4>
-                    <p>Browsers on macOS will mark dowloads as 'quarantined', which prevents you from running them directly. There are two ways to work around this:</p>
-
-                    <div class="code-block">
-                        <strong>Through the graphical UI:</strong>
-                        <ol>
-                            <li>Right click on the game executable and select 'Open'</li>
-                            <li>If the exe is quarantined then this will fail, but you then get a notification in the system settings, through which you can unblock the file</li>
-                            <li>Open System Settings</li>
-                            <li>Click Privacy & Security, scroll down, and click the Open Anyway button to confirm your intent to open or install the app</li>
-                            <li>After this, you should be able to run the game executable</li>
-                        </ol>
-                    </div>
-
-                    <div class="code-block">
-                        <strong>Through the terminal:</strong>
-                        <ol>
-                            <li>Open the macOS terminal</li>
-                            <li>Change directory to the directory containing the game executable</li>
-                            <li>Run the following command: ```xattr -d com.apple.quarantine LockstepArcade</li>
-                        </ol>
-                    </div>
-                </div>
-
-                <div class="troubleshoot-item">
-                    <h4>Easy Install Scripts</h4>
-                    <p>'Easy install' scripts are also provided for Windows and Mac, on the <a href="download/">downloads page</a>.</p>
-                    <p>(These download and extract the game archive directly from a terminal or powershell window and avoid issues with security blocks for brower downloads.)</p>
-                </div>
-
-                <div class="troubleshoot-item">
-                    <h4>Antivirus Software</h4>
-                    <p>If you have an antivirus installed, you may need to add the game folder to your antivirus exceptions list. Please refer to the documentation for your antivirus for more details.</p>
-                </div>
-
-                <div class="troubleshoot-item">
-                    <h4>Running in Windows Sandbox</h4>
-                    <p>If you're worried about running executables from the internet and you have Windows 11 Pro, we recommend running the game client inside <a href="https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/" target="_blank">Windows Sandbox</a>.</p>
-
-                    <div class="code-block">
-                        <strong>To run this way:</strong>
-                        <ol>
-                            <li>Make sure you have enabled Windows Sandbox as an optional Windows feature</li>
-                            <li>Start Windows Sandbox</li>
-                            <li>Move the game client directory into Windows Sandbox</li>
-                            <li>Double-click the client to run from there</li>
-                        </ol>
-                    </div>
+                <div class="info-box">
+                    <h4>Important Notes</h4>
+                    <ul>
+                        <li>You only have a limited supply of each order type, so use them carefully!</li>
+                        <li>Orders won't apply to falling lemmings (they appear darkened)</li>
+                        <li>Selection bars will show which lemming will get an order for the current mouse position</li>
+                    </ul>
                 </div>
             </div>
 
+            <div class="guide-section">
+                <h3>Game Objectives</h3>
+
+                <p>Lockstep Arcade features a Lemmings clone where the goal is to get your lemmings from a start position to an exit location.</p>
+
+                <div class="info-box">
+                    <h4>Game Modes</h4>
+                    <ul>
+                        <li><strong>Free-for-All:</strong> Some maps feature all-against-all competition</li>
+                        <li><strong>Team Play:</strong> Other maps have team assignments (shown in game details)</li>
+                        <li><strong>Cooperative Challenges:</strong> Can be played single player or as part of a team with high score tables</li>
+                        <li><strong>Ranked Matches:</strong> Compete for rankings using the Glicko2 rating system</li>
+                    </ul>
+                    <p>The team (or player) who gets the most lemmings into their exit when the game time expires is the winner!</p>
+                </div>
+            </div>
+
+            <div class="guide-section">
+                <h3>Testing and Multiple Clients</h3>
+
+                <p>Most of the time (e.g. if you connect at some arbitrary random time) the lobby will likely be completely empty, apart from you, on connection.</p>
+
+                <div class="info-box">
+                    <p>Multiple clients can be started on a single machine for testing purposes by double-clicking <code>client.exe</code> again after the game has started. One client can then be used to create a game room, and then you can join this game room with other clients to see everything working.</p>
+                    <p>It is also possible to play games with just one player (even on maps where this doesn't really make sense), to try out the various in-game mechanics and just see the game running.</p>
+                </div>
+            </div>
+
+            <div class="help-section">
+                <h3>Need Help?</h3>
+                <p>If you're experiencing issues or have questions, please reach out through the <a href="signup/">beta access form</a> with details about your problem.</p>
+            </div>
         </div>
     </section>
 
