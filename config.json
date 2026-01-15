@@ -1,15 +1,27 @@
 {
     "version": "0.1.0",
-    "download_size_windows": "~7.5 MB",
-    "download_size_mac": "~7.5 MB",
+    "download_size_windows": "~15 MB",
+    "download_size_mac": "~15 MB",
     "discord_url": "https://discord.gg/byJzJdQCVd",
     "web3forms_key": "2f3c7147-e4fb-4008-babd-8de206ece816",
-    "current_year": "2025",
+    "current_year": "2026",
 
     "releases": [
         {
-            "version": "0.0.9",
+            "version": "0.10.0",
             "current": true,
+            "changes": [
+                "second game added, 'Pilots', a top down shooter with asteroids style ships and inertial movement",
+                "orders for the swarmers in Neon Swarm can now be set to trigger on different conditions (blocked, turned around, about to fall)",
+                "a tutorial has been added for Neon Swarm",
+                "swarmers not matching direction filter are darkened",
+                "no wrap version of first map added",
+                "more single player challenges added",
+                "the last player in a game can now choose to end the game early"
+            ]
+        },
+        {
+            "version": "0.0.9",
             "changes": [
                 "fixed bug with local recording files only being scanned on application startup",
                 "fixed bug with imgui error on highscore table page",
