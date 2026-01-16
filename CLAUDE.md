@@ -53,3 +53,16 @@ These URLs must remain stable (linked from the game):
 - `/download` → `docs/download/index.html`
 - `/signup` → `docs/signup/index.html`
 - `/gettingstarted` → `docs/gettingstarted/index.html`
+
+## CSS Components
+
+Key reusable classes in `docs/styles.css`:
+
+- `.content-box` - White card with shadow. Add `--bordered` for header border.
+- `.info-box` - Colored callout. Variants: `--warning` (yellow), `--cta` (purple gradient)
+- `.step-badge` - Numbered circle. Add `--small` for compact version.
+- `.step-section` - Horizontal step with badge + content
+- `.code-block` - Light code block. Use `--dark` for terminal commands.
+- `.card-grid` - Responsive grid for cards
+- `.resource-card` - Clickable link card
+- `.content-wrapper` - Centers content at max-width 900px
