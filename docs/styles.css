@@ -1,10 +1,10 @@
-/* Reset and Base Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* ===========================================
+   Lockstep Arcade - Consolidated Styles
+   =========================================== */
 
+/* -------------------------------------------
+   CSS Variables
+   ------------------------------------------- */
 :root {
     --primary-color: #2563eb;
     --primary-dark: #1e40af;
@@ -16,8 +16,24 @@
     --text-light: #64748b;
     --border-color: #e2e8f0;
     --success-color: #10b981;
+    --warning-color: #f59e0b;
     --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+    --gradient-purple: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --gradient-primary: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+}
+
+/* -------------------------------------------
+   Reset and Base
+   ------------------------------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
@@ -27,13 +43,82 @@ body {
     background-color: var(--bg-color);
 }
 
+::selection {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* -------------------------------------------
+   Layout
+   ------------------------------------------- */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
-/* Navigation */
+/* Centered content wrapper for prose/guide content */
+.content-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.content-wrapper--narrow {
+    max-width: 800px;
+}
+
+/* -------------------------------------------
+   Typography - Prose styling for content areas
+   ------------------------------------------- */
+.prose p {
+    margin-bottom: 1rem;
+    line-height: 1.7;
+}
+
+.prose ul,
+.prose ol {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+    line-height: 1.8;
+}
+
+.prose li {
+    margin-bottom: 0.5rem;
+}
+
+.prose a {
+    color: var(--primary-color);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.prose a:hover {
+    text-decoration: underline;
+}
+
+/* Inline code */
+code {
+    background-color: var(--bg-alt);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    color: var(--primary-dark);
+    font-size: 0.9em;
+}
+
+/* -------------------------------------------
+   Navigation
+   ------------------------------------------- */
 .navbar {
     background-color: var(--bg-color);
     box-shadow: var(--shadow);
@@ -71,10 +156,12 @@ body {
     color: var(--primary-color);
 }
 
-/* Hero Section */
+/* -------------------------------------------
+   Hero Section
+   ------------------------------------------- */
 .hero {
     position: relative;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: var(--gradient-purple);
     color: white;
     padding: 0;
     overflow: hidden;
@@ -112,7 +199,9 @@ body {
     flex-wrap: wrap;
 }
 
-/* Buttons */
+/* -------------------------------------------
+   Buttons
+   ------------------------------------------- */
 .btn {
     display: inline-block;
     padding: 0.75rem 1.5rem;
@@ -134,6 +223,7 @@ body {
     background-color: var(--primary-dark);
     transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
+    text-decoration: none;
 }
 
 .btn-secondary {
@@ -145,6 +235,7 @@ body {
 .btn-secondary:hover {
     background-color: white;
     color: var(--primary-color);
+    text-decoration: none;
 }
 
 .btn-large {
@@ -152,7 +243,30 @@ body {
     font-size: 1.1rem;
 }
 
-/* Sections */
+/* Download button variant (white on gradient backgrounds) */
+.btn-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.1rem;
+    padding: 1rem 2rem;
+    background-color: white;
+    color: var(--primary-color);
+}
+
+.btn-download:hover {
+    background-color: #f8fafc;
+    transform: translateY(-3px);
+    text-decoration: none;
+}
+
+.download-icon {
+    font-size: 1.3rem;
+}
+
+/* -------------------------------------------
+   Sections
+   ------------------------------------------- */
 .section {
     padding: 4rem 0;
 }
@@ -178,6 +292,382 @@ body {
     margin-right: auto;
 }
 
+/* Standalone section heading */
+.section-heading {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+/* -------------------------------------------
+   Content Box - White card with shadow
+   ------------------------------------------- */
+.content-box {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+}
+
+.content-box h3 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+}
+
+/* With header border */
+.content-box--bordered h3 {
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+
+/* Highlighted variant */
+.content-box--highlight {
+    border-left: 4px solid var(--primary-color);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Gradient hero box (for download page hero) */
+.content-box--hero {
+    background: var(--gradient-purple);
+    color: white;
+    text-align: center;
+    padding: 3rem;
+    box-shadow: var(--shadow-lg);
+}
+
+.content-box--hero h3 {
+    color: white;
+    font-size: 2rem;
+    border-bottom: none;
+}
+
+.content-box--hero p {
+    opacity: 0.9;
+}
+
+/* -------------------------------------------
+   Info Boxes - Colored callout boxes
+   ------------------------------------------- */
+.info-box {
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin: 1.5rem 0;
+    border-left: 4px solid var(--primary-color);
+}
+
+.info-box h4 {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.info-box p {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+.info-box p:last-child {
+    margin-bottom: 0;
+}
+
+.info-box ul,
+.info-box ol {
+    margin-left: 1.5rem;
+    line-height: 1.8;
+}
+
+/* Blue info box (default) */
+.info-box--blue,
+.info-box:not([class*="info-box--"]) {
+    background-color: #dbeafe;
+    border-left-color: var(--primary-color);
+}
+
+.info-box--blue h4 {
+    color: var(--primary-dark);
+}
+
+/* Yellow/warning info box */
+.info-box--warning {
+    background-color: #fef3c7;
+    border-left-color: var(--accent-color);
+}
+
+.info-box--warning h4 {
+    color: #92400e;
+}
+
+.info-box--warning p {
+    color: #78350f;
+}
+
+.info-box--warning code {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Purple/gradient info box (call to action) */
+.info-box--cta {
+    background: var(--gradient-purple);
+    color: white;
+    border-left: none;
+    text-align: center;
+}
+
+.info-box--cta h3,
+.info-box--cta h4 {
+    color: white;
+}
+
+.info-box--cta a {
+    color: var(--accent-color);
+    font-weight: 600;
+}
+
+/* -------------------------------------------
+   Code Blocks
+   ------------------------------------------- */
+.code-block {
+    background-color: var(--bg-alt);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+    border-left: 4px solid var(--primary-color);
+}
+
+.code-block strong {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--primary-dark);
+}
+
+.code-block ol {
+    margin-left: 1.5rem;
+    line-height: 1.8;
+}
+
+/* Dark code block (for terminal commands) */
+.code-block--dark {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #1e293b;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    border-left: none;
+}
+
+.code-block--dark code {
+    flex: 1;
+    background: none;
+    color: #e2e8f0;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    word-break: break-all;
+    padding: 0;
+}
+
+.copy-btn {
+    flex-shrink: 0;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background-color 0.2s;
+}
+
+.copy-btn:hover {
+    background-color: var(--primary-dark);
+}
+
+.copy-btn.copied {
+    background-color: var(--success-color);
+}
+
+/* -------------------------------------------
+   Step Badge - Numbered circular badges
+   ------------------------------------------- */
+.step-badge {
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    background: var(--gradient-primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.step-badge--small {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+    background: var(--primary-color);
+}
+
+/* -------------------------------------------
+   Step Sections - Numbered instruction steps
+   ------------------------------------------- */
+.step-section {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    align-items: flex-start;
+}
+
+.step-section__content {
+    flex: 1;
+}
+
+.step-section__content h3 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    font-size: 1.4rem;
+}
+
+.step-section__content p {
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* Compact steps (horizontal list) */
+.steps-compact {
+    display: grid;
+    gap: 1rem;
+}
+
+.step-compact {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: var(--bg-alt);
+    border-radius: 8px;
+}
+
+/* Vertical steps (info section) */
+.steps-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.step-vertical {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+
+.step-vertical__content h4 {
+    color: var(--primary-dark);
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.step-vertical__content p {
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* -------------------------------------------
+   Grids
+   ------------------------------------------- */
+/* Generic card grid */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+.card-grid--2col {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.card-grid--3col {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+/* Resource cards */
+.resource-card {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 2px solid transparent;
+}
+
+.resource-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-color);
+    text-decoration: none;
+}
+
+.resource-card h4 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.resource-card p {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+/* Control/requirement items */
+.control-item {
+    background-color: var(--bg-alt);
+    padding: 1.5rem;
+    border-radius: 8px;
+}
+
+.control-item h4 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.control-item p {
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.control-item strong {
+    color: var(--primary-dark);
+}
+
+/* -------------------------------------------
+   Troubleshooting Items
+   ------------------------------------------- */
+.troubleshoot-item {
+    margin-bottom: 2rem;
+}
+
+.troubleshoot-item h4 {
+    color: var(--primary-dark);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+/* -------------------------------------------
+   Homepage Components
+   ------------------------------------------- */
 /* Game Info */
 .game-info {
     background-color: var(--bg-alt);
@@ -281,7 +771,7 @@ body {
     display: block;
 }
 
-/* Download Section */
+/* Download Section on homepage */
 .download-box {
     max-width: 700px;
     margin: 2rem auto;
@@ -355,7 +845,267 @@ body {
     text-decoration: underline;
 }
 
-/* Form Styles */
+/* -------------------------------------------
+   Download Page Components
+   ------------------------------------------- */
+.download-hero {
+    max-width: 800px;
+    margin: 2rem auto;
+    background: var(--gradient-purple);
+    color: white;
+    padding: 3rem;
+    border-radius: 16px;
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+}
+
+.version-info {
+    margin-bottom: 2rem;
+}
+
+.version-badge-large {
+    display: inline-block;
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 0.5rem 1.5rem;
+    border-radius: 30px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.version-date {
+    margin-top: 0.5rem;
+    opacity: 0.9;
+    font-size: 1rem;
+}
+
+.download-main h3 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.download-main > p {
+    margin-bottom: 2rem;
+    opacity: 0.9;
+    font-size: 1.1rem;
+}
+
+.download-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
+.file-info {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-top: 1rem;
+}
+
+/* Install options grid */
+.install-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.install-option {
+    background-color: var(--bg-alt);
+    padding: 1.5rem;
+    border-radius: 8px;
+}
+
+.install-option h4 {
+    color: var(--primary-dark);
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.install-option > p {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+}
+
+.install-note {
+    text-align: center;
+    color: var(--text-light);
+    font-size: 0.9rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0;
+}
+
+/* Feature list (what's new) */
+.feature-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.feature-list li {
+    padding: 0.75rem 0;
+    padding-left: 2rem;
+    position: relative;
+    line-height: 1.6;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.feature-list li:last-child {
+    border-bottom: none;
+}
+
+.feature-list li:before {
+    content: "\2713";
+    position: absolute;
+    left: 0;
+    color: var(--success-color);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.changelog-link {
+    display: inline-block;
+    margin-top: 1rem;
+    color: var(--primary-color);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.changelog-link:hover {
+    text-decoration: underline;
+}
+
+.help-link {
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+.help-link a {
+    color: var(--primary-color);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.help-link a:hover {
+    text-decoration: underline;
+}
+
+/* Requirements grid */
+.requirements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.requirement {
+    padding: 1rem;
+    background-color: var(--bg-alt);
+    border-radius: 8px;
+    line-height: 1.6;
+}
+
+.requirement strong {
+    display: block;
+    color: var(--primary-dark);
+    margin-bottom: 0.25rem;
+}
+
+/* -------------------------------------------
+   Changelog Page Components
+   ------------------------------------------- */
+.changelog-container {
+    max-width: 900px;
+    margin: 2rem auto;
+}
+
+.version-block {
+    background-color: white;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--border-color);
+}
+
+.version-block.current-version {
+    border-left-color: var(--primary-color);
+    box-shadow: var(--shadow-lg);
+}
+
+.version-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.version-header h3 {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    margin: 0;
+}
+
+.version-badge {
+    background-color: var(--success-color);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.changelog-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.changelog-list li {
+    padding: 0.75rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.changelog-list li:before {
+    content: "\2022";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.changelog-footer {
+    text-align: center;
+    margin-top: 3rem;
+    padding: 2rem;
+    background-color: var(--bg-alt);
+    border-radius: 12px;
+}
+
+.changelog-footer p {
+    font-size: 1.1rem;
+    color: var(--text-color);
+}
+
+.changelog-footer a {
+    color: var(--primary-color);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.changelog-footer a:hover {
+    text-decoration: underline;
+}
+
+/* -------------------------------------------
+   Form Styles
+   ------------------------------------------- */
 .signup-form {
     max-width: 600px;
     margin: 2rem auto;
@@ -418,7 +1168,9 @@ body {
     font-size: 0.9rem;
 }
 
-/* Footer */
+/* -------------------------------------------
+   Footer
+   ------------------------------------------- */
 .footer {
     background-color: var(--text-color);
     color: white;
@@ -453,10 +1205,12 @@ body {
     color: #cbd5e1;
     text-decoration: none;
     transition: color 0.3s;
+    font-weight: normal;
 }
 
 .footer-section a:hover {
     color: var(--accent-color);
+    text-decoration: none;
 }
 
 .footer-bottom {
@@ -466,7 +1220,9 @@ body {
     color: #94a3b8;
 }
 
-/* Responsive Design */
+/* -------------------------------------------
+   Responsive Design
+   ------------------------------------------- */
 @media (max-width: 768px) {
     .hero h1 {
         font-size: 2rem;
@@ -503,15 +1259,67 @@ body {
     .signup-form {
         padding: 1.5rem;
     }
-}
 
-/* Smooth Scrolling */
-html {
-    scroll-behavior: smooth;
-}
+    /* Step sections */
+    .step-section {
+        flex-direction: column;
+        gap: 1rem;
+    }
 
-/* Selection */
-::selection {
-    background-color: var(--primary-color);
-    color: white;
+    .step-badge {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+
+    /* Vertical steps */
+    .step-vertical {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .step-vertical .step-badge {
+        margin: 0 auto;
+    }
+
+    /* Grids */
+    .card-grid,
+    .install-options,
+    .requirements-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Content boxes */
+    .content-box {
+        padding: 1.5rem;
+    }
+
+    /* Download hero */
+    .download-hero {
+        padding: 2rem 1.5rem;
+    }
+
+    .download-main h3 {
+        font-size: 1.5rem;
+    }
+
+    .btn-download {
+        font-size: 1rem;
+        padding: 1rem 1.5rem;
+    }
+
+    /* Changelog */
+    .version-block {
+        padding: 1.5rem;
+    }
+
+    .version-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .version-header h3 {
+        font-size: 1.5rem;
+    }
 }

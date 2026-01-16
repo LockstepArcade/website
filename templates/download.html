@@ -40,7 +40,7 @@
                 </div>
             </div>
 
-            <div class="easy-install-section">
+            <div class="content-box content-wrapper--narrow">
                 <h3>Easy Install (Recommended)</h3>
                 <p>Copy and paste one of these commands to automatically download and extract the game. This avoids browser security warnings.</p>
 
@@ -48,7 +48,7 @@
                     <div class="install-option">
                         <h4>Windows (PowerShell)</h4>
                         <p>Open PowerShell and paste this command:</p>
-                        <div class="command-box">
+                        <div class="code-block--dark">
                             <code id="windows-command">irm https://locksteparcade.com/install_windows.ps1 | iex</code>
                             <button class="copy-btn" onclick="copyCommand('windows-command', this)">Copy</button>
                         </div>
@@ -57,7 +57,7 @@
                     <div class="install-option">
                         <h4>macOS (Terminal)</h4>
                         <p>Open Terminal and paste this command:</p>
-                        <div class="command-box">
+                        <div class="code-block--dark">
                             <code id="mac-command">curl -sL https://locksteparcade.com/install_mac.sh | bash</code>
                             <button class="copy-btn" onclick="copyCommand('mac-command', this)">Copy</button>
                         </div>
@@ -67,13 +67,13 @@
                 <p class="install-note">The script downloads the game to your Downloads folder, extracts it, and opens the folder for you.</p>
             </div>
 
-            <div class="credentials-notice">
+            <div class="info-box info-box--warning content-wrapper--narrow">
                 <h3>&#9888;&#65039; Credentials Required</h3>
                 <p>The game requires a <code>credentials.bin</code> file to connect to the dedicated server.</p>
                 <p>If you don't have credentials yet, <a href="../signup/">request beta access here</a> and we'll send you the file via email.</p>
             </div>
 
-            <div class="whats-new-section">
+            <div class="content-box content-wrapper--narrow">
                 <h3>What's New in v{version}</h3>
                 <ul class="feature-list">
 {whats_new_html}
@@ -81,30 +81,30 @@
                 <p><a href="../changelog/" class="changelog-link">View Full Changelog &#8594;</a></p>
             </div>
 
-            <div class="quick-start">
+            <div class="content-box content-wrapper--narrow">
                 <h3>Quick Start Guide</h3>
                 <div class="steps-compact">
                     <div class="step-compact">
-                        <span class="step-num">1</span>
+                        <span class="step-badge step-badge--small">1</span>
                         <span>Download the ZIP file above</span>
                     </div>
                     <div class="step-compact">
-                        <span class="step-num">2</span>
+                        <span class="step-badge step-badge--small">2</span>
                         <span>Extract to a new folder</span>
                     </div>
                     <div class="step-compact">
-                        <span class="step-num">3</span>
+                        <span class="step-badge step-badge--small">3</span>
                         <span>Copy <code>credentials.bin</code> to the game folder</span>
                     </div>
                     <div class="step-compact">
-                        <span class="step-num">4</span>
+                        <span class="step-badge step-badge--small">4</span>
                         <span>Run <code>client.exe</code> to play!</span>
                     </div>
                 </div>
                 <p class="help-link"><a href="../setup/">Need detailed installation help? View full setup guide &#8594;</a></p>
             </div>
 
-            <div class="system-requirements-box">
+            <div class="content-box content-wrapper--narrow">
                 <h3>System Requirements</h3>
                 <div class="requirements-grid">
                     <div class="requirement">
@@ -122,9 +122,9 @@
                 </div>
             </div>
 
-            <div class="additional-links">
-                <h3>Additional Resources</h3>
-                <div class="resources-grid">
+            <div class="content-wrapper">
+                <h3 class="section-heading">Additional Resources</h3>
+                <div class="card-grid">
                     <a href="../setup/" class="resource-card">
                         <h4>Installation Guide</h4>
                         <p>Detailed setup instructions and troubleshooting</p>
@@ -147,429 +147,6 @@
     </section>
 
 {footer}
-
-    <style>
-        .download-hero {
-            max-width: 800px;
-            margin: 2rem auto;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 3rem;
-            border-radius: 16px;
-            box-shadow: var(--shadow-lg);
-            text-align: center;
-        }
-
-        .version-info {
-            margin-bottom: 2rem;
-        }
-
-        .version-badge-large {
-            display: inline-block;
-            background-color: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            padding: 0.5rem 1.5rem;
-            border-radius: 30px;
-            font-size: 1.5rem;
-            font-weight: bold;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .version-date {
-            margin-top: 0.5rem;
-            opacity: 0.9;
-            font-size: 1rem;
-        }
-
-        .download-main h3 {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .download-main > p {
-            margin-bottom: 2rem;
-            opacity: 0.9;
-            font-size: 1.1rem;
-        }
-
-        .download-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 1rem;
-        }
-
-        .btn-download {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 1.1rem;
-            padding: 1rem 2rem;
-            background-color: white;
-            color: var(--primary-color);
-        }
-
-        .btn-download:hover {
-            background-color: #f8fafc;
-            transform: translateY(-3px);
-        }
-
-        .download-icon {
-            font-size: 1.3rem;
-        }
-
-        .file-info {
-            font-size: 0.9rem;
-            opacity: 0.8;
-            margin-top: 1rem;
-        }
-
-        .credentials-notice {
-            max-width: 800px;
-            margin: 2rem auto;
-            background-color: #fef3c7;
-            border-left: 4px solid var(--accent-color);
-            padding: 2rem;
-            border-radius: 12px;
-        }
-
-        .credentials-notice h3 {
-            color: #92400e;
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-        }
-
-        .credentials-notice p {
-            color: #78350f;
-            margin-bottom: 0.5rem;
-            line-height: 1.6;
-        }
-
-        .credentials-notice code {
-            background-color: rgba(0, 0, 0, 0.1);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-        }
-
-        .credentials-notice a {
-            color: var(--primary-color);
-            font-weight: 600;
-        }
-
-        .whats-new-section {
-            max-width: 800px;
-            margin: 3rem auto;
-            background-color: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-        }
-
-        .whats-new-section h3 {
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-        }
-
-        .feature-list {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .feature-list li {
-            padding: 0.75rem 0;
-            padding-left: 2rem;
-            position: relative;
-            line-height: 1.6;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .feature-list li:last-child {
-            border-bottom: none;
-        }
-
-        .feature-list li:before {
-            content: "\2713";
-            position: absolute;
-            left: 0;
-            color: var(--success-color);
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        .changelog-link {
-            display: inline-block;
-            margin-top: 1rem;
-            color: var(--primary-color);
-            font-weight: 600;
-            text-decoration: none;
-        }
-
-        .changelog-link:hover {
-            text-decoration: underline;
-        }
-
-        .quick-start {
-            max-width: 800px;
-            margin: 3rem auto;
-            background-color: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-        }
-
-        .quick-start h3 {
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-        }
-
-        .steps-compact {
-            display: grid;
-            gap: 1rem;
-        }
-
-        .step-compact {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem;
-            background-color: var(--bg-alt);
-            border-radius: 8px;
-        }
-
-        .step-num {
-            flex-shrink: 0;
-            width: 35px;
-            height: 35px;
-            background-color: var(--primary-color);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-        }
-
-        .step-compact code {
-            background-color: white;
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-            color: var(--primary-dark);
-        }
-
-        .help-link {
-            margin-top: 1.5rem;
-            text-align: center;
-        }
-
-        .help-link a {
-            color: var(--primary-color);
-            font-weight: 600;
-            text-decoration: none;
-        }
-
-        .help-link a:hover {
-            text-decoration: underline;
-        }
-
-        .system-requirements-box {
-            max-width: 800px;
-            margin: 3rem auto;
-            background-color: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-        }
-
-        .system-requirements-box h3 {
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-        }
-
-        .requirements-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .requirement {
-            padding: 1rem;
-            background-color: var(--bg-alt);
-            border-radius: 8px;
-            line-height: 1.6;
-        }
-
-        .requirement strong {
-            display: block;
-            color: var(--primary-dark);
-            margin-bottom: 0.25rem;
-        }
-
-        .additional-links {
-            max-width: 900px;
-            margin: 3rem auto;
-        }
-
-        .additional-links h3 {
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-            text-align: center;
-        }
-
-        .resources-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .resource-card {
-            background-color: white;
-            padding: 1.5rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            text-decoration: none;
-            color: inherit;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: 2px solid transparent;
-        }
-
-        .resource-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--primary-color);
-        }
-
-        .resource-card h4 {
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-            font-size: 1.2rem;
-        }
-
-        .resource-card p {
-            color: var(--text-light);
-            font-size: 0.95rem;
-            margin: 0;
-        }
-
-        .easy-install-section {
-            max-width: 800px;
-            margin: 2rem auto;
-            background-color: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-        }
-
-        .easy-install-section > h3 {
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-            font-size: 1.8rem;
-        }
-
-        .easy-install-section > p {
-            color: var(--text-light);
-            margin-bottom: 1.5rem;
-        }
-
-        .install-options {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .install-option {
-            background-color: var(--bg-alt);
-            padding: 1.5rem;
-            border-radius: 8px;
-        }
-
-        .install-option h4 {
-            color: var(--primary-dark);
-            margin-bottom: 0.5rem;
-            font-size: 1.2rem;
-        }
-
-        .install-option > p {
-            color: var(--text-light);
-            font-size: 0.95rem;
-            margin-bottom: 1rem;
-        }
-
-        .command-box {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            background-color: #1e293b;
-            padding: 0.75rem 1rem;
-            border-radius: 6px;
-            margin-bottom: 1rem;
-        }
-
-        .command-box code {
-            flex: 1;
-            color: #e2e8f0;
-            font-family: 'Courier New', monospace;
-            font-size: 0.85rem;
-            word-break: break-all;
-        }
-
-        .copy-btn {
-            flex-shrink: 0;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 0.4rem 0.8rem;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            transition: background-color 0.2s;
-        }
-
-        .copy-btn:hover {
-            background-color: var(--primary-dark);
-        }
-
-        .copy-btn.copied {
-            background-color: var(--success-color);
-        }
-
-        .install-note {
-            text-align: center;
-            color: var(--text-light);
-            font-size: 0.9rem;
-            margin-top: 1.5rem;
-            margin-bottom: 0;
-        }
-
-        @media (max-width: 768px) {
-            .download-hero {
-                padding: 2rem 1.5rem;
-            }
-
-            .download-main h3 {
-                font-size: 1.5rem;
-            }
-
-            .btn-download {
-                font-size: 1rem;
-                padding: 1rem 1.5rem;
-            }
-
-            .requirements-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .resources-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
 
     <script>
     function copyCommand(elementId, button) {

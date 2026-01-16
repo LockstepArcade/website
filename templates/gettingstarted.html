@@ -14,7 +14,7 @@
         <div class="container">
             <h2>Getting Started</h2>
 
-            <div class="guide-section">
+            <div class="content-box content-box--bordered content-wrapper">
                 <h3>Starting the Game Client</h3>
                 <p>
                     After downloading and extracting the game, you should have a folder containing the game executable ('LockstepArcade.exe' or 'LockstepArcade'),
@@ -28,7 +28,7 @@
                 </p>
             </div>
 
-            <div class="guide-section">
+            <div class="content-box content-box--bordered content-wrapper">
                 <h3>The Main Menu</h3>
 
                 <p>The main things you can do from here are:</p>
@@ -38,7 +38,7 @@
                 </ul>
             </div>
 
-            <div class="guide-section">
+            <div class="content-box content-box--bordered content-wrapper">
                 <h3>Credentials and Connecting to the Server</h3>
 
                 <p>A credentials file is requried for connection to the server.</p>
@@ -56,7 +56,7 @@
                 </p>
             </div>
 
-            <div class="guide-section">
+            <div class="content-box content-box--bordered content-wrapper">
                 <h3>The Online UI</h3>
 
                 <p>The online part of the game user interface is organised into a set of tabbed pages that you can move between by clicking on different tabs at the top of the scren.</p>
@@ -68,7 +68,7 @@
                 <p>The other tabs show information about games that have been played, high scores, and rankings.</p>
             </div>
 
-            <div class="guide-section">
+            <div class="content-box content-box--bordered content-wrapper">
                 <h3>Creating a Game Room</h3>
 
                 <p>The first step for playing an online game is to create a game room, by clicking the 'Create a game room' button.</p>
@@ -81,7 +81,7 @@
                 <p>For a game with more than one player, only one player needs to create a room, and other players can then join this room.</p>
             </div>
 
-            <div class="guide-section">
+            <div class="content-box content-box--bordered content-wrapper">
                 <h3>Starting a Game</h3>
 
                 <p>
@@ -93,10 +93,10 @@
                 </p>
             </div>
 
-            <div class="guide-section">
+            <div class="content-box content-box--bordered content-wrapper">
                 <h3>Game Controls</h3>
 
-                <div class="controls-grid">
+                <div class="card-grid card-grid--3col">
                     <div class="control-item">
                         <h4>Camera Movement</h4>
                         <p><strong>Middle Mouse + Drag:</strong> Pan the view around</p>
@@ -128,7 +128,7 @@
                 </div>
             </div>
 
-            <div class="guide-section">
+            <div class="content-box content-box--bordered content-wrapper">
                 <h3>Game Objectives</h3>
 
                 <p>Lockstep Arcade features a Lemmings clone where the goal is to get your lemmings from a start position to an exit location.</p>
@@ -146,7 +146,7 @@
                 <p>The team (or player) who got the most swarmers into their exit when the game time expires is the winner!</p>
             </div>
 
-            <div class="guide-section">
+            <div class="content-box content-box--bordered content-wrapper">
                 <h3>Testing and Multiple Clients</h3>
 
                 <p>Most of the time (e.g. if you connect at some arbitrary random time) the lobby will likely be completely empty, apart from you, on connection.</p>
@@ -157,7 +157,7 @@
                 </div>
             </div>
 
-            <div class="help-section">
+            <div class="info-box info-box--cta content-wrapper">
                 <h3>Need Help?</h3>
                 <p>If you're experiencing issues or have questions, please reach out through the <a href="signup/">beta access form</a> with details about your problem.</p>
             </div>
@@ -166,201 +166,5 @@
 
 {footer}
 
-    <style>
-        .setup-container {
-            max-width: 900px;
-            margin: 2rem auto;
-        }
-
-        .setup-section {
-            display: flex;
-            gap: 2rem;
-            margin-bottom: 2rem;
-            padding: 2rem;
-            background-color: white;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            align-items: flex-start;
-        }
-
-        .step-number {
-            flex-shrink: 0;
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        .step-content {
-            flex: 1;
-        }
-
-        .step-content h3 {
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-            font-size: 1.4rem;
-        }
-
-        .step-content p {
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-
-        .step-content code {
-            background-color: var(--bg-alt);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-            color: var(--primary-dark);
-        }
-
-        .guide-section {
-            max-width: 900px;
-            margin: 3rem auto;
-            padding: 2rem;
-            background-color: white;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-        }
-
-        .guide-section h3 {
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 0.5rem;
-        }
-
-        .guide-section p {
-            margin-bottom: 1rem;
-            line-height: 1.6;
-        }
-
-        .troubleshoot-item {
-            margin-bottom: 2rem;
-        }
-
-        .troubleshoot-item h4 {
-            color: var(--primary-dark);
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-        }
-
-        .code-block {
-            background-color: var(--bg-alt);
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin: 1rem 0;
-            border-left: 4px solid var(--primary-color);
-        }
-
-        .code-block strong {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--primary-dark);
-        }
-
-        .code-block ol {
-            margin-left: 1.5rem;
-            line-height: 1.8;
-        }
-
-        .info-box {
-            background-color: #dbeafe;
-            border-left: 4px solid var(--primary-color);
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin: 1.5rem 0;
-        }
-
-        .info-box h4 {
-            color: var(--primary-dark);
-            margin-bottom: 1rem;
-        }
-
-        .info-box ul {
-            margin-left: 1.5rem;
-            line-height: 1.8;
-        }
-
-        .info-box p {
-            margin-bottom: 0.5rem;
-        }
-
-        .controls-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin: 1.5rem 0;
-        }
-
-        .control-item {
-            background-color: var(--bg-alt);
-            padding: 1.5rem;
-            border-radius: 8px;
-        }
-
-        .control-item h4 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-        }
-
-        .control-item p {
-            margin-bottom: 0.5rem;
-            font-size: 0.95rem;
-        }
-
-        .control-item strong {
-            color: var(--primary-dark);
-        }
-
-        .help-section {
-            max-width: 900px;
-            margin: 3rem auto;
-            padding: 2rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 12px;
-            text-align: center;
-        }
-
-        .help-section h3 {
-            color: white;
-            margin-bottom: 1rem;
-        }
-
-        .help-section a {
-            color: var(--accent-color);
-            font-weight: 600;
-        }
-
-        @media (max-width: 768px) {
-            .setup-section {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .step-number {
-                width: 40px;
-                height: 40px;
-                font-size: 1.2rem;
-            }
-
-            .controls-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .guide-section {
-                padding: 1.5rem;
-            }
-        }
-    </style>
 </body>
 </html>
