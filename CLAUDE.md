@@ -52,3 +52,4 @@ GitHub Pages serves from the `docs/` directory. Assets (images, zip files, style
 These URLs must remain stable (linked from the game):
 - `/download` → `docs/download/index.html`
 - `/signup` → `docs/signup/index.html`
+- `/gettingstarted` → `docs/gettingstarted/index.html`
