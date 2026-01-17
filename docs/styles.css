@@ -1263,6 +1263,33 @@ code {
 }
 
 /* -------------------------------------------
+   Platform Detection
+   ------------------------------------------- */
+/* Platform-specific visibility */
+.platform-windows .show-mac,
+.platform-mac .show-windows {
+    display: none !important;
+}
+
+/* Platform indicator styling */
+.platform-indicator {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.platform-indicator a {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.platform-indicator a:hover {
+    color: white;
+}
+
+/* -------------------------------------------
    Responsive Design
    ------------------------------------------- */
 @media (max-width: 768px) {

@@ -23,44 +23,45 @@
 
                 <div class="download-main">
                     <h3>Lockstep Arcade Client</h3>
-                    <p>Full multiplayer game client with Lemmings</p>
+                    <p>Full multiplayer game client</p>
 
                     <div class="download-buttons">
-                        <a href="../lockstep_arcade_{version}.zip" class="btn btn-primary btn-large btn-download" download>
+                        <a href="../lockstep_arcade_{version}.zip" class="btn btn-primary btn-large btn-download show-windows" download>
                             <span class="download-icon">&#11015;</span>
                             Download for Windows
                         </a>
-                        <a href="../lockstep_arcade_{version}_mac.zip" class="btn btn-primary btn-large btn-download btn-download-mac" download>
+                        <a href="../lockstep_arcade_{version}_mac.zip" class="btn btn-primary btn-large btn-download show-mac" download>
                             <span class="download-icon">&#11015;</span>
                             Download for macOS
                         </a>
                     </div>
 
-                    <p class="file-info">Version {version} | Windows ({download_size_windows}) | macOS ({download_size_mac})</p>
+                    <p class="file-info show-windows">Version {version} | {download_size_windows}</p>
+                    <p class="file-info show-mac">Version {version} | {download_size_mac}</p>
                 </div>
+
+                <p class="platform-indicator">
+                    <span class="show-windows">Detected: Windows · <a onclick="setPlatform('mac')">Show macOS instead</a></span>
+                    <span class="show-mac">Detected: macOS · <a onclick="setPlatform('windows')">Show Windows instead</a></span>
+                </p>
             </div>
 
             <div class="content-box content-wrapper--narrow">
                 <h3>Easy Install (Recommended)</h3>
-                <p>Copy and paste one of these commands to automatically download and extract the game. This avoids browser security warnings.</p>
+                <p class="show-windows">Copy this command into PowerShell to automatically download and extract the game:</p>
+                <p class="show-mac">Copy this command into Terminal to automatically download and extract the game:</p>
 
-                <div class="install-options">
-                    <div class="install-option">
-                        <h4>Windows (PowerShell)</h4>
-                        <p>Open PowerShell and paste this command:</p>
-                        <div class="code-block--dark">
-                            <code id="windows-command">irm https://locksteparcade.com/install_windows.ps1 | iex</code>
-                            <button class="copy-btn" onclick="copyCommand('windows-command', this)">Copy</button>
-                        </div>
+                <div class="install-option show-windows">
+                    <div class="code-block--dark">
+                        <code id="windows-command">irm https://locksteparcade.com/install_windows.ps1 | iex</code>
+                        <button class="copy-btn" onclick="copyCommand('windows-command', this)">Copy</button>
                     </div>
+                </div>
 
-                    <div class="install-option">
-                        <h4>macOS (Terminal)</h4>
-                        <p>Open Terminal and paste this command:</p>
-                        <div class="code-block--dark">
-                            <code id="mac-command">curl -sL https://locksteparcade.com/install_mac.sh | bash</code>
-                            <button class="copy-btn" onclick="copyCommand('mac-command', this)">Copy</button>
-                        </div>
+                <div class="install-option show-mac">
+                    <div class="code-block--dark">
+                        <code id="mac-command">curl -sL https://locksteparcade.com/install_mac.sh | bash</code>
+                        <button class="copy-btn" onclick="copyCommand('mac-command', this)">Copy</button>
                     </div>
                 </div>
 
@@ -98,7 +99,8 @@
                     </div>
                     <div class="step-compact">
                         <span class="step-badge step-badge--small">4</span>
-                        <span>Run <code>client.exe</code> to play!</span>
+                        <span class="show-windows">Run <code>LockstepArcade.exe</code> to play!</span>
+                        <span class="show-mac">Run <code>LockstepArcade</code> to play!</span>
                     </div>
                 </div>
                 <p class="help-link"><a href="../setup/">Need detailed installation help? View full setup guide &#8594;</a></p>
@@ -149,6 +151,33 @@
 {footer}
 
     <script>
+    // Platform detection and switching
+    function detectPlatform() {
+        const ua = navigator.userAgent.toLowerCase();
+        const platform = navigator.platform.toLowerCase();
+
+        if (platform.includes('mac') || ua.includes('mac os')) {
+            return 'mac';
+        }
+        return 'windows'; // Default to Windows
+    }
+
+    function setPlatform(platform) {
+        document.body.classList.remove('platform-windows', 'platform-mac');
+        document.body.classList.add('platform-' + platform);
+        localStorage.setItem('lockstep-platform', platform);
+    }
+
+    function initPlatform() {
+        // Check localStorage first, then detect
+        const saved = localStorage.getItem('lockstep-platform');
+        const platform = saved || detectPlatform();
+        setPlatform(platform);
+    }
+
+    // Initialize on page load
+    initPlatform();
+
     function copyCommand(elementId, button) {
         const code = document.getElementById(elementId);
         navigator.clipboard.writeText(code.textContent).then(function() {
