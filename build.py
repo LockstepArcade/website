@@ -197,6 +197,7 @@ def build_site():
     ensure_dir(DOCS_DIR / "changelog")
     ensure_dir(DOCS_DIR / "setup")
     ensure_dir(DOCS_DIR / "gettingstarted")
+    ensure_dir(DOCS_DIR / "challenges")
 
     # Common variables for all pages
     common_vars = {
@@ -213,6 +214,7 @@ def build_site():
     # Pages to build: (template_name, output_path, path_prefix)
     pages = [
         ("index.html", DOCS_DIR / "index.html", ""),
+        ("challenges.html", DOCS_DIR / "challenges" / "index.html", "../"),
         ("download.html", DOCS_DIR / "download" / "index.html", "../"),
         ("signup.html", DOCS_DIR / "signup" / "index.html", "../"),
         ("setup.html", DOCS_DIR / "setup" / "index.html", "../"),
