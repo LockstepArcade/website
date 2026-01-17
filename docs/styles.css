@@ -371,6 +371,7 @@ code {
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
     border-left: 4px solid var(--primary-color);
+    border-right: 4px solid var(--primary-color);
 }
 
 .info-box h4 {

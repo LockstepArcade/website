@@ -13,19 +13,19 @@
     <section class="section">
         <div class="container">
             <h2>Getting Started</h2>
-            <p>
+            <p class="section-intro">
                 (This page is for information about getting started after downloading and installing the game,
                 and assumes you are already able to start the game and see the main menu.)
             </p>
 
             <div class="content-box content-box--bordered content-wrapper">
-                <h3>Online and Offline UI</h3>
+                <h3>Offline UI</h3>
                 <p>
-                    When running the game you start in the offline part of the game interface.
+                    When you start the game you'll start in the offline part of the game interface.
                 </p>
                 <p>
-                    There is some stuff you can do here, such as playing through the Neon Swarm tutorial,
-                    but to play multiplayer games you will need to connect to the server.
+                    There's some stuff you can do here, such as playing through the Neon Swarm tutorial,
+                    but to play multiplayer games you''ll need to connect to the server.
                 </p>
                 <p>
                     Information about setting up credentials for this can be found on the
@@ -34,35 +34,7 @@
             </div>
 
             <div class="content-box content-box--bordered content-wrapper">
-                <h3>The Main Menu</h3>
-
-                <p>The main things you can do from here are:</p>
-                <ul>
-                    <li>Play through the Neon Swarm tutorial (offline)</li>
-                    <li>Connect to the server</li>
-                </ul>
-            </div>
-
-            <div class="content-box content-box--bordered content-wrapper">
-                <h3>Credentials and Connecting to the Server</h3>
-
-                <p>A credentials file is requried for connection to the server.</p>
-
-                <p>Maybe I already sent you this. If not, you will need to <a href="https://locksteparcade.com/signup/">sign up for beta testing</a>.</p>
-
-                <p>
-                    Once you have a credentials file ('credentials.bin'), this will need to be put into the same directory as the game executable,
-                    in order for the game to be able to find it and connect to the server.
-                </p>
-
-                <p>
-                    Once you have a valid 'credentials.bin' file next to 'LockstepArcade.exe' or 'LockstepArcade', you should be able to select "Connect to server",
-                    and enter the online part of the game user interface.
-                </p>
-            </div>
-
-            <div class="content-box content-box--bordered content-wrapper">
-                <h3>The Online UI</h3>
+                <h3>Online UI</h3>
 
                 <p>The online part of the game user interface is organised into a set of tabbed pages that you can move between by clicking on different tabs at the top of the scren.</p>
 
@@ -70,27 +42,51 @@
 
                 <p>You can then create a game room and start a game through the 'Rooms and players' tab.</p>
 
-                <p>The other tabs show information about games that have been played, high scores, and rankings.</p>
+                <div class="info-box">
+                    <h4>Other Tabbed Pages</h4>
+                    <ul>
+                        <li>The 'Game results' tab shows a list of previously played games (click on a game to see details)</li>
+                        <li>'High scores' shows lists of top scoring games, for single player or coop challenges</li>
+                        <li>'Neon Swarm rankings' and 'Pilots rankings' show rankings for the top players based on the results of ranked games</li>
+                    </ul>
+                </div>
             </div>
 
             <div class="content-box content-box--bordered content-wrapper">
                 <h3>Creating a Game Room</h3>
 
-                <p>The first step for playing an online game is to create a game room, by clicking the 'Create a game room' button.</p>
+                <p>Create a game room by clicking the 'Create a game room' button, in 'Rooms and players'.</p>
 
                 <p>
                     This will take you to a page where you can set up the details of the game to be played, such as the type of game, map to play on, and so on.
                     When you are happy with the settings, click 'Create room' to go ahead and create the game room (which will then become visible to other players).
                 </p>
 
-                <p>For a game with more than one player, only one player needs to create a room, and other players can then join this room.</p>
+                <p>For multiplayer games, only one player needs to create a room. Other players can then join this room ('Join this room' on the room card).</p>
+
+                <div class="info-box">
+                    <h4>Game Creation Settings</h4>
+                    <ul>
+                        <li>'Friendly' game type allows maximum control of settings, flexible player count, (with the game then not taking into account for rankings)</li>
+                        <li>'Coop of single player challenge' game type starts a game that is eligable for one of the high score tables</li>
+                        <li>'Ranked match' starts a game which will effect player rankings</li>
+                        <li>If you have a particularly bad internet connection and see stuttering, try playing a friendly game with increased 'Delay frames' setting</li>
+                        <li>In a friendly game you can significantly change the game play by giving different order availabilities</li>
+                    </ul>
+                </div>
             </div>
 
             <div class="content-box content-box--bordered content-wrapper">
                 <h3>Starting a Game</h3>
 
                 <p>
-                    After either creating or joining a game, you will be taken to a page with a list of players on the left, and some information about the game settings on the right.
+                    After creating or joining a game, you'll be taken to a 'Game Room' page where you can see a list of the players currently in the room, on the left, and some information about the game settings on the right.
+                </p>
+
+                <p>
+                    Players can choose their 'slot' in a game, if desired, otherwise this defaults to assigning slots in the order players are listed.
+                    (Slots determine things like player start position, in the game, and each have an associated colour.
+                    In team games, your slot also determines which team you are on.)
                 </p>
 
                 <p>
@@ -99,44 +95,15 @@
             </div>
 
             <div class="content-box content-box--bordered content-wrapper">
-                <h3>Game Controls</h3>
+                <h3>Neon Swarm Game Objectives</h3>
 
-                <div class="card-grid card-grid--3col">
-                    <div class="control-item">
-                        <h4>Camera Movement</h4>
-                        <p><strong>Middle Mouse + Drag:</strong> Pan the view around</p>
-                        <p><strong>Mouse Wheel:</strong> Zoom in and out</p>
-                        <p><strong>WASD Keys:</strong> Alternative camera movement</p>
-                    </div>
+                <p>Neon Swarm is based on the <a href="https://en.wikipedia.org/wiki/Lemmings_(video_game)">"Lemmings"</a> classic video game.</p>
 
-                    <div class="control-item">
-                        <h4>Giving Orders</h4>
-                        <p><strong>Click order in bar:</strong> Select an order from the top bar</p>
-                        <p><strong>Function Keys:</strong> Quick-select orders</p>
-                        <p><strong>Click near lemming:</strong> Give the selected order</p>
-                        <p><strong>Left/Right Arrow:</strong> Hold to set directional filter</p>
-                    </div>
+                <p>(For comparison you can find emulated versions of the original in various places, such as <a href="https://www.elizium.nu/scripts/lemmings/index.php">here</a>.)</p>
 
-                    <div class="control-item">
-                        <h4>Other Controls</h4>
-                        <p><strong>F11:</strong> Toggle fullscreen/windowed mode</p>
-                    </div>
-                </div>
+                <p>The goal in Neon Swarm is to get your swarmers from a start position to an exit location.</p>
 
-                <div class="info-box">
-                    <h4>Important Notes</h4>
-                    <ul>
-                        <li>You only have a limited supply of each order type, so use them carefully!</li>
-                        <li>Orders won't apply to falling lemmings (they appear darkened)</li>
-                        <li>Selection bars will show which lemming will get an order for the current mouse position</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="content-box content-box--bordered content-wrapper">
-                <h3>Game Objectives</h3>
-
-                <p>Lockstep Arcade features a Lemmings clone where the goal is to get your lemmings from a start position to an exit location.</p>
+                <p>You can't control the swarmer movement directly, but you can give your swarmers order, such as to build bridges, or dig through the landscape.</p>
 
                 <p>
                     For some maps, play is all against all, and other maps have team assignments.
@@ -149,22 +116,120 @@
                 </p>
 
                 <p>The team (or player) who got the most swarmers into their exit when the game time expires is the winner!</p>
-            </div>
-
-            <div class="content-box content-box--bordered content-wrapper">
-                <h3>Testing and Multiple Clients</h3>
-
-                <p>Most of the time (e.g. if you connect at some arbitrary random time) the lobby will likely be completely empty, apart from you, on connection.</p>
 
                 <div class="info-box">
-                    <p>Multiple clients can be started on a single machine for testing purposes by double-clicking <code>client.exe</code> again after the game has started. One client can then be used to create a game room, and then you can join this game room with other clients to see everything working.</p>
-                    <p>It is also possible to play games with just one player (even on maps where this doesn't really make sense), to try out the various in-game mechanics and just see the game running.</p>
+                    <h4>Notes</h4>
+                    <ul>
+                        <li>In the case of a tie break, the team or player who got lemmings to the exit earlier wins</li>
+                        <li>Some maps have metal areas which cannot be dug through</li>
+                    </ul>
                 </div>
             </div>
 
-            <div class="info-box info-box--cta content-wrapper">
-                <h3>Need Help?</h3>
-                <p>If you're experiencing issues or have questions, please reach out through the <a href="signup/">beta access form</a> with details about your problem.</p>
+            <div class="content-box content-box--bordered content-wrapper">
+                <h3>Neon Swarm Game Controls</h3>
+
+                <div class="card-grid card-grid--3col">
+                    <div class="control-item">
+                        <h4>Camera Movement</h4>
+                        <p><strong>Middle Mouse + Drag:</strong> Pan the view around</p>
+                        <p><strong>Mouse Wheel:</strong> Zoom in and out</p>
+                        <p><strong>WASD Keys:</strong> Alternative camera movement</p>
+                        <p><strong>Q and E Keys:</strong> Alternative zoom controls</p>
+                    </div>
+
+                    <div class="control-item">
+                        <h4>Giving Orders</h4>
+                        <p><strong>Click order in bar:</strong> Select an order from the top bar</p>
+                        <p><strong>Function Keys:</strong> Quick-select orders</p>
+                        <p><strong>Click near lemming:</strong> Give the selected order</p>
+                        <p><strong>Left/Right Arrow:</strong> Hold to set directional filter</p>
+                    </div>
+
+                    <div class="control-item">
+                        <h4>Direct Trigger Controls</h4>
+                        <p><strong>Up Arrow:</strong> Hold to apply orders with 'on blocked' trigger</p>
+                        <p><strong>Down Arrow:</strong> Hold to apply orders with 'on about to fall' trigger</p>
+                        <p><strong>Left/Right Arrow:</strong> Hold the opposite direction to current direction filter for 'on turned' trigger</p>
+                    </div>
+
+                    <div class="control-item">
+                        <h4>Other Controls</h4>
+                        <p><strong>F11:</strong> Toggle fullscreen/windowed mode</p>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <h4>Important Notes</h4>
+                    <ul>
+                        <li>Keys given correspond to key positions on an English keyboard, and are independent of localised keyboard layout</li>
+                        <li>(on a French keyboard, for example, use ZQSD instead of WASD, and A instead of Q)</li>
+                        <li>You only have a limited supply of each order type, so use them carefully!</li>
+                        <li>Orders won't apply to falling lemmings (they appear darkened)</li>
+                        <li>Targetting brackets show, visually, which lemming will get an order for the current mouse position and direction filter</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-box content-box--bordered content-wrapper">
+                <h3>Pilots Game Objectives</h3>
+
+                <p>The goal in Neon Swarm is stay alive as long as possible.</p>
+
+                <p>(If multiple players survive until game time runs out, the player with the highest amount of remaining hit points wins.)</p>
+
+                <p>The team (or player) who got the most swarmers into their exit when the game time expires is the winner!</p>
+
+                <div class="info-box">
+                    <h4>Notes</h4>
+                    <ul>
+                        <li>In the case of a tie break, the team or player who got lemmings to the exit earlier wins</li>
+                        <li>Some maps have metal areas which cannot be dug through</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-box content-box--bordered content-wrapper">
+                <h3>Pilots Game Controls</h3>
+
+                <div class="card-grid card-grid--3col">
+                    <div class="control-item">
+                        <h4>Ship Control</h4>
+                        <p><strong>A:</strong> Rotate ship anticlockwise</p>
+                        <p><strong>D:</strong> Rotate ship clockwise</p>
+                        <p><strong>W:</strong> Thrust</p>
+                        <p><strong>S:</strong> Brakes</p>
+                    </div>
+
+                    <div class="control-item">
+                        <h4>Camera</h4>
+                        <p><strong>Mouse Wheel:</strong> Zoom in and out</p>
+                        <p><strong>Q and E Keys:</strong> Alternative zoom controls</p>
+                    </div>
+
+                    <div class="control-item">
+                        <h4>Missile Subsystem</h4>
+                        <p><strong>L:</strong> Attempt to obtain target lock</p>
+                        <p><strong>Space:</strong> Fire a missile at locked target</p>
+                    </div>
+
+                    <div class="control-item">
+                        <h4>Other Controls</h4>
+                        <p><strong>F11:</strong> Toggle fullscreen/windowed mode</p>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <h4>Important Notes</h4>
+                    <ul>
+                        <li>Collision with walls damages your ship, so move carefully!</li>
+                        <li>Target lock can be obtained on enemies within in a circular region in front of your ship</li>
+                        <li>(This target lock region is shown visually when you press the target lock key)</li>
+                        <li>Missiles are rendered in the colour of the target player (and can only hit this player)</li>
+                        <li>Missiles home in, but can be evaded with careful maneuvring</li>
+                        <li>You have a limited supply of missiles, but this will be gradually replenished with time</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
