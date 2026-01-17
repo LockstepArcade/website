@@ -164,6 +164,14 @@ code {
    ------------------------------------------- */
 .hero {
     position: relative;
+    background: var(--gradient-blue);
+    color: white;
+    padding: 0;
+    overflow: hidden;
+}
+
+.hero-purple {
+    position: relative;
     background: var(--gradient-purple);
     color: white;
     padding: 0;
@@ -337,7 +345,7 @@ code {
 
 /* Gradient hero box (for download page hero) */
 .content-box--hero {
-    background: var(--gradient-purple);
+    background: var(--gradient-blue);
     color: white;
     text-align: center;
     padding: 3rem;
@@ -416,7 +424,7 @@ code {
 
 /* Purple/gradient info box (call to action) */
 .info-box--cta {
-    background: var(--gradient-purple);
+    background: var(--gradient-blue);
     color: white;
     border-left: none;
     text-align: center;
