@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Installation Guide - Lockstep Arcade</title>
-    <meta name="description" content="Complete installation and setup guide for Lockstep Arcade">
+    <title>Server Connection - Lockstep Arcade</title>
+    <meta name="description" content="Get credentials and connect to the Lockstep Arcade server">
     <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
@@ -12,140 +12,91 @@
 
     <section class="section">
         <div class="container">
-            <h2>Installation Guide</h2>
-            <p class="section-intro">Follow these steps to get Lockstep Arcade up and running on your system</p>
+            <h2>Connect to the Server</h2>
+            <p class="section-intro">Get your credentials and start playing online</p>
 
             <div class="content-wrapper">
                 <div class="step-section">
                     <div class="step-badge">1</div>
                     <div class="step-section__content">
                         <h3>Get Your Credentials</h3>
-                        <p>You will need a <code>credentials.bin</code> file to connect to the server. If you don't have one yet, <a href="signup/">request beta access</a> and we'll send you the file via email.</p>
+                        <p>You need a <code>credentials.bin</code> file to connect to the server.</p>
+                        <p>If you don't have one yet, <a href="../signup/">request beta access</a> and we'll send you the file via email.</p>
                     </div>
                 </div>
 
                 <div class="step-section">
                     <div class="step-badge">2</div>
                     <div class="step-section__content">
-                        <h3>Download the Game</h3>
-                        <p><a href="download/">Download the latest release</a> and save the ZIP file to a location of your choice.</p>
+                        <h3>Add Credentials to the Game Folder</h3>
+                        <p>Copy your <code>credentials.bin</code> file into the same folder as the game executable.</p>
+                        <p>Your game folder should contain:</p>
+                        <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                            <li><code>LockstepArcade.exe</code> (or <code>LockstepArcade</code> on Mac)</li>
+                            <li><code>credentials.bin</code> ← your credentials file</li>
+                            <li><code>data/</code> folder</li>
+                            <li><code>README.md</code></li>
+                        </ul>
                     </div>
                 </div>
 
                 <div class="step-section">
                     <div class="step-badge">3</div>
                     <div class="step-section__content">
-                        <h3>Extract the Archive</h3>
-                        <p>Unzip the game release archive into its own directory. You should then have <code>LockstepArcade.exe</code>, <code>README.md</code>, and a <code>data</code> directory, all in the same directory.</p>
+                        <h3>Connect from the Game</h3>
+                        <p>Launch the game and click <strong>"Connect to Server"</strong> from the main menu.</p>
+                        <p>You'll be connected to the lobby where you can join or create game rooms.</p>
                     </div>
                 </div>
+            </div>
 
-                <div class="step-section">
-                    <div class="step-badge">4</div>
-                    <div class="step-section__content">
-                        <h3>Add Your Credentials</h3>
-                        <p>Copy your connection credential file (<code>credentials.bin</code>) into the same directory as <code>client.exe</code>.</p>
-                    </div>
-                </div>
-
-                <div class="step-section">
-                    <div class="step-badge">5</div>
-                    <div class="step-section__content">
-                        <h3>Launch the Game</h3>
-                        <p>Double-click <code>LockstepArcade.exe</code> to start the game client.</p>
-                    </div>
-                </div>
+            <div class="info-box info-box--cta content-wrapper--narrow">
+                <h3>Ready to Play!</h3>
+                <p>Once connected, you can join public rooms or create private rooms to play with friends.</p>
+                <p style="margin-top: 1rem;"><a href="{discord_url}" class="btn btn-primary">Join our Discord →</a></p>
             </div>
 
             <div class="content-box content-box--bordered content-wrapper">
                 <h3>Troubleshooting</h3>
 
                 <div class="troubleshoot-item">
-                    <h4>Windows Security Warnings</h4>
-                    <p>Sometimes Windows marks files downloaded from the internet as potentially unsafe. If Windows blocks the download or you can't extract/run the game, follow these steps:</p>
-
-                    <div class="code-block">
-                        <strong>For the ZIP file:</strong>
-                        <ol>
-                            <li>Right-click the downloaded zip file</li>
-                            <li>Select "Properties"</li>
-                            <li>At the bottom, check the box next to "Unblock"</li>
-                            <li>Click "Apply" then "OK"</li>
-                            <li>Now extract the zip file</li>
-                        </ol>
-                    </div>
-
-                    <div class="code-block">
-                        <strong>If the .exe is blocked after extraction:</strong>
-                        <ol>
-                            <li>Right-click the game executable</li>
-                            <li>Select "Properties"</li>
-                            <li>Check "Unblock" at the bottom</li>
-                            <li>Click "Apply" then "OK"</li>
-                        </ol>
-                    </div>
-
-                    <div class="code-block">
-                        <strong>If Windows SmartScreen appears:</strong>
-                        <ol>
-                            <li>Click "More info"</li>
-                            <li>Then click "Run anyway"</li>
-                        </ol>
-                    </div>
+                    <h4>"Credentials not found"</h4>
+                    <p>Make sure <code>credentials.bin</code> is in the same folder as the game executable, not in a subfolder.</p>
                 </div>
 
                 <div class="troubleshoot-item">
-                    <h4>Mac Security Warnings</h4>
-                    <p>Browsers on macOS will mark dowloads as 'quarantined', which prevents you from running them directly. There are two ways to work around this:</p>
-
-                    <div class="code-block">
-                        <strong>Through the graphical UI:</strong>
-                        <ol>
-                            <li>Right click on the game executable and select 'Open'</li>
-                            <li>If the exe is quarantined then this will fail, but you then get a notification in the system settings, through which you can unblock the file</li>
-                            <li>Open System Settings</li>
-                            <li>Click Privacy & Security, scroll down, and click the Open Anyway button to confirm your intent to open or install the app</li>
-                            <li>After this, you should be able to run the game executable</li>
-                        </ol>
-                    </div>
-
-                    <div class="code-block">
-                        <strong>Through the terminal:</strong>
-                        <ol>
-                            <li>Open the macOS terminal</li>
-                            <li>Change directory to the directory containing the game executable</li>
-                            <li>Run the following command: ```xattr -d com.apple.quarantine LockstepArcade</li>
-                        </ol>
-                    </div>
+                    <h4>"Connection failed"</h4>
+                    <p>Check your internet connection. If the problem persists, the server may be temporarily offline—check <a href="{discord_url}">Discord</a> for status updates.</p>
                 </div>
 
                 <div class="troubleshoot-item">
-                    <h4>Easy Install Scripts</h4>
-                    <p>'Easy install' scripts are also provided for Windows and Mac, on the <a href="download/">downloads page</a>.</p>
-                    <p>(These download and extract the game archive directly from a terminal or powershell window and avoid issues with security blocks for brower downloads.)</p>
+                    <h4>Can't run the game?</h4>
+                    <p>If you're having trouble launching the game itself (security warnings, blocked files), see the <a href="../download/">download page</a> for platform-specific instructions.</p>
                 </div>
 
                 <div class="troubleshoot-item">
-                    <h4>Antivirus Software</h4>
-                    <p>If you have an antivirus installed, you may need to add the game folder to your antivirus exceptions list. Please refer to the documentation for your antivirus for more details.</p>
-                </div>
-
-                <div class="troubleshoot-item">
-                    <h4>Running in Windows Sandbox</h4>
-                    <p>If you're worried about running executables from the internet and you have Windows 11 Pro, we recommend running the game client inside <a href="https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/" target="_blank">Windows Sandbox</a>.</p>
-
-                    <div class="code-block">
-                        <strong>To run this way:</strong>
-                        <ol>
-                            <li>Make sure you have enabled Windows Sandbox as an optional Windows feature</li>
-                            <li>Start Windows Sandbox</li>
-                            <li>Move the game client directory into Windows Sandbox</li>
-                            <li>Double-click the client to run from there</li>
-                        </ol>
-                    </div>
+                    <h4>Need credentials?</h4>
+                    <p><a href="../signup/">Request beta access</a> and we'll send you credentials via email.</p>
                 </div>
             </div>
 
+            <div class="content-wrapper">
+                <h3 class="section-heading">Resources</h3>
+                <div class="card-grid">
+                    <a href="../download/" class="resource-card">
+                        <h4>Download</h4>
+                        <p>Get the latest version of the game</p>
+                    </a>
+                    <a href="../signup/" class="resource-card">
+                        <h4>Request Access</h4>
+                        <p>Sign up for beta credentials</p>
+                    </a>
+                    <a href="{discord_url}" class="resource-card">
+                        <h4>Discord</h4>
+                        <p>Join the community and find players</p>
+                    </a>
+                </div>
+            </div>
         </div>
     </section>
 

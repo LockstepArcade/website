@@ -1263,29 +1263,59 @@ code {
 }
 
 /* -------------------------------------------
-   Platform Detection
+   Platform & Method Detection
    ------------------------------------------- */
-/* Platform-specific visibility */
-.platform-windows .show-mac,
-.platform-mac .show-windows {
+/* Method-specific visibility */
+.method-easy .show-manual,
+.method-easy .show-manual-windows,
+.method-easy .show-manual-mac,
+.method-manual .show-easy {
     display: none !important;
 }
 
-/* Platform indicator styling */
-.platform-indicator {
+/* Platform-specific visibility */
+.platform-windows .show-mac,
+.platform-windows .show-manual-mac,
+.platform-mac .show-windows,
+.platform-mac .show-manual-windows {
+    display: none !important;
+}
+
+/* Detection indicator styling */
+.detection-indicator {
+    text-align: center;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.detection-indicator a {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.detection-indicator a:hover {
+    color: white;
+}
+
+/* Method toggle link */
+.method-toggle {
     text-align: center;
     margin-top: 1rem;
     font-size: 0.95rem;
     color: rgba(255, 255, 255, 0.8);
 }
 
-.platform-indicator a {
-    color: rgba(255, 255, 255, 0.9);
+.method-toggle a {
+    color: rgba(255, 255, 255, 0.95);
     text-decoration: underline;
     cursor: pointer;
 }
 
-.platform-indicator a:hover {
+.method-toggle a:hover {
     color: white;
 }
 

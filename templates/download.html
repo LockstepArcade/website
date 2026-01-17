@@ -13,8 +13,9 @@
     <section class="section">
         <div class="container">
             <h2>Download Lockstep Arcade</h2>
-            <p class="section-intro">Get the latest version for Windows or macOS</p>
+            <p class="section-intro">Get the latest version and start playing</p>
 
+            <!-- Hero with version info -->
             <div class="download-hero">
                 <div class="version-info">
                     <div class="version-badge-large">v{version}</div>
@@ -22,90 +23,167 @@
                 </div>
 
                 <div class="download-main">
-                    <h3>Lockstep Arcade Client</h3>
-                    <p>Full multiplayer game client</p>
+                    <!-- Easy Install -->
+                    <div class="show-easy">
+                        <h3>Easy Install</h3>
+                        <p class="show-windows">Copy this command into PowerShell:</p>
+                        <p class="show-mac">Copy this command into Terminal:</p>
 
-                    <div class="download-buttons">
-                        <a href="../lockstep_arcade_{version}.zip" class="btn btn-primary btn-large btn-download show-windows" download>
-                            <span class="download-icon">&#11015;</span>
-                            Download for Windows
-                        </a>
-                        <a href="../lockstep_arcade_{version}_mac.zip" class="btn btn-primary btn-large btn-download show-mac" download>
-                            <span class="download-icon">&#11015;</span>
-                            Download for macOS
-                        </a>
+                        <div class="install-option show-windows" style="background: rgba(255,255,255,0.1); border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+                            <div class="code-block--dark">
+                                <code id="windows-command">irm https://locksteparcade.com/install_windows.ps1 | iex</code>
+                                <button class="copy-btn" onclick="copyCommand('windows-command', this)">Copy</button>
+                            </div>
+                        </div>
+
+                        <div class="install-option show-mac" style="background: rgba(255,255,255,0.1); border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+                            <div class="code-block--dark">
+                                <code id="mac-command">curl -sL https://locksteparcade.com/install_mac.sh | bash</code>
+                                <button class="copy-btn" onclick="copyCommand('mac-command', this)">Copy</button>
+                            </div>
+                        </div>
+
+                        <p style="opacity: 0.9; font-size: 0.95rem;">This downloads and extracts the game, then opens the folder for you.</p>
                     </div>
 
-                    <p class="file-info show-windows">Version {version} | {download_size_windows}</p>
-                    <p class="file-info show-mac">Version {version} | {download_size_mac}</p>
+                    <!-- Manual Download -->
+                    <div class="show-manual">
+                        <h3>Download</h3>
+                        <p>Download the game archive for your platform:</p>
+
+                        <div class="download-buttons" style="margin: 1.5rem 0;">
+                            <a href="../lockstep_arcade_{version}.zip" class="btn btn-primary btn-large btn-download show-windows" download>
+                                <span class="download-icon">&#11015;</span>
+                                Download for Windows
+                            </a>
+                            <a href="../lockstep_arcade_{version}_mac.zip" class="btn btn-primary btn-large btn-download show-mac" download>
+                                <span class="download-icon">&#11015;</span>
+                                Download for macOS
+                            </a>
+                        </div>
+
+                        <p class="file-info show-windows">Version {version} | {download_size_windows}</p>
+                        <p class="file-info show-mac">Version {version} | {download_size_mac}</p>
+                    </div>
+
+                    <!-- Method toggle -->
+                    <p class="method-toggle">
+                        <span class="show-easy">Prefer to download manually? <a onclick="setMethod('manual')">Show manual download</a></span>
+                        <span class="show-manual">Want the easier option? <a onclick="setMethod('easy')">Show easy install</a></span>
+                    </p>
                 </div>
 
-                <p class="platform-indicator">
-                    <span class="show-windows">Detected: Windows · <a onclick="setPlatform('mac')">Show macOS instead</a></span>
-                    <span class="show-mac">Detected: macOS · <a onclick="setPlatform('windows')">Show Windows instead</a></span>
-                </p>
+                <!-- Platform/method indicator -->
+                <div class="detection-indicator">
+                    <span class="show-windows">Platform: Windows</span>
+                    <span class="show-mac">Platform: macOS</span>
+                    · <a class="show-windows" onclick="setPlatform('mac')">Switch to macOS</a>
+                    <a class="show-mac" onclick="setPlatform('windows')">Switch to Windows</a>
+                </div>
             </div>
 
+            <!-- Installation Steps -->
             <div class="content-box content-wrapper--narrow">
-                <h3>Easy Install (Recommended)</h3>
-                <p class="show-windows">Copy this command into PowerShell to automatically download and extract the game:</p>
-                <p class="show-mac">Copy this command into Terminal to automatically download and extract the game:</p>
+                <h3>Installation Steps</h3>
 
-                <div class="install-option show-windows">
-                    <div class="code-block--dark">
-                        <code id="windows-command">irm https://locksteparcade.com/install_windows.ps1 | iex</code>
-                        <button class="copy-btn" onclick="copyCommand('windows-command', this)">Copy</button>
+                <!-- Easy Install Steps -->
+                <div class="show-easy">
+                    <div class="steps-compact">
+                        <div class="step-compact">
+                            <span class="step-badge step-badge--small">1</span>
+                            <span class="show-windows">Open PowerShell and paste the command above</span>
+                            <span class="show-mac">Open Terminal and paste the command above</span>
+                        </div>
+                        <div class="step-compact">
+                            <span class="step-badge step-badge--small">2</span>
+                            <span>The script will download, extract, and open the game folder</span>
+                        </div>
+                        <div class="step-compact">
+                            <span class="step-badge step-badge--small">3</span>
+                            <span class="show-windows">Double-click <code>LockstepArcade.exe</code> to run the game</span>
+                            <span class="show-mac">Double-click <code>LockstepArcade</code> to run the game</span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="install-option show-mac">
-                    <div class="code-block--dark">
-                        <code id="mac-command">curl -sL https://locksteparcade.com/install_mac.sh | bash</code>
-                        <button class="copy-btn" onclick="copyCommand('mac-command', this)">Copy</button>
+                <!-- Manual Install Steps - Windows -->
+                <div class="show-manual-windows">
+                    <div class="steps-compact">
+                        <div class="step-compact">
+                            <span class="step-badge step-badge--small">1</span>
+                            <span>Download the ZIP file using the button above</span>
+                        </div>
+                        <div class="step-compact">
+                            <span class="step-badge step-badge--small">2</span>
+                            <span><strong>Unblock the ZIP:</strong> Right-click the file → Properties → check "Unblock" → OK</span>
+                        </div>
+                        <div class="step-compact">
+                            <span class="step-badge step-badge--small">3</span>
+                            <span>Extract the ZIP to a folder of your choice</span>
+                        </div>
+                        <div class="step-compact">
+                            <span class="step-badge step-badge--small">4</span>
+                            <span>Double-click <code>LockstepArcade.exe</code> to run the game</span>
+                        </div>
+                    </div>
+
+                    <div class="info-box info-box--warning" style="margin-top: 1.5rem;">
+                        <h4>Windows SmartScreen</h4>
+                        <p>If Windows SmartScreen appears, click <strong>"More info"</strong> then <strong>"Run anyway"</strong>.</p>
+                        <p>If you skipped the unblock step, you may also need to unblock the .exe file the same way (Properties → Unblock).</p>
                     </div>
                 </div>
 
-                <p class="install-note">The script downloads the game to your Downloads folder, extracts it, and opens the folder for you.</p>
+                <!-- Manual Install Steps - Mac -->
+                <div class="show-manual-mac">
+                    <div class="steps-compact">
+                        <div class="step-compact">
+                            <span class="step-badge step-badge--small">1</span>
+                            <span>Download the ZIP file using the button above</span>
+                        </div>
+                        <div class="step-compact">
+                            <span class="step-badge step-badge--small">2</span>
+                            <span>Extract the ZIP (double-click it in Finder)</span>
+                        </div>
+                        <div class="step-compact">
+                            <span class="step-badge step-badge--small">3</span>
+                            <span><strong>Remove quarantine:</strong> Right-click <code>LockstepArcade</code> → select "Open"</span>
+                        </div>
+                        <div class="step-compact">
+                            <span class="step-badge step-badge--small">4</span>
+                            <span>If blocked, go to System Settings → Privacy & Security → click "Open Anyway"</span>
+                        </div>
+                    </div>
+
+                    <div class="info-box info-box--warning" style="margin-top: 1.5rem;">
+                        <h4>Alternative: Remove Quarantine via Terminal</h4>
+                        <p>If you're comfortable with Terminal, you can remove the quarantine attribute directly:</p>
+                        <div class="code-block--dark" style="margin-top: 0.75rem;">
+                            <code>xattr -d com.apple.quarantine LockstepArcade</code>
+                            <button class="copy-btn" onclick="copyCommand(this.previousElementSibling, this)">Copy</button>
+                        </div>
+                        <p style="margin-top: 0.75rem; margin-bottom: 0;">Run this command in Terminal from the game folder, then double-click to run.</p>
+                    </div>
+                </div>
             </div>
 
-            <div class="info-box info-box--warning content-wrapper--narrow">
-                <h3>&#9888;&#65039; Credentials Required</h3>
-                <p>The game requires a <code>credentials.bin</code> file to connect to the dedicated server.</p>
-                <p>If you don't have credentials yet, <a href="../signup/">request beta access here</a> and we'll send you the file via email.</p>
+            <!-- Success / Next Steps -->
+            <div class="info-box info-box--cta content-wrapper--narrow">
+                <h3>You should now see the main menu!</h3>
+                <p>You can explore the tutorial and offline features. To play online, you'll need server credentials.</p>
+                <p style="margin-top: 1rem;"><a href="../setup/" class="btn btn-primary">Next: Connect to the Server →</a></p>
             </div>
 
+            <!-- What's New -->
             <div class="content-box content-wrapper--narrow">
                 <h3>What's New in v{version}</h3>
                 <ul class="feature-list">
 {whats_new_html}
                 </ul>
-                <p><a href="../changelog/" class="changelog-link">View Full Changelog &#8594;</a></p>
+                <p><a href="../changelog/" class="changelog-link">View Full Changelog →</a></p>
             </div>
 
-            <div class="content-box content-wrapper--narrow">
-                <h3>Quick Start Guide</h3>
-                <div class="steps-compact">
-                    <div class="step-compact">
-                        <span class="step-badge step-badge--small">1</span>
-                        <span>Download the ZIP file above</span>
-                    </div>
-                    <div class="step-compact">
-                        <span class="step-badge step-badge--small">2</span>
-                        <span>Extract to a new folder</span>
-                    </div>
-                    <div class="step-compact">
-                        <span class="step-badge step-badge--small">3</span>
-                        <span>Copy <code>credentials.bin</code> to the game folder</span>
-                    </div>
-                    <div class="step-compact">
-                        <span class="step-badge step-badge--small">4</span>
-                        <span class="show-windows">Run <code>LockstepArcade.exe</code> to play!</span>
-                        <span class="show-mac">Run <code>LockstepArcade</code> to play!</span>
-                    </div>
-                </div>
-                <p class="help-link"><a href="../setup/">Need detailed installation help? View full setup guide &#8594;</a></p>
-            </div>
-
+            <!-- System Requirements -->
             <div class="content-box content-wrapper--narrow">
                 <h3>System Requirements</h3>
                 <div class="requirements-grid">
@@ -113,35 +191,29 @@
                         <strong>Operating System:</strong> Windows 10/11 or macOS
                     </div>
                     <div class="requirement">
-                        <strong>Internet:</strong> Active connection required
+                        <strong>Internet:</strong> Required for online play
                     </div>
                     <div class="requirement">
                         <strong>Input:</strong> Mouse for game controls
                     </div>
-                    <div class="requirement">
-                        <strong>Credentials:</strong> Server credentials file required
-                    </div>
                 </div>
             </div>
 
+            <!-- Resources -->
             <div class="content-wrapper">
-                <h3 class="section-heading">Additional Resources</h3>
+                <h3 class="section-heading">Resources</h3>
                 <div class="card-grid">
                     <a href="../setup/" class="resource-card">
-                        <h4>Installation Guide</h4>
-                        <p>Detailed setup instructions and troubleshooting</p>
+                        <h4>Server Connection</h4>
+                        <p>Get credentials and connect to online play</p>
                     </a>
                     <a href="../changelog/" class="resource-card">
                         <h4>Changelog</h4>
                         <p>Full version history and updates</p>
                     </a>
-                    <a href="../signup/" class="resource-card">
-                        <h4>Get Credentials</h4>
-                        <p>Request beta access and receive credentials</p>
-                    </a>
-                    <a href="../index.html#features" class="resource-card">
-                        <h4>Features</h4>
-                        <p>Learn about game modes and features</p>
+                    <a href="{discord_url}" class="resource-card">
+                        <h4>Discord</h4>
+                        <p>Join the community and find players</p>
                     </a>
                 </div>
             </div>
@@ -151,15 +223,14 @@
 {footer}
 
     <script>
-    // Platform detection and switching
+    // Platform and method detection/switching
     function detectPlatform() {
         const ua = navigator.userAgent.toLowerCase();
         const platform = navigator.platform.toLowerCase();
-
         if (platform.includes('mac') || ua.includes('mac os')) {
             return 'mac';
         }
-        return 'windows'; // Default to Windows
+        return 'windows';
     }
 
     function setPlatform(platform) {
@@ -168,18 +239,32 @@
         localStorage.setItem('lockstep-platform', platform);
     }
 
-    function initPlatform() {
-        // Check localStorage first, then detect
-        const saved = localStorage.getItem('lockstep-platform');
-        const platform = saved || detectPlatform();
-        setPlatform(platform);
+    function setMethod(method) {
+        document.body.classList.remove('method-easy', 'method-manual');
+        document.body.classList.add('method-' + method);
+        localStorage.setItem('lockstep-method', method);
     }
 
-    // Initialize on page load
-    initPlatform();
+    function init() {
+        // Platform: check localStorage, then detect
+        const savedPlatform = localStorage.getItem('lockstep-platform');
+        const platform = savedPlatform || detectPlatform();
+        setPlatform(platform);
 
-    function copyCommand(elementId, button) {
-        const code = document.getElementById(elementId);
+        // Method: check localStorage and URL param, default to easy
+        const urlParams = new URLSearchParams(window.location.search);
+        const urlMethod = urlParams.get('method');
+        const savedMethod = localStorage.getItem('lockstep-method');
+        const method = urlMethod || savedMethod || 'easy';
+        setMethod(method);
+    }
+
+    init();
+
+    function copyCommand(elementOrId, button) {
+        const code = typeof elementOrId === 'string'
+            ? document.getElementById(elementOrId)
+            : elementOrId;
         navigator.clipboard.writeText(code.textContent).then(function() {
             button.textContent = 'Copied!';
             button.classList.add('copied');
