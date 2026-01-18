@@ -1282,15 +1282,24 @@ code {
 .method-easy .show-manual,
 .method-easy .show-manual-windows,
 .method-easy .show-manual-mac,
-.method-manual .show-easy {
+.method-manual .show-easy,
+.method-manual .show-easy-windows,
+.method-manual .show-easy-mac {
     display: none !important;
 }
 
 /* Platform-specific visibility */
 .platform-windows .show-mac,
 .platform-windows .show-manual-mac,
+.platform-windows .show-easy-mac,
+.platform-windows .show-linux,
 .platform-mac .show-windows,
-.platform-mac .show-manual-windows {
+.platform-mac .show-manual-windows,
+.platform-mac .show-easy-windows,
+.platform-mac .show-linux,
+.platform-linux .show-mac,
+.platform-linux .show-manual-mac,
+.platform-linux .show-easy-mac {
     display: none !important;
 }
 

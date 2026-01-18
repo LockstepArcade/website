@@ -23,6 +23,11 @@
                 </div>
 
                 <div class="download-main">
+                    <!-- Linux notice -->
+                    <div class="show-linux info-box info-box--warning" style="margin-bottom: 1.5rem;">
+                        <p style="margin: 0;"><strong>Linux:</strong> No native build is available, but users report the Windows version runs well under Wine.</p>
+                    </div>
+
                     <!-- Easy Install -->
                     <div class="show-easy">
                         <h3>Easy Install</h3>
@@ -77,8 +82,12 @@
                 <div class="detection-indicator">
                     <span class="show-windows">Platform: Windows</span>
                     <span class="show-mac">Platform: macOS</span>
+                    <span class="show-linux">Platform: Linux (via Wine)</span>
                     · <a class="show-windows" onclick="setPlatform('mac')">Switch to macOS</a>
                     <a class="show-mac" onclick="setPlatform('windows')">Switch to Windows</a>
+                    <a class="show-linux" onclick="setPlatform('windows')">Switch to Windows</a>
+                    <span class="show-linux"> · </span>
+                    <a class="show-linux" onclick="setPlatform('mac')">Switch to macOS</a>
                 </div>
             </div>
 
@@ -86,18 +95,16 @@
             <div class="content-box content-wrapper--narrow">
                 <h3>Installation Steps</h3>
 
-                <!-- Easy Install Steps -->
-                <div class="show-easy">
+                <!-- Easy Install Steps - Windows -->
+                <div class="show-easy-windows">
                     <div class="steps-compact">
                         <div class="step-compact">
                             <span class="step-badge step-badge--small">1</span>
-                            <span class="show-windows">Open PowerShell (find this by typing "powershell" in the Windows search bar)</span>
-                            <span class="show-mac">Open Terminal (press <strong>Command + Space</strong>, type "terminal", press <strong>Return</strong>)</span>
+                            <span">Open PowerShell (find this by typing "powershell" in the Windows search bar)</span>
                         </div>
                         <div class="step-compact">
                             <span class="step-badge step-badge--small">2</span>
-                            <span class="show-windows">Paste the command above (by right clicking inside PowerShell), and press <strong>Return</strong></span>
-                            <span class="show-mac">Paste the command above, and press <strong>Return</strong></span>
+                            <span>Paste the command above (by right clicking inside PowerShell), and press <strong>Return</strong></span>
                         </div>
                         <div class="step-compact">
                             <span class="step-badge step-badge--small">3</span>
@@ -105,8 +112,44 @@
                         </div>
                         <div class="step-compact">
                             <span class="step-badge step-badge--small">4</span>
-                            <span class="show-windows">Double-click <code>LockstepArcade.exe</code> to run the game</span>
-                            <span class="show-mac">Double-click <code>LockstepArcade</code> to run the game</span>
+                            <span>Double-click <code>LockstepArcade.exe</code> to run the game</span>
+                        </div>
+                    </div>
+
+                    <div class="info-box info-box--warning" style="margin-top: 1.5rem;">
+                        <h4>Running in Windows Sandbox</h4>
+                        <p>
+                            If you're concerned about security, and have a version of Windows that supports this,
+                            we recommend running in Windows Sandbox.
+                        </p>
+                        <p>
+                            Microsoft Learn links for Windows Sandbox: 
+                            <a href="https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/">overview</a>, <a href="https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-install">setup instructions</a>
+                        </p>
+                        <p>
+                            The same easy install process can then be used, but with PowerShell opened <strong>inside</strong> the sandbox.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Easy Install Steps - Mac -->
+                <div class="show-easy-mac">
+                    <div class="steps-compact">
+                        <div class="step-compact">
+                            <span class="step-badge step-badge--small">1</span>
+                            <span>Open Terminal (press <strong>Command + Space</strong>, type "terminal", press <strong>Return</strong>)</span>
+                        </div>
+                        <div class="step-compact">
+                            <span class="step-badge step-badge--small">2</span>
+                            <span>Paste the command above, and press <strong>Return</strong></span>
+                        </div>
+                        <div class="step-compact">
+                            <span class="step-badge step-badge--small">3</span>
+                            <span>The script will download, extract, and open the game folder</span>
+                        </div>
+                        <div class="step-compact">
+                            <span class="step-badge step-badge--small">4</span>
+                            <span>Double-click <code>LockstepArcade</code> to run the game</span>
                         </div>
                     </div>
                 </div>
@@ -136,6 +179,12 @@
                         <h4>Windows SmartScreen</h4>
                         <p>If Windows SmartScreen appears, click <strong>"More info"</strong> then <strong>"Run anyway"</strong>.</p>
                         <p>If you skipped the unblock step, you may also need to unblock the .exe file the same way (Properties → Unblock).</p>
+                        <h4>Running in Windows Sandbox</h4>
+                        <p>
+                            If you're concerned about security, and have a version of Windows that supports this,
+                            we recommend running in Windows Sandbox
+                            (<a href="https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/">overview</a>, <a href="https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-install">setup instructions</a>).
+                        </p>
                     </div>
                 </div>
 
@@ -162,12 +211,12 @@
 
                     <div class="info-box info-box--warning" style="margin-top: 1.5rem;">
                         <h4>Alternative: Remove Quarantine via Terminal</h4>
-                        <p>If you're comfortable with Terminal, you can remove the quarantine attribute directly:</p>
+                        <p>If you're comfortable with Terminal, you can remove the quarantine attribute directly with the following command:</p>
                         <div class="code-block--dark" style="margin-top: 0.75rem;">
                             <code>xattr -d com.apple.quarantine LockstepArcade</code>
                             <button class="copy-btn" onclick="copyCommand(this.previousElementSibling, this)">Copy</button>
                         </div>
-                        <p style="margin-top: 0.75rem; margin-bottom: 0;">Run this command in Terminal from the game folder, then double-click to run.</p>
+                        <p style="margin-top: 0.75rem; margin-bottom: 0;">(Run this in Terminal, in the game folder.)</p>
                     </div>
                 </div>
             </div>
@@ -210,11 +259,14 @@
         if (platform.includes('mac') || ua.includes('mac os')) {
             return 'mac';
         }
+        if (platform.includes('linux') || ua.includes('linux')) {
+            return 'linux';
+        }
         return 'windows';
     }
 
     function setPlatform(platform) {
-        document.body.classList.remove('platform-windows', 'platform-mac');
+        document.body.classList.remove('platform-windows', 'platform-mac', 'platform-linux');
         document.body.classList.add('platform-' + platform);
         localStorage.setItem('lockstep-platform', platform);
     }
