@@ -283,11 +283,12 @@
         const platform = savedPlatform || detectPlatform();
         setPlatform(platform);
 
-        // Method: check localStorage and URL param, default to easy
+        // Method: check localStorage and URL param, default to easy (manual for Linux)
         const urlParams = new URLSearchParams(window.location.search);
         const urlMethod = urlParams.get('method');
         const savedMethod = localStorage.getItem('lockstep-method');
-        const method = urlMethod || savedMethod || 'easy';
+        const defaultMethod = platform === 'linux' ? 'manual' : 'easy';
+        const method = urlMethod || savedMethod || defaultMethod;
         setMethod(method);
     }
 
