@@ -1,5 +1,5 @@
 {
-    "version": "0.1.0",
+    "version": "0.1.1",
     "download_size_windows": "~15 MB",
     "download_size_mac": "~15 MB",
     "discord_url": "https://discord.gg/byJzJdQCVd",
@@ -8,8 +8,15 @@
 
     "releases": [
         {
-            "version": "0.10.0",
+            "version": "0.1.1",
             "current": true,
+            "changes": [
+                "fixes a bug with dead pilots still able to target lock and fire missiles",
+                "fixes a bug with desynchs detected at end of Neon Swarm in cases where swarmers are making world changes during the delay frames just before game end"
+            ]
+        },
+        {
+            "version": "0.1.0",
             "changes": [
                 "second game added, 'Pilots', a top down shooter with asteroids style ships and inertial movement",
                 "orders for the swarmers in Neon Swarm can now be set to trigger on different conditions (blocked, turned around, about to fall)",
