@@ -10,8 +10,8 @@ unzip -o lockstep_arcade_0.1.1_mac.zip -d lockstep_arcade_0.1.1
 echo "Cleaning up..."
 rm lockstep_arcade_0.1.1_mac.zip
 
-echo "Removing quarantine attribute (in case this was added)..."
-xattr -d com.apple.quarantine LockstepArcade
+echo "Remove quarantine attribute, if present (needed in case the archive was first downloaded manually)..."
+xattr -d com.apple.quarantine lockstep_arcade_0.1.1/LockstepArcade
 
 echo "Opening folder..."
 open lockstep_arcade_0.1.1
