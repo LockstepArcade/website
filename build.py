@@ -155,8 +155,9 @@ def clean_generated_files():
 
     print("Cleaning generated files...")
 
-    # Remove all generated files in docs/
-    for pattern in ["*.html", "*.sh", "*.ps1"]:
+    # Remove generated files in docs/
+    # Only remove index.html (not other .html files like WASM executables)
+    for pattern in ["index.html", "*.sh", "*.ps1"]:
         for generated_file in DOCS_DIR.glob(pattern):
             print(f"  Removing {generated_file.name}")
             generated_file.unlink()
