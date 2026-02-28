@@ -1,10 +1,10 @@
 $ProgressPreference = 'SilentlyContinue'
 $downloadDir = "$env:USERPROFILE\Downloads"
-$zipFile = "$downloadDir\lockstep_arcade_0.1.2.zip"
-$extractDir = "$downloadDir\lockstep_arcade_0.1.2"
+$zipFile = "$downloadDir\lockstep_arcade_0.1.3.zip"
+$extractDir = "$downloadDir\lockstep_arcade_0.1.3"
 
-Write-Host "Downloading Lockstep Arcade 0.1.2..."
-Invoke-WebRequest -Uri "https://locksteparcade.com/lockstep_arcade_0.1.2.zip" -OutFile $zipFile
+Write-Host "Downloading Lockstep Arcade 0.1.3..."
+Invoke-WebRequest -Uri "https://locksteparcade.com/lockstep_arcade_0.1.3.zip" -OutFile $zipFile
 
 Write-Host "Extracting..."
 Expand-Archive -Path $zipFile -DestinationPath $extractDir -Force
