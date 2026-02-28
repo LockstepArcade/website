@@ -20,35 +20,28 @@
                     <div class="step-badge">1</div>
                     <div class="step-section__content">
                         <h3>Get Your Credentials</h3>
-                        <p>You need a <code>credentials.bin</code> file to connect to the server.</p>
-                        <p>If you don't have one yet, <a href="../signup/">request beta access</a> and we'll send you the file via email.</p>
+                        <p>You need credentials in order to connect to the server.</p>
+                        <p>Credentials are encoded in a 36 charater long text string, which will look something like this: <code>AffTtjwdDNrGmMkPi2ODdO0jjORY8ghnVCKe</code></p>
+                        <p>(This is not a valid credentials string, but valid credentials will look similar.)</p>
+                        <p>If you don't have credentials yet, <a href="../signup/">request beta access</a> and we'll send credentials by email.</p>
                     </div>
                 </div>
 
                 <div class="step-section">
                     <div class="step-badge">2</div>
                     <div class="step-section__content">
-                        <h3>Save the Credentials</h3>
-                        <p>Save your <code>credentials.bin</code> file from the email we send you onto your computer hard drive, making sure to remember the location where your saved it.</p>
-                        <p>(Your download directory could be a good place for this.)</p>
+                        <h3>Load the Credentials in Game</h3>
+                        <p>Launch the game and click <strong>"Credentials setup"</strong> from the main menu.</p>
+                        <p>This will open a page (or overlay UI, in the web build), where you can paste your credentials string.</p>
+                        <p>Once valid credentials have been entered, you will now be able to connect to the server from the main menu.</p>
                     </div>
                 </div>
 
                 <div class="step-section">
                     <div class="step-badge">3</div>
                     <div class="step-section__content">
-                        <h3>Load the Credentials in Game</h3>
-                        <p>Launch the game and click <strong>"Connect to Server"</strong> from the main menu.</p>
-                        <p>Initially you will see 'No credentials found for server connection' near the top of this page.</p>
-                        <p>Click the 'Find credentials file' button to open a file browser, and browse to the location where you saved the credentials.</p>
-                    </div>
-                </div>
-
-                <div class="step-section">
-                    <div class="step-badge">4</div>
-                    <div class="step-section__content">
-                        <h3>Connect from the Game</h3>
-                        <p>Once credentials have been supplied, you should see 'Credentials found', in green, at the top of the page, and there will be a "Connect to Server" button.</p>
+                        <h3>Connect To the Server</h3>
+                        <p>Once credentials have been supplied, the <strong>"Connect to Server"</strong> button on the main menu should be enabled.</p>
                         <p>Click this button and you'll be connected to the server.</p>
                         <p>(You should then see a page with 'Multiplayer' at the top, and a bunch of tabs for different server operations.</p>
                     </div>
@@ -62,6 +55,12 @@
                     <a href="../gettingstarted/" class="btn btn-primary">Getting started</a>
                     <a href="{discord_url}" class="btn btn-primary">Join our Discord →</a>
                 </div>
+            </div>
+
+            <div class="info-box info-box--warning" style="margin-top: 1.5rem;">
+                <h4>Connecting with a Credentials.bin file</h4>
+                <p>Old style credentials in the form of a <code>credentials.bin</code> file are still supported.</p>
+                <p>Just follow the steps above, but instead of pasting in credentials text, click the button to browse to the credentials file instead.</p>
             </div>
 
             <div class="content-wrapper">
