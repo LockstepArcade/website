@@ -413,6 +413,7 @@ code {
 .info-box--warning {
     background-color: #fef3c7;
     border-left-color: var(--accent-color);
+    border-right-color: var(--accent-color);
 }
 
 .info-box--warning h4 {
