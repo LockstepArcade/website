@@ -7,8 +7,8 @@
     "current_year": "2026",
 
     "redirects": {
-        "client": "Client.html",
-        "testclient": "TestClient.html"
+        "client": "Client",
+        "testclient": "TestClient"
     },
 
     "releases": [
