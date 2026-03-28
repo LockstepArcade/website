@@ -253,6 +253,28 @@ def build_site():
         with open(output_path, "w", encoding="utf-8") as f:
             f.write(output)
 
+    # Generate redirect pages
+    redirects = config.get("redirects", {})
+    for slug, target in redirects.items():
+        redirect_dir = DOCS_DIR / slug
+        ensure_dir(redirect_dir)
+        redirect_path = redirect_dir / "index.html"
+        print(f"Building {redirect_path.relative_to(DOCS_DIR)}...")
+        redirect_html = f"""<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="refresh" content="0; url=../{target}">
+    <link rel="canonical" href="../{target}">
+    <title>Redirecting...</title>
+</head>
+<body>
+    <p>Redirecting to <a href="../{target}">{target}</a>...</p>
+</body>
+</html>
+"""
+        with open(redirect_path, "w", encoding="utf-8") as f:
+            f.write(redirect_html)
+
     # Generate install scripts
     print("Building install_mac.sh...")
     with open(DOCS_DIR / "install_mac.sh", "w", encoding="utf-8", newline="\n") as f:
