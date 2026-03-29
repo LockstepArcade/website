@@ -17,12 +17,14 @@
             "current": true,
             "changes": [
                 "fixed issues with connection failure from iPhones when on mobile data",
+                "fixes problems with UI extending outside screen extents after switching out of app and in again on mobile platforms",
                 "fix for spurious tail collision, in serpents game",
                 "fix for issue with tail length drift (e.g. tail actually non-zero length for dead player)",
                 "support for connecting as a guest, with credentials created on connection (in web builds)",
                 "possibility to copy currently logged in credential string to clipboard (in web builds)",
                 "sound tweaks, serpent exit sound",
                 "reduced default game duration for serpents",
+                "tweaks to network code for smoother play in situation where there are clients on bad connections (or mobile data)",
                 "font rendering improvements for high dpi displays"
             ]
         },
