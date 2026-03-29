@@ -6,8 +6,17 @@
     <title>Download - Lockstep Arcade</title>
     <meta name="description" content="Download the latest version of Lockstep Arcade - Multiplayer Lemmings with lockstep netcode">
     <link rel="stylesheet" href="../styles.css">
+    <style>
+        .show-no-mac-build { display: none !important; }
+        .no-mac-build.platform-mac .show-easy,
+        .no-mac-build.platform-mac .show-manual,
+        .no-mac-build.platform-mac .show-easy-mac,
+        .no-mac-build.platform-mac .show-manual-mac,
+        .no-mac-build.platform-mac .method-toggle { display: none !important; }
+        .no-mac-build.platform-mac .show-no-mac-build { display: block !important; }
+    </style>
 </head>
-<body>
+<body class="no-mac-build">
     <nav class="navbar">
         <div class="container">
             <div class="nav-brand">Lockstep Arcade</div>
@@ -94,6 +103,12 @@
                         <span class="show-easy">Prefer to download manually? <a onclick="setMethod('manual')">Show manual download</a></span>
                         <span class="show-manual">Want the easier option? <a onclick="setMethod('easy')">Show easy install</a></span>
                     </p>
+
+                    <!-- No Mac build available -->
+                    <div class="show-no-mac-build">
+                        <h3>macOS Build Not Yet Available</h3>
+                        <p>There is no native macOS build for v0.1.7 yet. You can <a href="../Client">run the game in your browser</a> using the web client instead.</p>
+                    </div>
                 </div>
 
                 <!-- Platform/method indicator -->
@@ -117,8 +132,9 @@
                 <div class="show-easy-windows">
                     <div class="steps-compact">
                         <div class="step-compact">
+                        <div class="step-compact">
                             <span class="step-badge step-badge--small">1</span>
-                            <span">Open PowerShell (find this by typing "powershell" in the Windows search bar)</span>
+                            <span>Open PowerShell (find this by typing "powershell" in the Windows search bar)</span>
                         </div>
                         <div class="step-compact">
                             <span class="step-badge step-badge--small">2</span>

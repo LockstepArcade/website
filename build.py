@@ -181,6 +181,7 @@ def build_site():
     version = config["version"]
     download_size_windows = config["download_size_windows"]
     download_size_mac = config["download_size_mac"]
+    has_mac_build = config.get("has_mac_build", True)
     discord_url = config["discord_url"]
     web3forms_key = config["web3forms_key"]
     current_year = config["current_year"]
@@ -211,6 +212,7 @@ def build_site():
         "discord_url": discord_url,
         "web3forms_key": web3forms_key,
         "current_year": current_year,
+        "no_mac_build_class": "" if has_mac_build else "no-mac-build",
         "changelog_html": changelog_html,
         "whats_new_html": whats_new_html,
     }
