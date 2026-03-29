@@ -1,7 +1,7 @@
 {
-    "version": "0.1.6",
-    "download_size_windows": "~15 MB",
-    "download_size_mac": "~15 MB",
+    "version": "0.1.7",
+    "download_size_windows": "~17 MB",
+    "download_size_mac": "~17 MB",
     "discord_url": "https://discord.gg/byJzJdQCVd",
     "web3forms_key": "2f3c7147-e4fb-4008-babd-8de206ece816",
     "current_year": "2026",
@@ -13,8 +13,21 @@
 
     "releases": [
         {
-            "version": "0.1.6",
+            "version": "0.1.7",
             "current": true,
+            "changes": [
+                "fixed issues with connection failure from iPhones when on mobile data",
+                "fix for spurious tail collision, in serpents game",
+                "fix for issue with tail length drift (e.g. tail actually non-zero length for dead player)",
+                "support for connecting as a guest, with credentials created on connection (in web builds)",
+                "possibility to copy currently logged in credential string to clipboard (in web builds)",
+                "sound tweaks, serpent exit sound",
+                "reduced default game duration for serpents",
+                "font rendering improvements for high dpi displays"
+            ]
+        },
+        {
+            "version": "0.1.6",
             "changes": [
                 "significant improvements to game networking in situations with poor wifi or mobile data connections (less 'Waiting for players')",
                 "serpents game now has 'exits' and you need to drop off your tail at your exit to score (with a score multiplier depending on tail length)",
