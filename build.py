@@ -194,6 +194,7 @@ def build_site():
     # Load partials
     navbar_template = load_partial("navbar.html")
     footer_template = load_partial("footer.html")
+    og_template = load_partial("og.html")
 
     # Ensure docs directories exist
     ensure_dir(DOCS_DIR)
@@ -240,11 +241,15 @@ def build_site():
         navbar = render_template(navbar_template, navbar_vars)
         footer = render_template(footer_template, footer_vars)
 
+        # Render og tags
+        og_tags = render_template(og_template, common_vars)
+
         # Build page variables
         page_vars = {
             **common_vars,
             "navbar": navbar,
             "footer": footer,
+            "og_tags": og_tags,
             "path_prefix": path_prefix,
         }
 
