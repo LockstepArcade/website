@@ -1,5 +1,5 @@
 {
-    "version": "0.1.7",
+    "version": "0.1.8",
     "download_size_windows": "~17 MB",
     "download_size_mac": "~17 MB",
     "has_mac_build": false,
@@ -14,8 +14,23 @@
 
     "releases": [
         {
-            "version": "0.1.7",
+            "version": "0.1.8",
             "current": true,
+            "changes": [
+                "single player games started through the multiplayer lobby no longer round trip packets through the server (so you won't get lag, or see 'Waiting for players', for these games)",
+                "fixes a crash when hovering player names on the recording replay page",
+                "fixed imgui errors when hovering slot colour indicators on the game results view",
+                "fixes an issue with some settings being missing from the game details shown for games other than Neon Swarm",
+                "added the possibility to change walk speed in Neon Swarm (to double or triple speed)",
+                "Neon Swarm games (including tutorial levels) end automatically when there are no swarmers left",
+                "added a sound when attempting to dig metal in Neon Swarm (and activities now end directly when this happens)",
+                "added tooltips for settings in create game screen",
+                "tweaks to Serpents game default settings and start situation",
+                "rendering tweaks to reduce aliasing in Pilots and Serpents"
+            ]
+        },
+        {
+            "version": "0.1.7",
             "changes": [
                 "fixed issues with connection failure from iPhones when on mobile data",
                 "fixes problems with UI extending outside screen extents after switching out of app and in again on mobile platforms",
