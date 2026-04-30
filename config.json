@@ -1,7 +1,7 @@
 {
-    "version": "0.1.8",
-    "download_size_windows": "~17 MB",
-    "download_size_mac": "~17 MB",
+    "version": "0.1.9",
+    "download_size_windows": "~18 MB",
+    "download_size_mac": "~18 MB",
     "has_mac_build": false,
     "discord_url": "https://discord.gg/byJzJdQCVd",
     "web3forms_key": "2f3c7147-e4fb-4008-babd-8de206ece816",
@@ -14,8 +14,28 @@
 
     "releases": [
         {
-            "version": "0.1.8",
+            "version": "0.1.9",
             "current": true,
+            "changes": [
+                "added mipmapping to reduce aliasing when zooming out",
+                "added thumbnails in create game page",
+                "orders (and pending triggered orders) can now be cancelled, in Neon Swarm",
+                "renamed the Neon Swarm orders",
+                "orders that don't affect the world (e.g. a dig that immediately hits metal) are now refunded",
+                "with the barrier (previously blocker) order the swarmer now just places the barrier and returns to normal movement",
+                "removed trigger icons where the trigger does not really make sense for the order",
+                "added scrollbars in cases where the UI overflows the bottom of the screen",
+                "improved the UI for 'fatal' errors (which include disconnection from server)",
+                "recording replay now ends when the actual gameplay ends, in the case of aborted games",
+                "moved exits for Serpents game to the center of the map",
+                "a minimum tail length is now required, in order to exit (and collect points)",
+                "reduced Serpents starting speed (which makes them easier to control)",
+                "added a serpents speedup pickup",
+                "added a UI page after game exit showing highscores or rating changes"
+          ]
+        },
+        {
+            "version": "0.1.8",
             "changes": [
                 "single player games started through the multiplayer lobby no longer round trip packets through the server (so you won't get lag, or see 'Waiting for players', for these games)",
                 "fixes a crash when hovering player names on the recording replay page",

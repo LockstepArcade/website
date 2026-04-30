@@ -43,8 +43,32 @@
             <div class="changelog-container">
                 <div class="version-block current-version">
                     <div class="version-header">
-                        <h3>Version 0.1.8</h3>
+                        <h3>Version 0.1.9</h3>
                         <span class="version-badge">Current</span>
+                    </div>
+                    <ul class="changelog-list">
+                        <li>added mipmapping to reduce aliasing when zooming out</li>
+                        <li>added thumbnails in create game page</li>
+                        <li>orders (and pending triggered orders) can now be cancelled, in Neon Swarm</li>
+                        <li>renamed the Neon Swarm orders</li>
+                        <li>orders that don't affect the world (e.g. a dig that immediately hits metal) are now refunded</li>
+                        <li>with the barrier (previously blocker) order the swarmer now just places the barrier and returns to normal movement</li>
+                        <li>removed trigger icons where the trigger does not really make sense for the order</li>
+                        <li>added scrollbars in cases where the UI overflows the bottom of the screen</li>
+                        <li>improved the UI for 'fatal' errors (which include disconnection from server)</li>
+                        <li>recording replay now ends when the actual gameplay ends, in the case of aborted games</li>
+                        <li>moved exits for Serpents game to the center of the map</li>
+                        <li>a minimum tail length is now required, in order to exit (and collect points)</li>
+                        <li>reduced Serpents starting speed (which makes them easier to control)</li>
+                        <li>added a serpents speedup pickup</li>
+                        <li>added a UI page after game exit showing highscores or rating changes</li>
+                    </ul>
+                </div>
+
+                <div class="version-block">
+                    <div class="version-header">
+                        <h3>Version 0.1.8</h3>
+                        
                     </div>
                     <ul class="changelog-list">
                         <li>single player games started through the multiplayer lobby no longer round trip packets through the server (so you won't get lag, or see 'Waiting for players', for these games)</li>
