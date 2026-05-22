@@ -165,7 +165,7 @@ def clean_generated_files():
     # Remove subdirectories (download/, signup/, changelog/, etc.)
     # These only contain generated index.html files
     for item in DOCS_DIR.iterdir():
-        if item.is_dir():
+        if item.is_dir() and item.name != 'assets':
             print(f"  Removing {item.name}/")
             shutil.rmtree(item)
 
