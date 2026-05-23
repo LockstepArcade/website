@@ -1,7 +1,7 @@
 {
-    "version": "0.1.9",
-    "download_size_windows": "~18 MB",
-    "download_size_mac": "~18 MB",
+    "version": "1.0.0",
+    "download_size_windows": "~16 MB",
+    "download_size_mac": "~16 MB",
     "has_mac_build": false,
     "discord_url": "https://discord.gg/byJzJdQCVd",
     "web3forms_key": "2f3c7147-e4fb-4008-babd-8de206ece816",
@@ -14,8 +14,25 @@
 
     "releases": [
         {
-            "version": "0.1.9",
+            "version": "1.0.0",
             "current": true,
+            "changes": [
+                "you now bounce off tails in the case of glancing collisions, in Serpents (to encourage longer serpents and more interesting games)",
+                "added a bunch of sound effects for Neon Swarm game",
+                "added speed controls for Neon Swarm",
+                "digging activities now continue until metal is hit or there is nothing to dig",
+                "changed looping sound for serpent exit",
+                "fixed an issue where looping sounds could get stuck playing after game end",
+                "fixed an issue where serpent speed was being reset on exit",
+                "you can now join game rooms while other players are viewing results, or games are in progress, as long as slots are available",
+                "tweaked rendering of different pickups in Serpents to make these more easily distinguishable on mobile",
+                "added server error display on mobile (which fixes an issue with silent failure of name change if name already used)",
+                "added a tile occupancy count mechanism in Serpents to control how much pickup clumping is possible",
+                "implemented content hash based cache busting for the web app (and website assets) so that the browser knows it doesn't need to download these again"
+            ]
+        },
+        {
+            "version": "0.1.9",
             "changes": [
                 "added mipmapping to reduce aliasing when zooming out",
                 "added thumbnails in create game page",

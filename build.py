@@ -24,7 +24,16 @@ CONFIG_FILE = SCRIPT_DIR / "config.json"
 def load_config():
     """Load configuration from config.json."""
     with open(CONFIG_FILE, "r", encoding="utf-8") as f:
-        return json.load(f)
+        text = f.read()
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError as e:
+        line_text = text.splitlines()[e.lineno - 1] if e.lineno - 1 < len(text.splitlines()) else ""
+        print(f"\nError parsing {CONFIG_FILE.name}: {e.msg}")
+        print(f"  Line {e.lineno}, column {e.colno}:")
+        print(f"    {line_text}")
+        print(f"    {' ' * (e.colno - 1)}^")
+        raise SystemExit(1)
 
 
 def load_template(name):

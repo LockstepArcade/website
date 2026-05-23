@@ -43,8 +43,29 @@
             <div class="changelog-container">
                 <div class="version-block current-version">
                     <div class="version-header">
-                        <h3>Version 0.1.9</h3>
+                        <h3>Version 1.0.0</h3>
                         <span class="version-badge">Current</span>
+                    </div>
+                    <ul class="changelog-list">
+                        <li>you now bounce off tails in the case of glancing collisions, in Serpents (to encourage longer serpents and more interesting games)</li>
+                        <li>added a bunch of sound effects for Neon Swarm game</li>
+                        <li>added speed controls for Neon Swarm</li>
+                        <li>digging activities now continue until metal is hit or there is nothing to dig</li>
+                        <li>changed looping sound for serpent exit</li>
+                        <li>fixed an issue where looping sounds could get stuck playing after game end</li>
+                        <li>fixed an issue where serpent speed was being reset on exit</li>
+                        <li>you can now join game rooms while other players are viewing results, or games are in progress, as long as slots are available</li>
+                        <li>tweaked rendering of different pickups in Serpents to make these more easily distinguishable on mobile</li>
+                        <li>added server error display on mobile (which fixes an issue with silent failure of name change if name already used)</li>
+                        <li>added a tile occupancy count mechanism in Serpents to control how much pickup clumping is possible</li>
+                        <li>implemented content hash based cache busting for the web app (and website assets) so that the browser knows it doesn't need to download these again</li>
+                    </ul>
+                </div>
+
+                <div class="version-block">
+                    <div class="version-header">
+                        <h3>Version 0.1.9</h3>
+                        
                     </div>
                     <ul class="changelog-list">
                         <li>added mipmapping to reduce aliasing when zooming out</li>
