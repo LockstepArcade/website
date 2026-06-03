@@ -1,5 +1,5 @@
 {
-    "version": "1.0.0",
+    "version": "1.0.1",
     "download_size_windows": "~16 MB",
     "download_size_mac": "~16 MB",
     "has_mac_build": false,
@@ -14,8 +14,20 @@
 
     "releases": [
         {
-            "version": "1.0.0",
+            "version": "1.0.1",
             "current": true,
+            "changes": [
+                "fixed an issue where the mobile client would get stuck attempting to connect with old guest id with no way to clear credentials",
+                "fixed an issue with blank names being displayed for guests on other clients, in some situations",
+                "vector maps added, for Pilots and Serpents (made default, so this is what you get for Serpents on mobile)",
+                "vector maps get a parallax scrolling background",
+                "added 'head' markers for the serpents",
+                "tweaked the control region so that you don't have click/touch all the way to the window edges to get full control",
+                "visual display of control region"
+            ]
+        },
+        {
+            "version": "1.0.0",
             "changes": [
                 "you now bounce off tails in the case of glancing collisions, in Serpents (to encourage longer serpents and more interesting games)",
                 "added a bunch of sound effects for Neon Swarm game",
