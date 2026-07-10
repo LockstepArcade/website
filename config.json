@@ -1,7 +1,7 @@
 {
-    "version": "1.0.1",
-    "download_size_windows": "~16 MB",
-    "download_size_mac": "~16 MB",
+    "version": "1.1.0",
+    "download_size_windows": "~20 MB",
+    "download_size_mac": "~20 MB",
     "has_mac_build": false,
     "discord_url": "https://discord.gg/byJzJdQCVd",
     "web3forms_key": "2f3c7147-e4fb-4008-babd-8de206ece816",
@@ -14,8 +14,21 @@
 
     "releases": [
         {
-            "version": "1.0.1",
+            "version": "1.1.0",
             "current": true,
+            "changes": [
+                "added a new game, 'Spirits' (mobile and desktop), which is an homage to N++",
+                "you can now choose the map to play, for Spirits, on mobile",
+                "fixed bug with range of 'grow by' setting for Serpents",
+                "fixed issues around slot choices for players in a game room not being limited to number of slots actually available for the selected map",
+                "added another tutorial level for Neon Swarm ('Mine Barrier')",
+                "the colour of dug pixels in Neon Swarm is now set to match the average background colour for the map",
+                "made the red circle that displays control extents for Serpents much brighter",
+                "the Serpents status bar no longer blocks control input"
+            ]
+        },
+        {
+            "version": "1.0.1",
             "changes": [
                 "fixed an issue where the mobile client would get stuck attempting to connect with old guest id with no way to clear credentials",
                 "fixed an issue with blank names being displayed for guests on other clients, in some situations",
