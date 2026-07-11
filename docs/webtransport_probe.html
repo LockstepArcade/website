@@ -1,0 +1,183 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WebTransport connectivity test</title>
+<style>
+body { font-family: system-ui, sans-serif; max-width: 40em; margin: 1em auto; padding: 0 1em; }
+button { font-size: 1.1em; padding: 0.5em 1.5em; margin: 0.5em 0; }
+#results div { padding: 0.3em 0; }
+.pass::before { content: "\2705 "; }
+.fail::before { content: "\274C "; }
+.info::before { content: "\2139\FE0F "; }
+textarea { width: 100%; height: 10em; font-family: monospace; font-size: 0.8em; }
+</style>
+</head>
+<body>
+<h1>WebTransport connectivity test</h1>
+<p>This checks whether your browser and network connection support WebTransport.
+It takes a few seconds and sends only tiny test packets.</p>
+<button id="run">Run test</button>
+<div id="results"></div>
+<div id="report" hidden>
+<p>Please copy the results below and send them back to us:</p>
+<textarea id="json" readonly></textarea>
+<button id="copy">Copy results</button>
+</div>
+<script>
+"use strict";
+
+// Endpoint of webtransport_echo_server.py; can be overridden with ?server=https://host:port/echo
+const DEFAULT_SERVER = "https://gameserver.locksteparcade.com:443/echo";
+
+const CONNECT_TIMEOUT_MS = 8000;
+const ECHO_TIMEOUT_MS = 5000;
+
+function withTimeout(promise, ms, label)
+{
+    let timer;
+    const timeout = new Promise((_, reject) => {
+        timer = setTimeout(() => reject(new Error(label + " timed out after " + ms + "ms")), ms);
+    });
+    return Promise.race([promise, timeout]).finally(() => clearTimeout(timer));
+}
+
+function show(cls, text)
+{
+    const div = document.createElement("div");
+    div.className = cls;
+    div.textContent = text;
+    document.getElementById("results").appendChild(div);
+}
+
+async function testDatagramEcho(wt, results)
+{
+    const writer = wt.datagrams.writable.getWriter();
+    const reader = wt.datagrams.readable.getReader();
+    try
+    {
+        // Datagrams are unreliable, so send a burst and accept the first echo.
+        const sendTimes = new Map();
+        let sequence = 0;
+        const sendOne = () => {
+            const seq = sequence++;
+            sendTimes.set(seq, performance.now());
+            writer.write(new TextEncoder().encode("probe-" + seq)).catch(() => {});
+        };
+        sendOne();
+        const resend = setInterval(sendOne, 400);
+        try
+        {
+            const {value} = await withTimeout(reader.read(), ECHO_TIMEOUT_MS, "datagram echo");
+            const text = new TextDecoder().decode(value);
+            const match = /^probe-(\d+)$/.exec(text);
+            if (match && sendTimes.has(Number(match[1])))
+            {
+                results.datagramEcho = true;
+                results.datagramRttMs = Math.round(performance.now() - sendTimes.get(Number(match[1])));
+            }
+            else
+            {
+                results.datagramEcho = false;
+                results.datagramError = "unexpected echo payload";
+            }
+        }
+        finally
+        {
+            clearInterval(resend);
+        }
+    }
+    catch (e)
+    {
+        results.datagramEcho = false;
+        results.datagramError = String(e);
+    }
+    finally
+    {
+        writer.releaseLock();
+        reader.releaseLock();
+    }
+}
+
+async function testStreamEcho(wt, results)
+{
+    try
+    {
+        const stream = await withTimeout(wt.createBidirectionalStream(), ECHO_TIMEOUT_MS, "stream open");
+        const writer = stream.writable.getWriter();
+        await writer.write(new TextEncoder().encode("hello-stream"));
+        const reader = stream.readable.getReader();
+        const {value} = await withTimeout(reader.read(), ECHO_TIMEOUT_MS, "stream echo");
+        results.streamEcho = new TextDecoder().decode(value) === "hello-stream";
+    }
+    catch (e)
+    {
+        results.streamEcho = false;
+        results.streamError = String(e);
+    }
+}
+
+async function runTests()
+{
+    document.getElementById("results").innerHTML = "";
+    document.getElementById("report").hidden = true;
+    const server = new URLSearchParams(location.search).get("server") || DEFAULT_SERVER;
+    const results = {
+        time: new Date().toISOString(),
+        userAgent: navigator.userAgent,
+        server: server,
+    };
+
+    results.apiAvailable = typeof WebTransport !== "undefined";
+    show(results.apiAvailable ? "pass" : "fail",
+         results.apiAvailable ? "WebTransport API available" : "WebTransport API not available in this browser");
+
+    if (results.apiAvailable)
+    {
+        let wt = null;
+        try
+        {
+            wt = new WebTransport(server);
+            await withTimeout(wt.ready, CONNECT_TIMEOUT_MS, "connection");
+            results.connected = true;
+            show("pass", "Connected to test server");
+        }
+        catch (e)
+        {
+            results.connected = false;
+            results.connectError = String(e);
+            show("fail", "Could not connect: " + e);
+            show("info", "The API exists but the connection failed - this usually means UDP is blocked on this network.");
+        }
+
+        if (results.connected)
+        {
+            if (wt.datagrams.maxDatagramSize !== undefined)
+            {
+                results.maxDatagramSize = wt.datagrams.maxDatagramSize;
+                show("info", "Max datagram size: " + results.maxDatagramSize + " bytes");
+            }
+            await testDatagramEcho(wt, results);
+            show(results.datagramEcho ? "pass" : "fail",
+                 results.datagramEcho
+                     ? "Datagram echo OK (round trip " + results.datagramRttMs + "ms)"
+                     : "Datagram echo failed: " + (results.datagramError || "?"));
+            await testStreamEcho(wt, results);
+            show(results.streamEcho ? "pass" : "fail",
+                 results.streamEcho ? "Stream echo OK" : "Stream echo failed: " + (results.streamError || "?"));
+            wt.close();
+        }
+    }
+
+    document.getElementById("json").value = JSON.stringify(results, null, 1);
+    document.getElementById("report").hidden = false;
+}
+
+document.getElementById("run").addEventListener("click", runTests);
+document.getElementById("copy").addEventListener("click", () => {
+    navigator.clipboard.writeText(document.getElementById("json").value);
+});
+</script>
+</body>
+</html>
