@@ -1,5 +1,5 @@
 {
-    "version": "1.1.0",
+    "version": "1.1.1",
     "download_size_windows": "~20 MB",
     "download_size_mac": "~20 MB",
     "has_mac_build": false,
@@ -14,8 +14,18 @@
 
     "releases": [
         {
-            "version": "1.1.0",
+            "version": "1.1.1",
             "current": true,
+            "changes": [
+                "streamlined process for connection as a guest",
+                "added a welcome page after guest connection for copying credentials and choosing a name",
+                "removed the Account page on mobile since this no longer made sense",
+                "added possibility to disconnect from server and go back to the main offline menu, on mobile",
+                "fixed some issues with Spirits games score reporting"
+            ]
+        },
+        {
+            "version": "1.1.0",
             "changes": [
                 "added a new game, 'Spirits' (mobile and desktop), which is an homage to N++",
                 "you can now choose the map to play, for Spirits, on mobile",
