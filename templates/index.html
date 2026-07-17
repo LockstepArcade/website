@@ -21,10 +21,9 @@
         <div class="container hero-content">
             <h1>Welcome to Lockstep Arcade</h1>
             <p class="lead">Ideosyncratic multiplayer games with rock solid lockstep networking</p>
+            <p class="lead">Runs directly in your browser, on mobile and desktop, with no login required</p>
             <div class="cta-buttons">
-                <a href="Client" class="btn btn-primary">Open Web Client</a>
-                <a href="download/" class="btn btn-primary">Download Native Client</a>
-                <a href="signup/" class="btn btn-secondary">Request Beta Access</a>
+                <a href="Client" class="btn btn-primary">Open the Game Client</a>
             </div>
         </div>
     </header>
@@ -33,7 +32,7 @@
         <div class="container">
             <h2>About Lockstep Arcade</h2>
             <p class="section-intro">
-                Lockstep Arcade is in active development. Three games are available, currently.
+                Lockstep Arcade is in active development. Four games are available, currently.
             </p>
 
             <div class="game-info">
@@ -53,6 +52,12 @@
                 <h3>Serpents</h3>
                 <p>
                     Combination of the classic 'Snake' game with inertial (asteroids style) movement.
+                </p>
+            </div>
+            <div class="game-info">
+                <h3>Spirits</h3>
+                <p>
+                    Get one player on your team to the exit with a time limit, unlocking doors and avoiding enemies. (An homage to N++, with online co-op.)
                 </p>
             </div>
 
@@ -100,66 +105,6 @@
                     <img src="assets/screenshot6.png" alt="Gameplay Screenshot 6">
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section id="download" class="section section-alt">
-        <div class="container">
-            <h2>How to Play</h2>
-            <div class="download-box">
-                <h3>Current Version: {version}</h3>
-                <a href="Client" class="btn btn-primary btn-large">Run in Browser</a>
-                <p>(Lockstep Arcade can run directly in your browser, without requiring any download or install)</p>
-                <a href="download/" class="btn btn-primary btn-large">Or go to Downloads</a>
-                <p>(For the latest native client for Windows or macOS</p>
-                <p class="download-note">Requires credentials file to play. <a href="signup/">Request beta access</a> to get yours.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="signup" class="section">
-        <div class="container">
-            <h2>Request Beta Access</h2>
-            <p class="section-intro">Sign up to receive your credentials file and get notified about updates and new features. The game is currently in early development, and we're looking for players to test and provide feedback!</p>
-
-            <form action="https://api.web3forms.com/submit" method="POST" class="signup-form" id="signupform">
-                <input type="hidden" name="access_key" value="{web3forms_key}">
-                <input type="hidden" name="subject" value="New Beta Access Request - Lockstep Arcade">
-                <input type="hidden" name="from_name" value="Lockstep Arcade Website">
-
-                <div class="form-group">
-                    <label for="name">Name *</label>
-                    <input type="text" id="name" name="name" required placeholder="Your name">
-                </div>
-
-                <div class="form-group">
-                    <label for="email">Email *</label>
-                    <input type="email" id="email" name="email" required placeholder="your.email@example.com">
-                </div>
-
-                <div class="form-group">
-                    <label for="player_name">Preferred Player Name</label>
-                    <input type="text" id="player_name" name="player_name" maxlength="30" placeholder="In-game name (max 30 characters)">
-                </div>
-
-                <div class="form-group">
-                    <label for="message">Additional Information (Optional)</label>
-                    <textarea id="message" name="message" rows="4" placeholder="Tell us about your gaming experience, feedback ideas, or anything else you'd like to share..."></textarea>
-                </div>
-
-                <div class="form-group checkbox-group">
-                    <label>
-                        <input type="checkbox" name="notifications" value="yes" checked>
-                        I want to receive email notifications about updates and new features
-                    </label>
-                </div>
-
-                <div class="h-captcha" data-captcha="true"></div>
-
-                <button type="submit" class="btn btn-primary btn-large">Request Beta Access</button>
-            </form>
-
-            <p class="form-note">We'll send you a credentials.bin file via email within 24-48 hours. Make sure to check your spam folder!</p>
         </div>
     </section>
 

@@ -107,53 +107,6 @@ def ensure_dir(path):
     path.mkdir(parents=True, exist_ok=True)
 
 
-def build_install_script_mac(version):
-    """Build the macOS install shell script."""
-    return f"""#!/bin/bash
-cd ~/Downloads
-
-echo "Downloading Lockstep Arcade {version}..."
-curl -LO https://locksteparcade.com/lockstep_arcade_{version}_mac.zip
-
-echo "Extracting..."
-unzip -o lockstep_arcade_{version}_mac.zip -d lockstep_arcade_{version}
-
-echo "Cleaning up..."
-rm lockstep_arcade_{version}_mac.zip
-
-echo "Remove quarantine attribute, if present (needed in case the archive was first downloaded manually)..."
-xattr -d com.apple.quarantine lockstep_arcade_{version}/LockstepArcade
-
-echo "Opening folder..."
-open lockstep_arcade_{version}
-
-echo "Done! Run LockstepArcade to play."
-"""
-
-
-def build_install_script_windows(version):
-    """Build the Windows install PowerShell script."""
-    return f"""$ProgressPreference = 'SilentlyContinue'
-$downloadDir = "$env:USERPROFILE\\Downloads"
-$zipFile = "$downloadDir\\lockstep_arcade_{version}.zip"
-$extractDir = "$downloadDir\\lockstep_arcade_{version}"
-
-Write-Host "Downloading Lockstep Arcade {version}..."
-Invoke-WebRequest -Uri "https://locksteparcade.com/lockstep_arcade_{version}.zip" -OutFile $zipFile
-
-Write-Host "Extracting..."
-Expand-Archive -Path $zipFile -DestinationPath $extractDir -Force
-
-Write-Host "Cleaning up..."
-Remove-Item $zipFile
-
-Write-Host "Opening folder..."
-Start-Process explorer.exe $extractDir
-
-Write-Host "Done! Run LockstepArcade.exe to play."
-"""
-
-
 def clean_generated_files():
     """Remove generated HTML files and subdirectories from docs/.
 
@@ -166,12 +119,12 @@ def clean_generated_files():
 
     # Remove generated files in docs/
     # Only remove index.html (not other .html files like WASM executables)
-    for pattern in ["index.html", "*.sh", "*.ps1"]:
+    for pattern in ["index.html", "*.sh"]:
         for generated_file in DOCS_DIR.glob(pattern):
             print(f"  Removing {generated_file.name}")
             generated_file.unlink()
 
-    # Remove subdirectories (download/, signup/, changelog/, etc.)
+    # Remove subdirectories (signup/, changelog/, etc.)
     # These only contain generated index.html files
     for item in DOCS_DIR.iterdir():
         if item.is_dir() and item.name != 'assets':
@@ -188,9 +141,6 @@ def build_site():
 
     # Extract config values
     version = config["version"]
-    download_size_windows = config["download_size_windows"]
-    download_size_mac = config["download_size_mac"]
-    has_mac_build = config.get("has_mac_build", True)
     discord_url = config["discord_url"]
     web3forms_key = config["web3forms_key"]
     current_year = config["current_year"]
@@ -207,22 +157,20 @@ def build_site():
 
     # Ensure docs directories exist
     ensure_dir(DOCS_DIR)
-    ensure_dir(DOCS_DIR / "download")
-    ensure_dir(DOCS_DIR / "signup")
-    ensure_dir(DOCS_DIR / "changelog")
-    ensure_dir(DOCS_DIR / "setup")
-    ensure_dir(DOCS_DIR / "gettingstarted")
     ensure_dir(DOCS_DIR / "challenges")
+    ensure_dir(DOCS_DIR / "signup")
+    ensure_dir(DOCS_DIR / "neonswarm")
+    ensure_dir(DOCS_DIR / "pilots")
+    ensure_dir(DOCS_DIR / "serpents")
+    ensure_dir(DOCS_DIR / "spirits")
+    ensure_dir(DOCS_DIR / "changelog")
 
     # Common variables for all pages
     common_vars = {
         "version": version,
-        "download_size_windows": download_size_windows,
-        "download_size_mac": download_size_mac,
         "discord_url": discord_url,
         "web3forms_key": web3forms_key,
         "current_year": current_year,
-        "no_mac_build_class": "" if has_mac_build else "no-mac-build",
         "changelog_html": changelog_html,
         "whats_new_html": whats_new_html,
     }
@@ -231,10 +179,11 @@ def build_site():
     pages = [
         ("index.html", DOCS_DIR / "index.html", ""),
         ("challenges.html", DOCS_DIR / "challenges" / "index.html", "../"),
-        ("download.html", DOCS_DIR / "download" / "index.html", "../"),
         ("signup.html", DOCS_DIR / "signup" / "index.html", "../"),
-        ("setup.html", DOCS_DIR / "setup" / "index.html", "../"),
-        ("gettingstarted.html", DOCS_DIR / "gettingstarted" / "index.html", "../"),
+        ("neonswarm.html", DOCS_DIR / "neonswarm" / "index.html", "../"),
+        ("pilots.html", DOCS_DIR / "pilots" / "index.html", "../"),
+        ("serpents.html", DOCS_DIR / "serpents" / "index.html", "../"),
+        ("spirits.html", DOCS_DIR / "spirits" / "index.html", "../"),
         ("changelog.html", DOCS_DIR / "changelog" / "index.html", "../"),
     ]
 
@@ -291,24 +240,13 @@ def build_site():
         with open(redirect_path, "w", encoding="utf-8") as f:
             f.write(redirect_html)
 
-    # Generate install scripts
-    print("Building install_mac.sh...")
-    with open(DOCS_DIR / "install_mac.sh", "w", encoding="utf-8", newline="\n") as f:
-        f.write(build_install_script_mac(version))
-
-    print("Building install_windows.ps1...")
-    with open(DOCS_DIR / "install_windows.ps1", "w", encoding="utf-8", newline="\n") as f:
-        f.write(build_install_script_windows(version))
-
     print("\nBuild complete!")
     print(f"Output directory: {DOCS_DIR}")
-    print("\nRemember to copy/move your assets to docs/:")
+    print("\nRemember to copy/move your assets to docs/, e.g.:")
     print("  - styles.css")
     print("  - banner.jpg")
     print("  - screenshot1.png, screenshot2.png, screenshot3.png")
-    print("  - lockstep_arcade_*.zip (game files)")
     print("  - CNAME")
-
 
 if __name__ == "__main__":
     build_site()
