@@ -1,5 +1,5 @@
 {
-    "version": "1.2.0",
+    "version": "1.2.1",
     "discord_url": "https://discord.gg/byJzJdQCVd",
     "web3forms_key": "2f3c7147-e4fb-4008-babd-8de206ece816",
     "current_year": "2026",
@@ -11,8 +11,15 @@
 
     "releases": [
         {
-            "version": "1.2.0",
+            "version": "1.2.1",
             "current": true,
+            "changes": [
+                "added animated background to desktop UI",
+                "changes to desktop UI to make this look less like a web page"
+            ]
+        },
+        {
+            "version": "1.2.0",
             "changes": [
                 "fixed issues with team game setup for Neon Swarm games being broken by certain non default slot choices",
                 "improved communication of game eligibility for high scores/rankings in game room view",
