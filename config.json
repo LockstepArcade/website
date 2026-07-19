@@ -1,5 +1,5 @@
 {
-    "version": "1.2.1",
+    "version": "1.2.2",
     "discord_url": "https://discord.gg/byJzJdQCVd",
     "web3forms_key": "2f3c7147-e4fb-4008-babd-8de206ece816",
     "current_year": "2026",
@@ -11,12 +11,13 @@
 
     "releases": [
         {
-            "version": "1.2.1",
+            "version": "1.2.2",
             "current": true,
             "changes": [
                 "added animated background to desktop UI",
-                "changes to desktop UI to make this look less like a web page"
-            ]
+                "changes to desktop UI to make this look less like a web page",
+                "switching away from the browser while playing in mobile disconnects you rather than freezing the session for other players",
+                "fixed an issue with stuff not being substituted in format strings for room listing entries in mobile UI"            ]
         },
         {
             "version": "1.2.0",
