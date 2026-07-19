@@ -19,6 +19,8 @@ textarea { width: 100%; height: 10em; font-family: monospace; font-size: 0.8em; 
 <p>This checks whether your browser and network connection support WebTransport.
 It takes a few seconds and sends only tiny test packets.</p>
 <button id="run">Run test</button>
+<button id="soak">Run soak test (5 min)</button>
+<p id="soaknote" hidden>Keep this page in the foreground with the screen on until the soak finishes.</p>
 <div id="results"></div>
 <div id="report" hidden>
 <p>Please copy the results below and send them back to us:</p>
@@ -33,6 +35,7 @@ const DEFAULT_SERVER = "https://gameserver.locksteparcade.com:443/echo";
 
 const CONNECT_TIMEOUT_MS = 8000;
 const ECHO_TIMEOUT_MS = 5000;
+const SOAK_PROBE_TIMEOUT_MS = 5000;
 
 function withTimeout(promise, ms, label)
 {
@@ -118,7 +121,7 @@ async function testStreamEcho(wt, results)
     }
 }
 
-async function runTests()
+function startRun()
 {
     document.getElementById("results").innerHTML = "";
     document.getElementById("report").hidden = true;
@@ -128,28 +131,45 @@ async function runTests()
         userAgent: navigator.userAgent,
         server: server,
     };
-
     results.apiAvailable = typeof WebTransport !== "undefined";
     show(results.apiAvailable ? "pass" : "fail",
          results.apiAvailable ? "WebTransport API available" : "WebTransport API not available in this browser");
+    return results;
+}
+
+async function connectSession(results)
+{
+    try
+    {
+        const wt = new WebTransport(results.server);
+        await withTimeout(wt.ready, CONNECT_TIMEOUT_MS, "connection");
+        results.connected = true;
+        show("pass", "Connected to test server");
+        return wt;
+    }
+    catch (e)
+    {
+        results.connected = false;
+        results.connectError = String(e);
+        show("fail", "Could not connect: " + e);
+        show("info", "The API exists but the connection failed - this usually means UDP is blocked on this network.");
+        return null;
+    }
+}
+
+function showReport(results)
+{
+    document.getElementById("json").value = JSON.stringify(results, null, 1);
+    document.getElementById("report").hidden = false;
+}
+
+async function runTests()
+{
+    const results = startRun();
 
     if (results.apiAvailable)
     {
-        let wt = null;
-        try
-        {
-            wt = new WebTransport(server);
-            await withTimeout(wt.ready, CONNECT_TIMEOUT_MS, "connection");
-            results.connected = true;
-            show("pass", "Connected to test server");
-        }
-        catch (e)
-        {
-            results.connected = false;
-            results.connectError = String(e);
-            show("fail", "Could not connect: " + e);
-            show("info", "The API exists but the connection failed - this usually means UDP is blocked on this network.");
-        }
+        const wt = await connectSession(results);
 
         if (results.connected)
         {
@@ -170,11 +190,149 @@ async function runTests()
         }
     }
 
-    document.getElementById("json").value = JSON.stringify(results, null, 1);
-    document.getElementById("report").hidden = false;
+    showReport(results);
+}
+
+// One soak probe: send seq-tagged datagrams (resending, since datagrams are unreliable)
+// until one is echoed or the probe times out. Echoes from earlier rounds are ignored.
+async function soakProbe(writer, reader, round)
+{
+    const sendTimes = new Map();
+    let attempt = 0;
+    const sendOne = () => {
+        const key = round + "-" + attempt++;
+        sendTimes.set(key, performance.now());
+        writer.write(new TextEncoder().encode("soak-" + key)).catch(() => {});
+    };
+    sendOne();
+    const resend = setInterval(sendOne, 400);
+    try
+    {
+        const deadline = performance.now() + SOAK_PROBE_TIMEOUT_MS;
+        while (performance.now() < deadline)
+        {
+            const {value} = await withTimeout(reader.read(), deadline - performance.now(), "soak probe");
+            const match = /^soak-(\d+-\d+)$/.exec(new TextDecoder().decode(value));
+            if (match && sendTimes.has(match[1]))
+            {
+                return {ok: true, rttMs: Math.round(performance.now() - sendTimes.get(match[1]))};
+            }
+        }
+        return {ok: false};
+    }
+    catch (e)
+    {
+        return {ok: false, error: String(e)};
+    }
+    finally
+    {
+        clearInterval(resend);
+    }
+}
+
+async function runSoak()
+{
+    // The interval leaves idle windows long enough for a NAT mapping to expire or shift
+    // (the event under test) while staying under typical QUIC idle timeouts.
+    const params = new URLSearchParams(location.search);
+    const durationMs = (parseFloat(params.get("soakMinutes")) || 5) * 60000;
+    const intervalMs = (parseFloat(params.get("soakIntervalS")) || 15) * 1000;
+
+    const results = startRun();
+    if (!results.apiAvailable)
+    {
+        showReport(results);
+        return;
+    }
+
+    document.getElementById("soaknote").hidden = false;
+    document.getElementById("run").disabled = true;
+    document.getElementById("soak").disabled = true;
+    let wakeLock = null;
+    try
+    {
+        if (navigator.wakeLock)
+        {
+            wakeLock = await navigator.wakeLock.request("screen").catch(() => null);
+        }
+
+        const wt = await connectSession(results);
+        if (!results.connected)
+        {
+            showReport(results);
+            return;
+        }
+        let closeInfo = null;
+        wt.closed.then(info => { closeInfo = info || {}; }, e => { closeInfo = {error: String(e)}; });
+
+        const rounds = [];
+        results.soak = {intervalS: intervalMs / 1000, plannedMinutes: durationMs / 60000, rounds};
+        const progress = document.createElement("div");
+        progress.className = "info";
+        document.getElementById("results").appendChild(progress);
+
+        const writer = wt.datagrams.writable.getWriter();
+        const reader = wt.datagrams.readable.getReader();
+        const start = performance.now();
+        let failures = 0;
+        let recoveries = 0;
+        let lastOk = true;
+        for (let round = 0; performance.now() - start < durationMs; round++)
+        {
+            const probe = await soakProbe(writer, reader, round);
+            probe.tS = Math.round((performance.now() - start) / 1000);
+            rounds.push(probe);
+            if (!probe.ok)
+            {
+                failures++;
+            }
+            else if (!lastOk)
+            {
+                recoveries++;
+            }
+            lastOk = probe.ok;
+            progress.textContent = "Soak: " + rounds.length + " probes, " + failures + " failed"
+                + (recoveries ? ", " + recoveries + " recoveries" : "")
+                + " - " + Math.round((durationMs - (performance.now() - start)) / 1000) + "s left";
+            if (closeInfo !== null)
+            {
+                results.soak.connectionClosed = closeInfo;
+                results.soak.connectionClosedAtS = probe.tS;
+                break;
+            }
+            await new Promise(resolve => setTimeout(resolve, intervalMs));
+        }
+        writer.releaseLock();
+        reader.releaseLock();
+
+        results.soak.failures = failures;
+        results.soak.recoveries = recoveries;
+        const survived = closeInfo === null && lastOk;
+        show(survived ? "pass" : "fail",
+             "Soak finished: " + rounds.length + " probes, " + failures + " failed, "
+             + recoveries + " recovered"
+             + (closeInfo !== null ? " - connection closed early" : ""));
+        show("info", "Whether the public address changed during the run is visible in the server log.");
+        if (closeInfo === null)
+        {
+            wt.close();
+        }
+        showReport(results);
+    }
+    finally
+    {
+        if (wakeLock)
+        {
+            wakeLock.release().catch(() => {});
+        }
+        document.getElementById("soaknote").hidden = true;
+        document.getElementById("run").disabled = false;
+        document.getElementById("soak").disabled = false;
+    }
 }
 
 document.getElementById("run").addEventListener("click", runTests);
+document.getElementById("soak").addEventListener("click", runSoak);
 document.getElementById("copy").addEventListener("click", () => {
     navigator.clipboard.writeText(document.getElementById("json").value);
 });
