@@ -6,7 +6,8 @@
 
     "redirects": {
         "client": "Client",
-        "testclient": "TestClient"
+        "testclient": "TestClient",
+        "gettingstarted": ""
     },
 
     "releases": [
