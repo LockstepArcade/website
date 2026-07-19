@@ -266,7 +266,8 @@ async function runSoak()
         wt.closed.then(info => { closeInfo = info || {}; }, e => { closeInfo = {error: String(e)}; });
 
         const rounds = [];
-        results.soak = {intervalS: intervalMs / 1000, plannedMinutes: durationMs / 60000, rounds};
+        const events = [];
+        results.soak = {intervalS: intervalMs / 1000, plannedMinutes: durationMs / 60000, rounds, events};
         const progress = document.createElement("div");
         progress.className = "info";
         document.getElementById("results").appendChild(progress);
@@ -274,6 +275,39 @@ async function runSoak()
         const writer = wt.datagrams.writable.getWriter();
         const reader = wt.datagrams.readable.getReader();
         const start = performance.now();
+
+        // Ambient events, to attribute a mid-soak "Connection lost": a visibility or
+        // wake-lock-release event points at the phone locking/backgrounding the page,
+        // a network change event at an interface/IP switch (which browsers treat as fatal).
+        results.soak.wakeLockGranted = wakeLock !== null;
+        const eventTs = () => Math.round((performance.now() - start) / 1000);
+        if (wakeLock)
+        {
+            wakeLock.addEventListener("release", () => events.push({tS: eventTs(), wakeLock: "released"}));
+        }
+        const onVisibility = () => events.push({tS: eventTs(), visibility: document.visibilityState});
+        document.addEventListener("visibilitychange", onVisibility);
+        const netInfo = navigator.connection;
+        const netState = () => (netInfo.type || "?") + "/" + (netInfo.effectiveType || "?");
+        const onNetChange = () => events.push({tS: eventTs(), network: netState()});
+        if (netInfo)
+        {
+            results.soak.networkAtStart = netState();
+            netInfo.addEventListener("change", onNetChange);
+        }
+        const onOffline = () => events.push({tS: eventTs(), online: false});
+        const onOnline = () => events.push({tS: eventTs(), online: true});
+        window.addEventListener("offline", onOffline);
+        window.addEventListener("online", onOnline);
+        const removeEventListeners = () => {
+            document.removeEventListener("visibilitychange", onVisibility);
+            if (netInfo)
+            {
+                netInfo.removeEventListener("change", onNetChange);
+            }
+            window.removeEventListener("offline", onOffline);
+            window.removeEventListener("online", onOnline);
+        };
         let failures = 0;
         let recoveries = 0;
         let lastOk = true;
@@ -304,6 +338,7 @@ async function runSoak()
         }
         writer.releaseLock();
         reader.releaseLock();
+        removeEventListeners();
 
         results.soak.failures = failures;
         results.soak.recoveries = recoveries;
