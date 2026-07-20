@@ -54,9 +54,17 @@ function show(cls, text)
     document.getElementById("results").appendChild(div);
 }
 
+// Safari implements the current spec, where the datagram writable is obtained from
+// createWritable(); Chrome and Firefox still expose the older .writable attribute.
+function datagramWritable(wt, results)
+{
+    results.datagramApi = wt.datagrams.createWritable ? "createWritable" : "writable";
+    return wt.datagrams.createWritable ? wt.datagrams.createWritable() : wt.datagrams.writable;
+}
+
 async function testDatagramEcho(wt, results)
 {
-    const writer = wt.datagrams.writable.getWriter();
+    const writer = datagramWritable(wt, results).getWriter();
     const reader = wt.datagrams.readable.getReader();
     try
     {
@@ -109,7 +117,7 @@ async function testStreamEcho(wt, results)
     {
         const stream = await withTimeout(wt.createBidirectionalStream(), ECHO_TIMEOUT_MS, "stream open");
         const writer = stream.writable.getWriter();
-        await writer.write(new TextEncoder().encode("hello-stream"));
+        await withTimeout(writer.write(new TextEncoder().encode("hello-stream")), ECHO_TIMEOUT_MS, "stream write");
         const reader = stream.readable.getReader();
         const {value} = await withTimeout(reader.read(), ECHO_TIMEOUT_MS, "stream echo");
         results.streamEcho = new TextDecoder().decode(value) === "hello-stream";
@@ -166,31 +174,47 @@ function showReport(results)
 async function runTests()
 {
     const results = startRun();
-
-    if (results.apiAvailable)
+    try
     {
-        const wt = await connectSession(results);
-
-        if (results.connected)
+        if (results.apiAvailable)
         {
-            if (wt.datagrams.maxDatagramSize !== undefined)
+            const wt = await connectSession(results);
+
+            if (results.connected)
             {
-                results.maxDatagramSize = wt.datagrams.maxDatagramSize;
-                show("info", "Max datagram size: " + results.maxDatagramSize + " bytes");
+                // A close arriving while the tests run (e.g. a server-side session
+                // rejection after ready resolved) would otherwise only show up as
+                // opaque echo timeouts.
+                let testsDone = false;
+                wt.closed.then(info => { if (!testsDone) results.closedDuringTest = info || {}; },
+                               e => { if (!testsDone) results.closedDuringTest = {error: String(e)}; });
+                if (wt.datagrams.maxDatagramSize !== undefined)
+                {
+                    results.maxDatagramSize = wt.datagrams.maxDatagramSize;
+                    show("info", "Max datagram size: " + results.maxDatagramSize + " bytes");
+                }
+                await testDatagramEcho(wt, results);
+                show(results.datagramEcho ? "pass" : "fail",
+                     results.datagramEcho
+                         ? "Datagram echo OK (round trip " + results.datagramRttMs + "ms)"
+                         : "Datagram echo failed: " + (results.datagramError || "?"));
+                await testStreamEcho(wt, results);
+                show(results.streamEcho ? "pass" : "fail",
+                     results.streamEcho ? "Stream echo OK" : "Stream echo failed: " + (results.streamError || "?"));
+                testsDone = true;
+                wt.close();
             }
-            await testDatagramEcho(wt, results);
-            show(results.datagramEcho ? "pass" : "fail",
-                 results.datagramEcho
-                     ? "Datagram echo OK (round trip " + results.datagramRttMs + "ms)"
-                     : "Datagram echo failed: " + (results.datagramError || "?"));
-            await testStreamEcho(wt, results);
-            show(results.streamEcho ? "pass" : "fail",
-                 results.streamEcho ? "Stream echo OK" : "Stream echo failed: " + (results.streamError || "?"));
-            wt.close();
         }
     }
-
-    showReport(results);
+    catch (e)
+    {
+        results.uncaughtError = String(e);
+        show("fail", "Test stopped by an unexpected error: " + e);
+    }
+    finally
+    {
+        showReport(results);
+    }
 }
 
 // One soak probe: send seq-tagged datagrams (resending, since datagrams are unreliable)
@@ -272,7 +296,7 @@ async function runSoak()
         progress.className = "info";
         document.getElementById("results").appendChild(progress);
 
-        const writer = wt.datagrams.writable.getWriter();
+        const writer = datagramWritable(wt, results).getWriter();
         const reader = wt.datagrams.readable.getReader();
         const start = performance.now();
 
@@ -352,6 +376,12 @@ async function runSoak()
         {
             wt.close();
         }
+        showReport(results);
+    }
+    catch (e)
+    {
+        results.uncaughtError = String(e);
+        show("fail", "Soak stopped by an unexpected error: " + e);
         showReport(results);
     }
     finally
