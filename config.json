@@ -1,5 +1,5 @@
 {
-    "version": "1.2.2",
+    "version": "1.3.0",
     "discord_url": "https://discord.gg/byJzJdQCVd",
     "web3forms_key": "2f3c7147-e4fb-4008-babd-8de206ece816",
     "current_year": "2026",
@@ -12,13 +12,24 @@
 
     "releases": [
         {
-            "version": "1.2.2",
+            "version": "1.3.0",
             "current": true,
+            "changes": [
+                "fixed issues with incorrect exit assignment in the Serpents game when non default slots are chosen",
+                "fixed incorrect team assignment info lobby, in desktop UI, for team games",
+                "tweaked and improved the Spirits player ship control",
+                "improved the look of mines, in Spirits",
+                "changes to direction interpolation for the direction of edge crawler beams"
+            ]
+        },
+        {
+            "version": "1.2.2",
             "changes": [
                 "added animated background to desktop UI",
                 "changes to desktop UI to make this look less like a web page",
                 "switching away from the browser while playing in mobile disconnects you rather than freezing the session for other players",
-                "fixed an issue with stuff not being substituted in format strings for room listing entries in mobile UI"            ]
+                "fixed an issue with stuff not being substituted in format strings for room listing entries in mobile UI"
+            ]
         },
         {
             "version": "1.2.0",
