@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Audio Test</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 12px;
+            background: #111;
+            color: #ddd;
+            font-family: -apple-system, sans-serif;
+            font-size: 15px;
+        }
+        h1 { font-size: 18px; margin: 0 0 8px 0; }
+        h2 { font-size: 15px; margin: 16px 0 6px 0; color: #4a90e2; }
+        p { margin: 6px 0; line-height: 1.4; }
+        #state {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            padding: 8px;
+            font-family: monospace;
+            font-size: 12px;
+            white-space: pre;
+            overflow-x: auto;
+        }
+        button {
+            display: block;
+            width: 100%;
+            margin: 6px 0;
+            padding: 12px;
+            font-size: 15px;
+            text-align: left;
+            background: #262626;
+            color: #ddd;
+            border: 1px solid #444;
+            border-radius: 4px;
+        }
+        button:active { background: #3a3a3a; }
+        button .num { color: #4a90e2; font-weight: bold; }
+        button .note { display: block; color: #999; font-size: 12px; margin-top: 3px; }
+        #log {
+            background: #000;
+            border: 1px solid #333;
+            padding: 8px;
+            font-family: monospace;
+            font-size: 11px;
+            height: 240px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+        .ok { color: #6c6; }
+        .bad { color: #e66; }
+        .info { color: #999; }
+    </style>
+</head>
+<body>
+
+<h1>iOS Audio Diagnostic</h1>
+
+<p>Each test makes a 440&nbsp;Hz beep for about half a second. Tap them in order and note
+which ones you can actually <em>hear</em>. The log records what each test did.</p>
+
+<p><strong>Before starting:</strong> note the position of the Ring/Silent switch, and turn the
+volume up. While test 10 is looping, press a volume button &mdash; the on-screen volume HUD says
+either <em>Ringer</em> or <em>Media</em>, and which one it says is itself a result worth recording.</p>
+
+<h2>Live state</h2>
+<div id="state">…</div>
+
+<h2>Tests</h2>
+<div id="buttons"></div>
+
+<h2>Log</h2>
+<div id="log"></div>
+
+<script>
+(function() {
+
+// ---------------------------------------------------------------- logging
+
+var log_element = document.getElementById('log');
+var start_time = performance.now();
+
+function Log(text, css_class)
+{
+    var stamp = ((performance.now() - start_time) / 1000).toFixed(2);
+    var line = document.createElement('div');
+    if(css_class)
+    {
+        line.className = css_class;
+    }
+    line.textContent = '[' + stamp + '] ' + text;
+    log_element.appendChild(line);
+    log_element.scrollTop = log_element.scrollHeight;
+    console.log(text);
+}
+
+window.addEventListener('error', function(e) {
+    Log('UNCAUGHT: ' + e.message, 'bad');
+});
+
+// ------------------------------------------------------- wav construction
+
+// The reference tests need real media-element playback, so they need an
+// encoded file. Building it here keeps the page a single self-contained
+// file that can be dropped on the site with no accompanying assets.
+function EncodeWav(samples, sample_rate)
+{
+    var bytes = new Uint8Array(44 + samples.length * 2);
+    var view = new DataView(bytes.buffer);
+
+    function WriteTag(offset, tag)
+    {
+        for(var i = 0; i < tag.length; ++i)
+        {
+            view.setUint8(offset + i, tag.charCodeAt(i));
+        }
+    }
+
+    WriteTag(0, 'RIFF');
+    view.setUint32(4, 36 + samples.length * 2, true);
+    WriteTag(8, 'WAVEfmt ');
+    view.setUint32(16, 16, true);
+    view.setUint16(20, 1, true);            // PCM
+    view.setUint16(22, 1, true);            // mono
+    view.setUint32(24, sample_rate, true);
+    view.setUint32(28, sample_rate * 2, true);
+    view.setUint16(32, 2, true);
+    view.setUint16(34, 16, true);
+    WriteTag(36, 'data');
+    view.setUint32(40, samples.length * 2, true);
+
+    for(var i = 0; i < samples.length; ++i)
+    {
+        var clamped = Math.max(-1, Math.min(1, samples[i]));
+        view.setInt16(44 + i * 2, clamped * 32767, true);
+    }
+
+    var binary = '';
+    for(var j = 0; j < bytes.length; ++j)
+    {
+        binary += String.fromCharCode(bytes[j]);
+    }
+    return 'data:audio/wav;base64,' + btoa(binary);
+}
+
+function MakeToneSamples(frequency, seconds, sample_rate, amplitude)
+{
+    var count = Math.floor(seconds * sample_rate);
+    var samples = new Float32Array(count);
+    var fade = Math.floor(sample_rate * 0.01);
+    for(var i = 0; i < count; ++i)
+    {
+        var envelope = 1;
+        if(i < fade)
+        {
+            envelope = i / fade;
+        }
+        else if(i > count - fade)
+        {
+            envelope = (count - i) / fade;
+        }
+        samples[i] = amplitude * envelope * Math.sin(2 * Math.PI * frequency * i / sample_rate);
+    }
+    return samples;
+}
+
+var BEEP_WAV = EncodeWav(MakeToneSamples(440, 0.5, 44100, 0.5), 44100);
+var SILENT_WAV = EncodeWav(new Float32Array(4410), 44100);
+
+// ------------------------------------------------------ the page-load context
+
+// Deliberately constructed here, at page load, outside any user gesture, and
+// asking for 48 kHz -- this mirrors what the game's sound system does, and is
+// the configuration under test.
+var REQUESTED_RATE = 48000;
+var AudioContextClass = window.AudioContext || window.webkitAudioContext;
+var load_context = null;
+
+if(!AudioContextClass)
+{
+    Log('No AudioContext constructor available!', 'bad');
+}
+else
+{
+    try
+    {
+        load_context = new AudioContextClass({sampleRate: REQUESTED_RATE});
+        Log('Page-load AudioContext created: requested ' + REQUESTED_RATE +
+            ' Hz, got ' + load_context.sampleRate + ' Hz, state=' + load_context.state,
+            load_context.sampleRate === REQUESTED_RATE ? 'ok' : 'bad');
+        load_context.suspend();
+    }
+    catch(e)
+    {
+        Log('Failed to create 48 kHz context: ' + e + ' -- falling back to default rate', 'bad');
+        load_context = new AudioContextClass();
+        Log('Fallback context: ' + load_context.sampleRate + ' Hz, state=' + load_context.state);
+    }
+
+    // Whether this succeeds without a gesture is itself informative.
+    load_context.resume().then(
+        function() { Log('Ungated resume() on page-load context resolved, state=' + load_context.state, 'info'); },
+        function(e) { Log('Ungated resume() on page-load context rejected: ' + e, 'info'); }
+    );
+}
+
+// ------------------------------------------------------------- live state
+
+var state_element = document.getElementById('state');
+var extra_state = '';
+
+function DescribeAudioSession()
+{
+    if(!navigator.audioSession)
+    {
+        return 'navigator.audioSession: not supported';
+    }
+    return 'navigator.audioSession.type: ' + navigator.audioSession.type;
+}
+
+function UpdateState()
+{
+    var lines = [];
+    if(load_context)
+    {
+        lines.push('page-load ctx  state: ' + load_context.state);
+        lines.push('               rate:  ' + load_context.sampleRate + ' Hz (asked ' + REQUESTED_RATE + ')');
+        lines.push('               time:  ' + load_context.currentTime.toFixed(3) + ' s');
+        var out_latency = load_context.outputLatency;
+        lines.push('               latency: base ' + load_context.baseLatency +
+                   ', output ' + (out_latency === undefined ? 'n/a' : out_latency));
+    }
+    lines.push(DescribeAudioSession());
+    lines.push('AudioWorklet: ' + (window.AudioWorklet ? 'yes' : 'no') +
+               '   ScriptProcessor: ' + (AudioContextClass && AudioContextClass.prototype.createScriptProcessor ? 'yes' : 'no'));
+    if(extra_state)
+    {
+        lines.push(extra_state);
+    }
+    state_element.textContent = lines.join('\n');
+}
+
+setInterval(UpdateState, 100);
+UpdateState();
+
+Log('userAgent: ' + navigator.userAgent, 'info');
+Log(DescribeAudioSession(), 'info');
+
+// --------------------------------------------------------------- helpers
+
+// currentTime advancing while nothing is audible is the signature of the
+// output being routed somewhere silent rather than the graph being stalled,
+// so every web-audio test reports it either side of the beep.
+function ReportContext(label, context)
+{
+    Log('  ' + label + ': state=' + context.state +
+        ' rate=' + context.sampleRate +
+        ' currentTime=' + context.currentTime.toFixed(3));
+}
+
+function BeepWithOscillator(context, label)
+{
+    var oscillator = context.createOscillator();
+    var gain = context.createGain();
+    oscillator.frequency.value = 440;
+    gain.gain.value = 0;
+    oscillator.connect(gain);
+    gain.connect(context.destination);
+
+    var now = context.currentTime;
+    gain.gain.setValueAtTime(0, now);
+    gain.gain.linearRampToValueAtTime(0.5, now + 0.01);
+    gain.gain.setValueAtTime(0.5, now + 0.49);
+    gain.gain.linearRampToValueAtTime(0, now + 0.5);
+    oscillator.start(now);
+    oscillator.stop(now + 0.5);
+
+    ReportContext(label + ' at start', context);
+    setTimeout(function() { ReportContext(label + ' 700ms later', context); }, 700);
+}
+
+function BeepWithBufferSource(context, label)
+{
+    var samples = MakeToneSamples(440, 0.5, context.sampleRate, 0.5);
+    var buffer = context.createBuffer(1, samples.length, context.sampleRate);
+    buffer.getChannelData(0).set(samples);
+
+    var source = context.createBufferSource();
+    source.buffer = buffer;
+    source.connect(context.destination);
+    source.start();
+
+    ReportContext(label + ' at start', context);
+    setTimeout(function() { ReportContext(label + ' 700ms later', context); }, 700);
+}
+
+// The game's sound path is a ScriptProcessorNode filled from wasm, so this
+// reproduces that node type specifically -- it can behave differently from a
+// buffer source on iOS.
+function BeepWithScriptProcessor(context, label)
+{
+    var node = context.createScriptProcessor(2048, 0, 2);
+    var phase = 0;
+    var frames_remaining = Math.floor(context.sampleRate * 0.5);
+    var callback_count = 0;
+
+    node.onaudioprocess = function(e) {
+        ++callback_count;
+        var left = e.outputBuffer.getChannelData(0);
+        var right = e.outputBuffer.getChannelData(1);
+        for(var i = 0; i < left.length; ++i)
+        {
+            var value = 0;
+            if(frames_remaining > 0)
+            {
+                value = 0.5 * Math.sin(phase);
+                phase += 2 * Math.PI * 440 / context.sampleRate;
+                --frames_remaining;
+            }
+            left[i] = value;
+            right[i] = value;
+        }
+    };
+
+    node.connect(context.destination);
+    ReportContext(label + ' at start', context);
+
+    setTimeout(function() {
+        node.disconnect();
+        node.onaudioprocess = null;
+        Log('  ' + label + ': onaudioprocess fired ' + callback_count + ' times',
+            callback_count > 0 ? 'ok' : 'bad');
+        ReportContext(label + ' 1s later', context);
+    }, 1000);
+}
+
+function ResumeThen(context, label, action)
+{
+    Log(label + ': resuming, state was ' + context.state);
+    context.resume().then(
+        function()
+        {
+            Log('  resume() resolved, state=' + context.state,
+                context.state === 'running' ? 'ok' : 'bad');
+            action();
+        },
+        function(e)
+        {
+            Log('  resume() REJECTED: ' + e, 'bad');
+        }
+    );
+}
+
+// ----------------------------------------------------------------- tests
+
+var gesture_contexts = [];
+
+function MakeGestureContext(options)
+{
+    var context = new AudioContextClass(options);
+    gesture_contexts.push(context);
+    return context;
+}
+
+var tests = [
+{
+    title: 'HTML &lt;audio&gt; element beep',
+    note: 'Reference case. This is the mechanism Freesound uses, so it is expected to work. If this is silent too, the problem is not specific to Web Audio.',
+    run: function()
+    {
+        var element = new Audio(BEEP_WAV);
+        element.volume = 1;
+        element.play().then(
+            function() { Log('  <audio>.play() resolved', 'ok'); },
+            function(e) { Log('  <audio>.play() REJECTED: ' + e, 'bad'); }
+        );
+    }
+},
+{
+    title: 'Page-load context, oscillator',
+    note: 'The closest match to the game: context built at load time outside a gesture, resumed on this tap.',
+    run: function()
+    {
+        ResumeThen(load_context, 'page-load oscillator', function() {
+            BeepWithOscillator(load_context, 'page-load oscillator');
+        });
+    }
+},
+{
+    title: 'Page-load context, buffer source',
+    note: 'Same context, decoded-sample playback rather than a synthesised tone.',
+    run: function()
+    {
+        ResumeThen(load_context, 'page-load buffer', function() {
+            BeepWithBufferSource(load_context, 'page-load buffer');
+        });
+    }
+},
+{
+    title: 'Page-load context, ScriptProcessorNode',
+    note: 'The node type the game actually uses. Reports whether its audio callback is being called at all.',
+    run: function()
+    {
+        ResumeThen(load_context, 'page-load scriptprocessor', function() {
+            BeepWithScriptProcessor(load_context, 'page-load scriptprocessor');
+        });
+    }
+},
+{
+    title: 'Fresh context created in this tap, native rate',
+    note: 'Tests whether creating the context inside a user gesture is what matters.',
+    run: function()
+    {
+        var context = MakeGestureContext();
+        Log('  fresh context rate=' + context.sampleRate + ' state=' + context.state);
+        ResumeThen(context, 'fresh native', function() {
+            BeepWithOscillator(context, 'fresh native');
+        });
+    }
+},
+{
+    title: 'Fresh context created in this tap, forced 48000 Hz',
+    note: 'Same as above but asking for 48 kHz. If this is silent and the one above is audible, the requested sample rate is the problem.',
+    run: function()
+    {
+        var context;
+        try
+        {
+            context = MakeGestureContext({sampleRate: 48000});
+        }
+        catch(e)
+        {
+            Log('  constructing 48 kHz context threw: ' + e, 'bad');
+            return;
+        }
+        Log('  fresh 48k context rate=' + context.sampleRate + ' state=' + context.state,
+            context.sampleRate === 48000 ? 'ok' : 'bad');
+        ResumeThen(context, 'fresh 48k', function() {
+            BeepWithOscillator(context, 'fresh 48k');
+        });
+    }
+},
+{
+    title: 'Set audioSession.type = "playback", then beep',
+    note: 'Moves the page out of the ambient audio session, which is the session the Ring/Silent switch mutes. Needs iOS 16.4 or later.',
+    run: function()
+    {
+        if(!navigator.audioSession)
+        {
+            Log('  navigator.audioSession not supported on this browser', 'bad');
+            return;
+        }
+        try
+        {
+            navigator.audioSession.type = 'playback';
+            Log('  audioSession.type is now ' + navigator.audioSession.type, 'ok');
+        }
+        catch(e)
+        {
+            Log('  setting audioSession.type threw: ' + e, 'bad');
+            return;
+        }
+        ResumeThen(load_context, 'playback-session beep', function() {
+            BeepWithOscillator(load_context, 'playback-session beep');
+        });
+    }
+},
+{
+    title: 'Silent &lt;audio&gt; loop unlock, then beep',
+    note: 'Keeps a silent media element playing so the page holds a media audio session, then beeps through Web Audio. The workaround that does not need iOS 16.4.',
+    run: function()
+    {
+        var element = new Audio(SILENT_WAV);
+        element.loop = true;
+        element.volume = 1;
+        element.play().then(
+            function()
+            {
+                Log('  silent <audio> loop playing', 'ok');
+                extra_state = 'silent <audio> unlock: active';
+                ResumeThen(load_context, 'silent-unlock beep', function() {
+                    BeepWithOscillator(load_context, 'silent-unlock beep');
+                });
+            },
+            function(e)
+            {
+                Log('  silent <audio>.play() REJECTED: ' + e, 'bad');
+            }
+        );
+    }
+},
+{
+    title: 'Route Web Audio through a media element source',
+    note: 'Plays the beep as a media element but pulls it through the Web Audio graph. Distinguishes "the graph is silent" from "the session is silent".',
+    run: function()
+    {
+        var element = new Audio(BEEP_WAV);
+        element.volume = 1;
+        var source;
+        try
+        {
+            source = load_context.createMediaElementSource(element);
+        }
+        catch(e)
+        {
+            Log('  createMediaElementSource threw: ' + e, 'bad');
+            return;
+        }
+        source.connect(load_context.destination);
+        ResumeThen(load_context, 'media-element-source beep', function() {
+            element.play().then(
+                function() { Log('  media element source playing', 'ok'); },
+                function(e) { Log('  play() REJECTED: ' + e, 'bad'); }
+            );
+            ReportContext('media-element-source', load_context);
+        });
+    }
+},
+{
+    title: 'Continuous tone on/off (page-load context)',
+    note: 'Leaves a tone running so you can flip the Ring/Silent switch and press a volume button. Watch whether the volume HUD says Ringer or Media.',
+    run: function()
+    {
+        if(this.oscillator)
+        {
+            this.oscillator.stop();
+            this.oscillator = null;
+            Log('  continuous tone stopped');
+            extra_state = '';
+            return;
+        }
+        var self = this;
+        ResumeThen(load_context, 'continuous tone', function() {
+            var oscillator = load_context.createOscillator();
+            var gain = load_context.createGain();
+            oscillator.frequency.value = 440;
+            gain.gain.value = 0.3;
+            oscillator.connect(gain);
+            gain.connect(load_context.destination);
+            oscillator.start();
+            self.oscillator = oscillator;
+            extra_state = 'continuous tone: playing';
+            Log('  continuous tone started -- tap again to stop', 'ok');
+        });
+    }
+},
+{
+    title: 'Stop and close everything',
+    note: 'Closes the contexts created by the fresh-context tests and stops the continuous tone.',
+    run: function()
+    {
+        for(var i = 0; i < gesture_contexts.length; ++i)
+        {
+            gesture_contexts[i].close();
+        }
+        gesture_contexts = [];
+        var continuous = tests[9];
+        if(continuous.oscillator)
+        {
+            continuous.oscillator.stop();
+            continuous.oscillator = null;
+        }
+        extra_state = '';
+        Log('  all extra contexts closed');
+    }
+}
+];
+
+var button_container = document.getElementById('buttons');
+tests.forEach(function(test, index) {
+    var button = document.createElement('button');
+    button.innerHTML = '<span class="num">' + (index + 1) + '.</span> ' + test.title +
+                       '<span class="note">' + test.note + '</span>';
+    button.addEventListener('click', function() {
+        Log('=== TEST ' + (index + 1) + ': ' + button.querySelector('.num').nextSibling.textContent.trim() + ' ===');
+        try
+        {
+            test.run();
+        }
+        catch(e)
+        {
+            Log('  threw: ' + e, 'bad');
+        }
+    });
+    button_container.appendChild(button);
+});
+
+})();
+</script>
+
+</body>
+</html>
