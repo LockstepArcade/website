@@ -1,5 +1,5 @@
 {
-    "version": "1.3.0",
+    "version": "1.4.0",
     "discord_url": "https://discord.gg/byJzJdQCVd",
     "web3forms_key": "2f3c7147-e4fb-4008-babd-8de206ece816",
     "current_year": "2026",
@@ -12,8 +12,20 @@
 
     "releases": [
         {
-            "version": "1.3.0",
+            "version": "1.4.0",
             "current": true,
+            "changes": [
+                "significant improvements to networking code (so this should work better on bad quality network connections, in particular)",
+                "fixed issues with browser effects on long press getting in the way of user controls, on some phones",
+                "fixed sound problems on some phones",
+                "fixed some more issues with confusion about team assignments when non default slot assignments are chosen",
+                "fixed confusing user experience with persistent authorisation failure with stored guest credentials that are no longer recognised by the server",
+                "the map can now be changed after a game room has been created",
+                "added another Spirits map, 'Three Hops'"
+            ]
+        },
+        {
+            "version": "1.3.0",
             "changes": [
                 "fixed issues with incorrect exit assignment in the Serpents game when non default slots are chosen",
                 "fixed incorrect team assignment info lobby, in desktop UI, for team games",
