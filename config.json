@@ -1,5 +1,5 @@
 {
-    "version": "1.4.0",
+    "version": "1.5.0",
     "discord_url": "https://discord.gg/byJzJdQCVd",
     "web3forms_key": "2f3c7147-e4fb-4008-babd-8de206ece816",
     "current_year": "2026",
@@ -12,8 +12,23 @@
 
     "releases": [
         {
-            "version": "1.4.0",
+            "version": "1.5.0",
             "current": true,
+            "changes": [
+                "fixed some (hard to repeat) issues with potential desynchs in the Pilots game",
+                "fixed issues with not being able to download certain recordings",
+                "fixed issues with getting stuck in some situations when turning in towards walls, in Serpents and Pilots",
+                "fixed problem with start positions facing towards the wall for some players on some maps",
+                "serpents with no tail no longer glance off other serpent tails when hitting at a low angle",
+                "refined the Serpents speed powerups mechanism: these now increase your pulling power, with longer tails being harder to pull",
+                "changed wall collision mechanism for Serpents so you can turn into a wall at a low angle and slide along it without collision penalties",
+                "improvements to Spirits control, making it easier to stop on ground areas after movement bursts",
+                "removed some spurious edges on the Vector Berth map",
+                "added a new map, for Serpents and Pilots, 'The Vortex', featuring edges that can only be crossed in one direction"
+            ]
+        },
+        {
+            "version": "1.4.0",
             "changes": [
                 "significant improvements to networking code (so this should work better on bad quality network connections, in particular)",
                 "fixed issues with browser effects on long press getting in the way of user controls, on some phones",
