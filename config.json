@@ -7,7 +7,8 @@
     "redirects": {
         "client": "Client",
         "testclient": "TestClient",
-        "gettingstarted": ""
+        "gettingstarted": "",
+        "setup": "signup"
     },
 
     "releases": [
