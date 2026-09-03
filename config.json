@@ -1,5 +1,5 @@
 {
-    "version": "1.5.0",
+    "version": "1.6.0",
     "discord_url": "https://discord.gg/byJzJdQCVd",
     "web3forms_key": "2f3c7147-e4fb-4008-babd-8de206ece816",
     "current_year": "2026",
@@ -13,8 +13,22 @@
 
     "releases": [
         {
-            "version": "1.5.0",
+            "version": "1.6.0",
             "current": true,
+            "changes": [
+                "added lobby mechanism for single player and multiplayer (online-coop) 'campaign rooms' ",
+                "(work in progress) single player and two player campaigns added for Spirits (and new maps, for these campaigns)",
+                "added support for invitation only game rooms",
+                "it is no longer permitted for the same player to connect twice to the same game room, using different clients (unless explicitly allowed by an admin)",
+                "map authoring: named positions can be given a player count condition, so that one map can serve both single player and multiplayer games where the contents need to differ",
+                "corrected 'Return to Lobby' button labelling to match the actual context that is being returned to",
+                "the in game UI now distinguishes players who abandon a game but stay connected from players who actually disconnected",
+                "fixed an issue with looping sounds continuing to play after the game has ended",
+                "fixed an issue where mine explosions in Spirits would kill other players that are quite far away"
+            ]
+        },
+        {
+            "version": "1.5.0",
             "changes": [
                 "fixed some (hard to repeat) issues with potential desynchs in the Pilots game",
                 "fixed issues with not being able to download certain recordings",
