@@ -13,8 +13,14 @@
 
     "releases": [
         {
-            "version": "1.6.0",
+            "version": "1.6.1",
             "current": true,
+            "changes": [
+                "fix for 'Left game: game not running' fatal error from server after game end, in some situations"
+            ]
+        },
+        {
+            "version": "1.6.0",
             "changes": [
                 "added lobby mechanism for single player and multiplayer (online-coop) 'campaign rooms' ",
                 "(work in progress) single player and two player campaigns added for Spirits (and new maps, for these campaigns)",
