@@ -140,7 +140,6 @@ def build_site():
     config = load_config()
 
     # Extract config values
-    version = config["version"]
     discord_url = config["discord_url"]
     web3forms_key = config["web3forms_key"]
     current_year = config["current_year"]
@@ -167,7 +166,6 @@ def build_site():
 
     # Common variables for all pages
     common_vars = {
-        "version": version,
         "discord_url": discord_url,
         "web3forms_key": web3forms_key,
         "current_year": current_year,
