@@ -1,5 +1,5 @@
 {
-    "version": "1.6.0",
+    "version": "1.6.2",
     "discord_url": "https://discord.gg/byJzJdQCVd",
     "web3forms_key": "2f3c7147-e4fb-4008-babd-8de206ece816",
     "current_year": "2026",
@@ -13,8 +13,16 @@
 
     "releases": [
         {
-            "version": "1.6.1",
+            "version": "1.6.2",
             "current": true,
+          "changes": [
+            "UI tweaks to make Neon Swarm order assignment more intuitive (start with no order selected, switch to crosshair when player is expected to target swarmers),",
+            "switch to pointer with red cross when no more orders are available for currently selected order",
+            "fixed an issue with the mouse potentially getting stuck on custom Neon Swarm mouse cursors after game end"
+          ]
+        },
+        {
+            "version": "1.6.1",
             "changes": [
                 "fix for 'Left game: game not running' fatal error from server after game end, in some situations"
             ]
