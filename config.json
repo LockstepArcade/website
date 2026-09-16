@@ -12,8 +12,21 @@
 
     "releases": [
         {
-            "version": "1.6.3",
+            "version": "1.7.0",
             "current": true,
+            "changes": [
+                "added support for playing campaigns on mobile phones",
+                "added support for immediate game retry for single player games (button + backspace hotkey)",
+                "removed unnecessary parts of the campaign room UI when you are playing a single player campaign",
+                "guest accounts can now persist across server restarts",
+                "restrict highscore table entries to one per player (or unique combination of players)",
+                "show time left in total seconds in Spirits status bar, to match how this is shown for high scores",
+                "improved user experience when disconnected due to client going idle (e.g. left backgrounded in browser tab)",
+                "map/tutorial instructions can include images"
+            ]
+        },
+        {
+            "version": "1.6.3",
             "changes": [
                 "fixed issues with some controls (copy/paste, text boxes) not working in full screen mode",
                 "fixed issues with full screen toggle sometimes acting erratically",
