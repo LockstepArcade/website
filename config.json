@@ -2,18 +2,23 @@
     "discord_url": "https://discord.gg/byJzJdQCVd",
     "web3forms_key": "2f3c7147-e4fb-4008-babd-8de206ece816",
     "current_year": "2026",
-
     "redirects": {
         "client": "Client",
         "testclient": "TestClient",
         "gettingstarted": "",
         "setup": "signup"
     },
-
     "releases": [
         {
-            "version": "1.7.0",
+            "version": "1.7.1",
             "current": true,
+            "changes": [
+                "some simpler maps added, for the Spirits tutorial",
+                "new Spirits campaign maps added and the Spirits campaign no longer repeats maps from the tutorial"
+            ]
+        },
+        {
+            "version": "1.7.0",
             "changes": [
                 "added support for playing campaigns on mobile phones",
                 "added support for immediate game retry for single player games (button + backspace hotkey)",
@@ -191,7 +196,7 @@
                 "reduced Serpents starting speed (which makes them easier to control)",
                 "added a serpents speedup pickup",
                 "added a UI page after game exit showing highscores or rating changes"
-          ]
+            ]
         },
         {
             "version": "0.1.8",
