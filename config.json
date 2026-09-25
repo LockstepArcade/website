@@ -10,8 +10,14 @@
     },
     "releases": [
         {
-            "version": "1.8.0",
+            "version": "1.8.1",
             "current": true,
+            "changes": [
+                "the end of game overlay for single player and co-op games now says why a failed level was failed, such as not reaching the exit, instead of just giving a score"
+            ]
+        },
+        {
+            "version": "1.8.0",
             "changes": [
                 "AI controlled enemies added to Serpents",
                 "single player Serpents now has an 'exit' separate from the collector where you bank coloured stuff from your tail",
