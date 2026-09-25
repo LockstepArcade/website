@@ -10,8 +10,27 @@
     },
     "releases": [
         {
-            "version": "1.7.1",
+            "version": "1.8.0",
             "current": true,
+            "changes": [
+                "AI controlled enemies added to Serpents",
+                "single player Serpents now has an 'exit' separate from the collector where you bank coloured stuff from your tail",
+                "when playing single player Serpents you now need to reach a target score (banked amount), and then exit, to 'complete' the level",
+                "Serpents now has a tutorial, also offered on mobile",
+                "Serpents now has a single player campaign",
+                "Neon swarm now has a single player campaign",
+                "single player games are now played in campaigns, and a game room needs at least two players to start a game",
+                "host no longer has to explicitly click in as ready, themselves, before starting a multiplayer game",
+                "the UI now indicates when the map you are playing has been completed",
+                "Neon Swarm maps can now require a number of swarmers to exit, to 'complete' the level",
+                "the end of game overlay for single player and co-op games now says whether the level was completed or failed, instead of 'Game Over'",
+                "the in-game Retry button now shows its Backspace hotkey, when there is a keyboard",
+                "fixed incorrect thumbnails for some maps",
+                "game rooms and campaign rooms now show what it takes to complete the map, such as the target score or number of swarmers required to exit"
+            ]
+        },
+        {
+            "version": "1.7.1",
             "changes": [
                 "some simpler maps added, for the Spirits tutorial",
                 "new Spirits campaign maps added and the Spirits campaign no longer repeats maps from the tutorial"
