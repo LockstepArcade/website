@@ -10,8 +10,20 @@
     },
     "releases": [
         {
-            "version": "1.8.1",
+            "version": "1.8.2",
             "current": true,
+            "changes": [
+                "added textures to the polygons for vector worlds, in Pilots, Serpents, Spirits",
+                "raster worlds (The Empty Berth) now gets a parallax background",
+                "added an end countdown to indicate when the timer is about to run out, in Serpents (so you know to go to an exit)",
+                "time display in Serpents also indicates when time is running out, and so does the time display in Neon Swarm, Pilots and Spirits",
+                "fixed an issue with game UI sometimes being draw over the game results display",
+                "more compact info view in Serpents status bar",
+                "a tick sounds on each of the last 10 seconds of the timer in Neon Swarm, Pilots and Spirits"
+            ]
+        },
+        {
+            "version": "1.8.1",
             "changes": [
                 "the end of game overlay for single player and co-op games now says why a failed level was failed, such as not reaching the exit, instead of just giving a score"
             ]
