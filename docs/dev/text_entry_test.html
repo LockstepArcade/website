@@ -18,7 +18,7 @@ var OPTS = (function()
         fs: 'half',      // font size: half (as the client, half the field height); 16 (at least 16px)
         place: 'every',  // every (as the client): write position every frame; changed: only when it moves
         stopkeys: '1',   // 1 (as the client): stop key and mouse events propagating from the inputs
-        scroll: '0',     // 1: page taller than the screen, scrolled by dragging the canvas
+        scroll: '1',     // 1 (as the client's phone pages): taller than the screen, scrolled by dragging the canvas; 0: fits
         vcenter: '1',    // 1: content centred vertically when it fits, so a height change moves it
         nameac: 'off'    // autocomplete for the name field: off, nickname, username
     };
@@ -123,7 +123,7 @@ document.write('<meta name="viewport" content="width=device-width, initial-scale
     'use strict';
 
     // Shown in the status line, so that a stale cached copy is evident. Bump with each change.
-    var PAGE_VERSION = 'v2';
+    var PAGE_VERSION = 'v4';
 
     var container = document.getElementById('canvas-container');
     var canvas = document.getElementById('canvas');
@@ -149,7 +149,7 @@ document.write('<meta name="viewport" content="width=device-width, initial-scale
 
     // What a failing tap is read from, for a short log that can be read on the phone itself.
     var KEY_PATTERNS = [' focus ', ' blur ', 'activeElement', 'hidden', ' shown', 'moved while focused',
-        'visualViewport resize', 'canvas buffer', 'tap on ', ' pointerdown', ' touchstart', ' click',
+        'visualViewport resize', 'document scroll', 'canvas buffer', 'tap on ', ' pointerdown', ' touchstart', ' click',
         'page ', 'popstate', 'autofilled'];
     var log_key_only = false;
     var log_oldest_first = false;
@@ -180,7 +180,9 @@ document.write('<meta name="viewport" content="width=device-width, initial-scale
     function ViewportSummary()
     {
         var vp = window.visualViewport;
-        var s = 'inner=' + window.innerWidth + 'x' + window.innerHeight;
+        var s = 'inner=' + window.innerWidth + 'x' + window.innerHeight
+            + ' box=' + container.clientWidth + 'x' + container.clientHeight
+            + ' docscroll=' + Math.round(window.scrollX) + ',' + Math.round(window.scrollY);
         if(vp)
         {
             s += ' visual=' + Math.round(vp.width) + 'x' + Math.round(vp.height)
@@ -246,7 +248,7 @@ document.write('<meta name="viewport" content="width=device-width, initial-scale
         ['fs', ['half', '16']],
         ['place', ['every', 'changed']],
         ['stopkeys', ['1', '0']],
-        ['scroll', ['0', '1']],
+        ['scroll', ['1', '0']],
         ['vcenter', ['1', '0']],
         ['nameac', ['off', 'nickname', 'username']]
     ];
@@ -320,7 +322,10 @@ document.write('<meta name="viewport" content="width=device-width, initial-scale
         {
             input.addEventListener(evt, function(e)
             {
-                Log(name + ' ' + evt + ' related=' + Describe(e.relatedTarget) + ' ' + ViewportSummary());
+                var r = input.getBoundingClientRect();
+                Log(name + ' ' + evt + ' related=' + Describe(e.relatedTarget) + ' at ' + Math.round(r.left)
+                    + ',' + Math.round(r.top) + ' ' + Math.round(r.width) + 'x' + Math.round(r.height)
+                    + ' ' + ViewportSummary());
             });
         });
         ['pointerdown', 'pointerup', 'pointercancel', 'touchstart', 'touchend', 'touchcancel',
@@ -446,6 +451,7 @@ document.write('<meta name="viewport" content="width=device-width, initial-scale
         window.visualViewport.addEventListener('scroll', function() { Log('visualViewport scroll ' + ViewportSummary()); });
     }
     window.addEventListener('resize', function() { Log('window resize ' + ViewportSummary()); });
+    window.addEventListener('scroll', function() { Log('document scroll ' + ViewportSummary()); });
     document.addEventListener('visibilitychange', function() { Log('visibility ' + document.visibilityState); });
 
     // ---------------------------------------------------------------------------------------------
