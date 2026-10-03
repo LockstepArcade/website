@@ -103,6 +103,8 @@ document.write('<meta name="viewport" content="width=device-width, initial-scale
         <button id="log-copy">Copy log</button>
         <button id="log-clear">Clear</button>
         <button id="log-close">Close</button>
+        <button id="log-key">Key only: off</button>
+        <button id="log-order">Newest first</button>
     </div>
     <div id="log-lines"></div>
 </div>
@@ -142,9 +144,25 @@ document.write('<meta name="viewport" content="width=device-width, initial-scale
             RenderLog();
     }
 
+    // What a failing tap is read from, for a short log that can be read on the phone itself.
+    var KEY_PATTERNS = [' focus ', ' blur ', 'activeElement', 'hidden', ' shown', 'moved while focused',
+        'visualViewport resize', 'canvas buffer', 'tap on ', ' pointerdown', ' touchstart', ' click',
+        'page ', 'popstate', 'autofilled'];
+    var log_key_only = false;
+    var log_oldest_first = false;
+
+    function IsKeyLine(line)
+    {
+        return KEY_PATTERNS.some(function(p) { return line.indexOf(p) >= 0; });
+    }
+
     function RenderLog()
     {
-        log_lines.textContent = log_entries.slice(-300).reverse().join('\n');
+        var lines = log_key_only ? log_entries.filter(IsKeyLine) : log_entries;
+        lines = lines.slice(-300);
+        if(!log_oldest_first)
+            lines = lines.reverse();
+        log_lines.textContent = lines.join('\n');
     }
 
     function Describe(el)
@@ -174,6 +192,18 @@ document.write('<meta name="viewport" content="width=device-width, initial-scale
 
     document.getElementById('log-close').onclick = function() { log_panel.style.display = 'none'; };
     document.getElementById('log-clear').onclick = function() { log_entries = []; RenderLog(); };
+    document.getElementById('log-key').onclick = function()
+    {
+        log_key_only = !log_key_only;
+        this.textContent = 'Key only: ' + (log_key_only ? 'on' : 'off');
+        RenderLog();
+    };
+    document.getElementById('log-order').onclick = function()
+    {
+        log_oldest_first = !log_oldest_first;
+        this.textContent = log_oldest_first ? 'Oldest first' : 'Newest first';
+        RenderLog();
+    };
     document.getElementById('log-copy').onclick = function()
     {
         var text = 'Options: ' + location.search + '\nUser agent: ' + navigator.userAgent + '\n'
@@ -383,6 +413,18 @@ document.write('<meta name="viewport" content="width=device-width, initial-scale
         if(a === password || a === name_input)
             Log(Describe(a) + ' selectionchange sel=' + a.selectionStart + '-' + a.selectionEnd);
     });
+
+    // Where each tap lands, and where the password field is then, which tells a tap that missed the
+    // field from focus lost afterwards.
+    document.addEventListener('pointerdown', function(e)
+    {
+        if(log_panel.contains(e.target) || settings_panel.contains(e.target))
+            return;
+        var r = password.getBoundingClientRect();
+        Log('tap on ' + Describe(e.target) + ' at ' + Math.round(e.clientX) + ',' + Math.round(e.clientY)
+            + ' password field at ' + Math.round(r.left) + ',' + Math.round(r.top) + ' '
+            + Math.round(r.width) + 'x' + Math.round(r.height) + ' ' + ViewportSummary());
+    }, true);
 
     // As SDL's: key handlers on the window, which prevent the default of navigation keys.
     window.addEventListener('keydown', function(e)
