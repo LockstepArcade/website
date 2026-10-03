@@ -11,7 +11,7 @@ var OPTS = (function()
 {
     var defaults = {
         iw: '',          // viewport interactive-widget: '', resizes-visual, resizes-content, overlays-content
-        size: 'visual',  // canvas buffer: visual (as the client), layout, visualbox (container follows visual viewport)
+        size: 'visual',  // canvas buffer: visual (as the client), layout, box (the container's CSS size), visualbox (container follows visual viewport)
         us: '0',         // 1: user-select:text on the inputs, overriding the body's none
         freeze: '0',     // 1: keep the page's layout height while an input has focus
         hide: 'clip',    // clip (as the client): display:none when outside the clip rect; never
@@ -122,6 +122,9 @@ document.write('<meta name="viewport" content="width=device-width, initial-scale
 {
     'use strict';
 
+    // Shown in the status line, so that a stale cached copy is evident. Bump with each change.
+    var PAGE_VERSION = 'v2';
+
     var container = document.getElementById('canvas-container');
     var canvas = document.getElementById('canvas');
     var ctx = canvas.getContext('2d');
@@ -228,7 +231,7 @@ document.write('<meta name="viewport" content="width=device-width, initial-scale
         }
     };
 
-    Log('start ' + location.search + ' ' + navigator.userAgent);
+    Log('start ' + PAGE_VERSION + ' ' + location.search + ' ' + navigator.userAgent);
     Log('viewport ' + ViewportSummary());
 
     // ---------------------------------------------------------------------------------------------
@@ -236,7 +239,7 @@ document.write('<meta name="viewport" content="width=device-width, initial-scale
 
     var SETTINGS = [
         ['iw', ['', 'resizes-visual', 'resizes-content', 'overlays-content']],
-        ['size', ['visual', 'layout', 'visualbox']],
+        ['size', ['visual', 'layout', 'box', 'visualbox']],
         ['us', ['0', '1']],
         ['freeze', ['0', '1']],
         ['hide', ['clip', 'never']],
@@ -484,7 +487,12 @@ document.write('<meta name="viewport" content="width=device-width, initial-scale
     {
         var vp = window.visualViewport;
         var w, h;
-        if(OPTS.size === 'layout' || !vp)
+        if(OPTS.size === 'box')
+        {
+            w = container.clientWidth;
+            h = container.clientHeight;
+        }
+        else if(OPTS.size === 'layout' || !vp)
         {
             w = window.innerWidth;
             h = window.innerHeight;
@@ -729,7 +737,7 @@ document.write('<meta name="viewport" content="width=device-width, initial-scale
 
         // Status line at the bottom.
         var a = document.activeElement;
-        var status = 'active=' + Describe(a);
+        var status = PAGE_VERSION + ' active=' + Describe(a);
         if(a === password || a === name_input)
             status += ' len=' + a.value.length + ' sel=' + a.selectionStart + '-' + a.selectionEnd;
         ctx.fillStyle = 'rgba(0,0,0,0.6)';
