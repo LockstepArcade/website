@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The satisfaction of people getting stuck into and completing hard levels - Lockstep Arcade devlog</title>
+    <meta name="description" content="I left some really hard levels in, at the end of the Spirits campaign, because I didn&#x27;t have enough levels to fill this. It was really a buzz to see some people actually try hard and complete these levels.">
+    <meta property="og:title" content="The satisfaction of people getting stuck into and completing hard levels">
+    <meta property="og:description" content="I left some really hard levels in, at the end of the Spirits campaign, because I didn&#x27;t have enough levels to fill this. It was really a buzz to see some people actually try hard and complete these levels.">
+    <meta property="og:url" content="https://locksteparcade.com/devlog/hard-levels/">
+    <meta name="twitter:title" content="The satisfaction of people getting stuck into and completing hard levels">
+    <meta name="twitter:description" content="I left some really hard levels in, at the end of the Spirits campaign, because I didn&#x27;t have enough levels to fill this. It was really a buzz to see some people actually try hard and complete these levels.">
+    <meta property="og:image" content="https://locksteparcade.com/assets/banner.jpg">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://locksteparcade.com/assets/banner.jpg">
+
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="alternate" type="application/rss+xml" title="Lockstep Arcade devlog" href="../feed.xml">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">Lockstep Arcade</div>
+            <div class="nav-links">
+                <a href="../../index.html">Home</a>
+                <a href="../../challenges/">Testing Challenges</a>
+                <a href="../../signup/">Signup</a>
+                <a href="../../spirits/">Spirits</a>
+                <a href="../../serpents/">Serpents</a>
+                <a href="../../pilots/">Pilots</a>
+                <a href="../../neonswarm/">Neon Swarm</a>
+                <a href="../../devlog/">Devlog</a>
+                <a href="../../changelog/">Changelog</a>
+            </div>
+        </div>
+    </nav>
+
+
+    <article class="post content-wrapper">
+        <h1>The satisfaction of people getting stuck into and completing hard levels</h1>
+        <p class="post-date">27 September 2026</p>
+        <div class="prose">
+<p>So campaigns are a pretty new feature, it is difficult to make enough different levels to fill up a campaign properly, and I have included some levels at the end of the Spirits campaign that are really too difficult.</p>
+<p>The levels in question are a couple of 'beam dance' levels, where crawlers move around an outer wall shooting deadly beams you need to avoid into the space you move through. The beams are obstructed by features inside the space and you need to take advantage of this, and the pattern that results as the crawlers move, to complete the level.</p>
+<p>The challenge is then to activate a bunch of switches in sequence, each one opening up access to another switch, with the last switch eventually opening up access to the exit. (This is unashamedly derivative of an N++ level I enjoyed playing a lot with some friends!) Actually, these levels were originally designed to be played by multiple players working together, with the players coordinating to each activate different switches, but they could theoretically be completed by just one player, so I put them in as super challenging 'boss' levels to come up against at the end of the campaign.</p>
+<p>I had tried the hardest level in 2 player co-op with my daughter. We found it challenging, had not yet managed to complete it, and were intending to come back to it.</p>
+<p>I have had some people testing the Spirits campaign, then, through the Play2Review site, where they post gameplay recordings of their sessions. Actually, I hadn't looked at the review there yet, and had instead noticed a whole load of new games listed in the played games list, clicked through these and saw a player basically sieging these hard levels and eventually completing them. Another player also completed all the levels later on.</p>
+<p>It is a really nice feeling, as a game designer, to see players succeed at a really hard level, I think. :)</p>
+<p>Here is a video of a playthrough of the easier of the two levels:</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/aopmlFH9y8E?si=n5zxxazyXdn6yXnv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<p>And then here is a playthrough of the hardest level:</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ThbxYUziGZM?si=pr-di3nW58xcotfS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<p>Other players obviously found the hardest level much too hard, and there is not enough of a gradual increase in difficulty through the Spirits campaign, so these two levels really represent a far from ideal difficulty cliff, but it is such a great feeling to see these levels completed that I am going to struggle not to include more hard levels like this in the future, I think. :)</p>
+<p>I guess the solution will be 1) to add more levels that gradually ramp towards this difficulty (obviously), and 2) to communicate that these levels <em>are</em> really difficult so players are not surprised by this, and can choose whether or not to accept the challenge. (I am thinking for example, that there could be a difficulty rating as a number of stars, going from 1 to 5 stars, and then for really hard levels this could change from 5 stars to 5 skulls, or something like that.)</p>
+        </div>
+        <div class="post-end">
+            <a href="../../Client" class="btn btn-primary">Play in your browser</a>
+            <p><a href="../">All devlog posts</a></p>
+        </div>
+    </article>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" class="lightbox-img" src="" alt="Enlarged screenshot">
+    </div>
+
+    <script>
+    function openLightbox(src) {
+        document.getElementById('lightbox-img').src = src;
+        document.getElementById('lightbox').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        document.getElementById('lightbox').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeLightbox();
+    });
+
+    document.querySelectorAll('.screenshot img').forEach(function(img) {
+        img.addEventListener('click', function() {
+            openLightbox(this.src);
+        });
+    });
+    </script>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Lockstep Arcade</h4>
+                    <p>Idiosyncratic multiplayer games built around rock solid netcode</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Games</h4>
+                    <ul>
+                        <li><a href="../../spirits/">Spirits</a></li>
+                        <li><a href="../../serpents/">Serpents</a></li>
+                        <li><a href="../../pilots/">Pilots</a></li>
+                        <li><a href="../../neonswarm/">Neon Swarm</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Links</h4>
+                    <ul>
+                        <li><a href="../../devlog/">Devlog</a></li>
+                        <li><a href="../../changelog/">Changelog</a></li>
+                        <li><a href="../../signup/">Signup</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+
+</body>
+</html>

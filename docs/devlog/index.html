@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devlog - Lockstep Arcade</title>
+    <meta name="description" content="News from the development of Lockstep Arcade">
+    <meta property="og:title" content="Devlog - Lockstep Arcade">
+    <meta property="og:description" content="News from the development of Lockstep Arcade">
+    <meta property="og:url" content="https://locksteparcade.com/devlog/">
+    <meta name="twitter:title" content="Devlog - Lockstep Arcade">
+    <meta name="twitter:description" content="News from the development of Lockstep Arcade">
+    <meta property="og:image" content="https://locksteparcade.com/assets/banner.jpg">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://locksteparcade.com/assets/banner.jpg">
+
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="alternate" type="application/rss+xml" title="Lockstep Arcade devlog" href="feed.xml">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">Lockstep Arcade</div>
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="../challenges/">Testing Challenges</a>
+                <a href="../signup/">Signup</a>
+                <a href="../spirits/">Spirits</a>
+                <a href="../serpents/">Serpents</a>
+                <a href="../pilots/">Pilots</a>
+                <a href="../neonswarm/">Neon Swarm</a>
+                <a href="../devlog/">Devlog</a>
+                <a href="../changelog/">Changelog</a>
+            </div>
+        </div>
+    </nav>
+
+
+    <section class="section">
+        <div class="container">
+            <h2>Devlog</h2>
+            <div class="content-box">
+                <h3><a href="hard-levels/">The satisfaction of people getting stuck into and completing hard levels</a></h3>
+                <p class="post-date">27 September 2026</p>
+                <p>I left some really hard levels in, at the end of the Spirits campaign, because I didn&#x27;t have enough levels to fill this. It was really a buzz to see some people actually try hard and complete these levels.</p>
+            </div>
+            <div class="content-box">
+                <h3><a href="campaign-mode/">Placing stuff conditionally, campaign mode, fast retry</a></h3>
+                <p class="post-date">4 September 2026</p>
+                <p>A campaign mode for Spirits, conditional placement of stuff, and a faster way to retry after failing a level.</p>
+            </div>
+            <p class="section-intro">Follow new posts in a feed reader with the <a href="feed.xml">RSS feed</a></p>
+        </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" class="lightbox-img" src="" alt="Enlarged screenshot">
+    </div>
+
+    <script>
+    function openLightbox(src) {
+        document.getElementById('lightbox-img').src = src;
+        document.getElementById('lightbox').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        document.getElementById('lightbox').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeLightbox();
+    });
+
+    document.querySelectorAll('.screenshot img').forEach(function(img) {
+        img.addEventListener('click', function() {
+            openLightbox(this.src);
+        });
+    });
+    </script>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Lockstep Arcade</h4>
+                    <p>Idiosyncratic multiplayer games built around rock solid netcode</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Games</h4>
+                    <ul>
+                        <li><a href="../spirits/">Spirits</a></li>
+                        <li><a href="../serpents/">Serpents</a></li>
+                        <li><a href="../pilots/">Pilots</a></li>
+                        <li><a href="../neonswarm/">Neon Swarm</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Links</h4>
+                    <ul>
+                        <li><a href="../devlog/">Devlog</a></li>
+                        <li><a href="../changelog/">Changelog</a></li>
+                        <li><a href="../signup/">Signup</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+
+</body>
+</html>

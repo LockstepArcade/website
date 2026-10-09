@@ -10,6 +10,14 @@ challenges/index.html
 changelog/index.html
 client/index.html
 dev/text_entry_test.html
+devlog/campaign-mode/index.html
+devlog/feed.xml
+devlog/hard-levels/index.html
+devlog/images/conditional_placement.png
+devlog/images/mine_blocks_exit.png
+devlog/images/retry_client_side.png
+devlog/images/retry_host_side.png
+devlog/index.html
 gettingstarted/index.html
 index.html
 neonswarm/index.html

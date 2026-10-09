@@ -1159,6 +1159,81 @@ code {
 }
 
 /* -------------------------------------------
+   Devlog
+   ------------------------------------------- */
+.post-date {
+    color: var(--text-light);
+    font-size: 0.95rem;
+}
+
+.content-box .post-date {
+    margin-top: -1rem;
+    margin-bottom: 1rem;
+}
+
+.post {
+    padding: 4rem 20px;
+}
+
+.post h1 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.post > .post-date {
+    margin-bottom: 2rem;
+}
+
+.post h2 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin: 2.5rem 0 1rem;
+}
+
+.post h3 {
+    font-size: 1.3rem;
+    margin: 2rem 0 0.75rem;
+}
+
+.post figure {
+    margin: 1.5rem 0 2rem;
+}
+
+.post img,
+.post iframe {
+    display: block;
+    max-width: 100%;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+
+.post img {
+    height: auto;
+}
+
+/* An embedded video takes the column's width whatever the size in its embed code */
+.post iframe {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    margin: 1.5rem 0 2rem;
+}
+
+.post-end {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.post-end p {
+    margin-top: 1.5rem;
+}
+
+/* -------------------------------------------
    Form Styles
    ------------------------------------------- */
 .signup-form {
@@ -1364,8 +1439,13 @@ code {
         gap: 1rem;
     }
 
-    .section h2 {
+    .section h2,
+    .post h1 {
         font-size: 2rem;
+    }
+
+    .post {
+        padding: 2rem 20px;
     }
 
     .key-points,

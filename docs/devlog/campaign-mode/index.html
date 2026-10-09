@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placing stuff conditionally, campaign mode, fast retry - Lockstep Arcade devlog</title>
+    <meta name="description" content="A campaign mode for Spirits, conditional placement of stuff, and a faster way to retry after failing a level.">
+    <meta property="og:title" content="Placing stuff conditionally, campaign mode, fast retry">
+    <meta property="og:description" content="A campaign mode for Spirits, conditional placement of stuff, and a faster way to retry after failing a level.">
+    <meta property="og:url" content="https://locksteparcade.com/devlog/campaign-mode/">
+    <meta name="twitter:title" content="Placing stuff conditionally, campaign mode, fast retry">
+    <meta name="twitter:description" content="A campaign mode for Spirits, conditional placement of stuff, and a faster way to retry after failing a level.">
+    <meta property="og:image" content="https://locksteparcade.com/devlog/images/mine_blocks_exit.png">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://locksteparcade.com/devlog/images/mine_blocks_exit.png">
+
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="alternate" type="application/rss+xml" title="Lockstep Arcade devlog" href="../feed.xml">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">Lockstep Arcade</div>
+            <div class="nav-links">
+                <a href="../../index.html">Home</a>
+                <a href="../../challenges/">Testing Challenges</a>
+                <a href="../../signup/">Signup</a>
+                <a href="../../spirits/">Spirits</a>
+                <a href="../../serpents/">Serpents</a>
+                <a href="../../pilots/">Pilots</a>
+                <a href="../../neonswarm/">Neon Swarm</a>
+                <a href="../../devlog/">Devlog</a>
+                <a href="../../changelog/">Changelog</a>
+            </div>
+        </div>
+    </nav>
+
+
+    <article class="post content-wrapper">
+        <h1>Placing stuff conditionally, campaign mode, fast retry</h1>
+        <p class="post-date">4 September 2026</p>
+        <div class="prose">
+<p>Ok, so the main thrust of recent development has been a kind of 'campaign mode'.</p>
+<p>Before this, after you completed the tutorial and went into the online part of the game, you would just choose from a big bag of playable levels. In testing videos, or when watching people playing, I would then see everyone just essentially start with the first in the list, or one they like the sound of, neither of which is likely to actually be the best map to start off with.</p>
+<p>Apart from being difficult, most testers play single player, and the first level I saw people playing was actually not completable by a single player.</p>
+<figure><img src="../images/mine_blocks_exit.png" alt="A Spirits level, with a mine blocking the narrow gap to the exit" loading="lazy"></figure>
+<p>In this level, for Spirits, there is a mine blocking the narrow gap leading to the exit at the end of the level. This is a kind of cliché copied from N++. The point is that the level is actually designed for two players. The first player to reach the exit can then detonate this mine, dying in the process, but opening up the way for the second player to complete the level.</p>
+<p>To make things worse, the config let me specify the different player counts the level was intended for, but the actual interface you would see would just tell you something about the level 'not being eligible for highscores'.</p>
+<p>Of course, that interface could be improved, and a mechanism could be added to prevent you playing this level single player, but that's just more friction, and less possibilities for the player, and I was able to find a much better solution for this.</p>
+<figure><img src="../images/conditional_placement.png" alt="The level editor, with the mine given the condition players&gt;=2" loading="lazy"></figure>
+<p>The solution, as shown in this screenshot of the level editor was to add the possibility to make things placed in the world conditional. So, in this case, that mine is only actually added if there is actually more than one player. (This way, the map actually becomes playable in this case.)</p>
+<p>I also added the possibility to make placed items conditional on difficulty, since this also fits well with the idea of conditional placement. Taken together, these two conditional placement conditions then really help with generating a set of different maps to fill out a campaign, without having to do things like copying and modifying maps for these kinds of detail tweaks.</p>
+<h2>Campaign mode</h2>
+<p>The new campaign mode is very strongly inspired by the grid of levels in the N++ campaign, and I like the idea, in particular, that you get a kind of branching structure from this, and some choice about how exactly you prefer to proceed through the levels in the campaign.</p>
+<p>So you start off with only the top left level in a grid being unlocked, and as you start to complete levels, the levels to the right and below the completed levels then also become available to play.</p>
+<p>I recently added a thumbnail generation feature, which does a trick with creating a temporary game session, calling the normal render() method for the game, and capturing the resulting image in a texture for use as a thumbnail.</p>
+<p>I modified this to add some caching and limit the number of new thumbnails that can be generated on any frame to 2, and then a thumbnail image can be rendered for each grid element in the campaign. (Locked elements get no thumbnail, and you just see a grey rectangle with a question mark, for these.)</p>
+<p>The actual lobby mechanism didn't need any modifications to support this, initially. (I had previously added the possibility to change map selection in an active game room, which was actually the main prerequisite for this.)</p>
+<p>I did add the possibility to create 'invite only' rooms, since there is a good chance you want to be able to choose who you want to play with, for an online co-op campaign. This was fairly complicated, but is also now available for 'normal' multiplayer rooms, and is a good thing to have, I think.</p>
+<h2>Fast retry loop after failed attempts</h2>
+<p>Apart from that, one thing I really wanted to improve was to make it much easier for players to retry a level after failure.</p>
+<p>The point is that, as with N++, there is an intention that the levels can get pretty hard, but they don't take long to play, and then it really is supposed to be "if at first you don't succeed, try, try again".</p>
+<p>In the previous release, after dying, you would get:</p>
+<ol><li>The game end screen with the results, shown in game (click to move on)</li><li>A post game results screen showing things like highscore updates (very nice to have if you actually got a highscore, but a pain when you just failed, click again to move on)</li><li>Back in the game lobby, but you need to indicate you are ready, before the host can retry (if they actually agree)</li><li>The host then needs to actually start the game</li></ol>
+<p>It took a lot of thinking to find some way to really cut back that sequence, without redesigning all the lobby server and client interactions, but now, on the client side you get the following shown after a game ending in failure:</p>
+<figure><img src="../images/retry_client_side.png" alt="The game over screen for a player who isn't the host, saying that the host's current choice is to retry" loading="lazy"></figure>
+<p>And then, on the host side, after a short delay to give other players the chance to quit out if they want, you get:</p>
+<figure><img src="../images/retry_host_side.png" alt="The game over screen for the host, with buttons to retry the map or return to the campaign room" loading="lazy"></figure>
+<h2>Map 'nominations'</h2>
+<p>The one thing left for the campaign rooms, to make things work for co-op players <em>not</em> also on voice chat, was to give non-host players some way of indicating which map/level they would like to play next.</p>
+<p>The design chosen for this was for non-host players to be able to 'nominate' which map <em>they</em> would like to play. This nomination is then purely informational, and the host can choose to take it into account or ignore it, but the non-host players nevertheless remain able to click ready or not click ready.</p>
+        </div>
+        <div class="post-end">
+            <a href="../../Client" class="btn btn-primary">Play in your browser</a>
+            <p><a href="../">All devlog posts</a></p>
+        </div>
+    </article>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" class="lightbox-img" src="" alt="Enlarged screenshot">
+    </div>
+
+    <script>
+    function openLightbox(src) {
+        document.getElementById('lightbox-img').src = src;
+        document.getElementById('lightbox').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        document.getElementById('lightbox').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeLightbox();
+    });
+
+    document.querySelectorAll('.screenshot img').forEach(function(img) {
+        img.addEventListener('click', function() {
+            openLightbox(this.src);
+        });
+    });
+    </script>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Lockstep Arcade</h4>
+                    <p>Idiosyncratic multiplayer games built around rock solid netcode</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Games</h4>
+                    <ul>
+                        <li><a href="../../spirits/">Spirits</a></li>
+                        <li><a href="../../serpents/">Serpents</a></li>
+                        <li><a href="../../pilots/">Pilots</a></li>
+                        <li><a href="../../neonswarm/">Neon Swarm</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Links</h4>
+                    <ul>
+                        <li><a href="../../devlog/">Devlog</a></li>
+                        <li><a href="../../changelog/">Changelog</a></li>
+                        <li><a href="../../signup/">Signup</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+
+</body>
+</html>

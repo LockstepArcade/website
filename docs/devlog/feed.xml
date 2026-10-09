@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Lockstep Arcade devlog</title>
+    <link>https://locksteparcade.com/devlog/</link>
+    <description>News from the development of Lockstep Arcade</description>
+    <language>en</language>
+    <atom:link href="https://locksteparcade.com/devlog/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>The satisfaction of people getting stuck into and completing hard levels</title>
+      <link>https://locksteparcade.com/devlog/hard-levels/</link>
+      <guid isPermaLink="true">https://locksteparcade.com/devlog/hard-levels/</guid>
+      <pubDate>Sun, 27 Sep 2026 00:00:00 +0000</pubDate>
+      <description>&lt;p&gt;So campaigns are a pretty new feature, it is difficult to make enough different levels to fill up a campaign properly, and I have included some levels at the end of the Spirits campaign that are really too difficult.&lt;/p&gt;
+&lt;p&gt;The levels in question are a couple of &#x27;beam dance&#x27; levels, where crawlers move around an outer wall shooting deadly beams you need to avoid into the space you move through. The beams are obstructed by features inside the space and you need to take advantage of this, and the pattern that results as the crawlers move, to complete the level.&lt;/p&gt;
+&lt;p&gt;The challenge is then to activate a bunch of switches in sequence, each one opening up access to another switch, with the last switch eventually opening up access to the exit. (This is unashamedly derivative of an N++ level I enjoyed playing a lot with some friends!) Actually, these levels were originally designed to be played by multiple players working together, with the players coordinating to each activate different switches, but they could theoretically be completed by just one player, so I put them in as super challenging &#x27;boss&#x27; levels to come up against at the end of the campaign.&lt;/p&gt;
+&lt;p&gt;I had tried the hardest level in 2 player co-op with my daughter. We found it challenging, had not yet managed to complete it, and were intending to come back to it.&lt;/p&gt;
+&lt;p&gt;I have had some people testing the Spirits campaign, then, through the Play2Review site, where they post gameplay recordings of their sessions. Actually, I hadn&#x27;t looked at the review there yet, and had instead noticed a whole load of new games listed in the played games list, clicked through these and saw a player basically sieging these hard levels and eventually completing them. Another player also completed all the levels later on.&lt;/p&gt;
+&lt;p&gt;It is a really nice feeling, as a game designer, to see players succeed at a really hard level, I think. :)&lt;/p&gt;
+&lt;p&gt;Here is a video of a playthrough of the easier of the two levels:&lt;/p&gt;
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/aopmlFH9y8E?si=n5zxxazyXdn6yXnv&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot; referrerpolicy=&quot;strict-origin-when-cross-origin&quot; allowfullscreen&gt;&lt;/iframe&gt;
+&lt;p&gt;And then here is a playthrough of the hardest level:&lt;/p&gt;
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/ThbxYUziGZM?si=pr-di3nW58xcotfS&quot; title=&quot;YouTube video player&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&quot; referrerpolicy=&quot;strict-origin-when-cross-origin&quot; allowfullscreen&gt;&lt;/iframe&gt;
+&lt;p&gt;Other players obviously found the hardest level much too hard, and there is not enough of a gradual increase in difficulty through the Spirits campaign, so these two levels really represent a far from ideal difficulty cliff, but it is such a great feeling to see these levels completed that I am going to struggle not to include more hard levels like this in the future, I think. :)&lt;/p&gt;
+&lt;p&gt;I guess the solution will be 1) to add more levels that gradually ramp towards this difficulty (obviously), and 2) to communicate that these levels &lt;em&gt;are&lt;/em&gt; really difficult so players are not surprised by this, and can choose whether or not to accept the challenge. (I am thinking for example, that there could be a difficulty rating as a number of stars, going from 1 to 5 stars, and then for really hard levels this could change from 5 stars to 5 skulls, or something like that.)&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Placing stuff conditionally, campaign mode, fast retry</title>
+      <link>https://locksteparcade.com/devlog/campaign-mode/</link>
+      <guid isPermaLink="true">https://locksteparcade.com/devlog/campaign-mode/</guid>
+      <pubDate>Fri, 04 Sep 2026 00:00:00 +0000</pubDate>
+      <description>&lt;p&gt;Ok, so the main thrust of recent development has been a kind of &#x27;campaign mode&#x27;.&lt;/p&gt;
+&lt;p&gt;Before this, after you completed the tutorial and went into the online part of the game, you would just choose from a big bag of playable levels. In testing videos, or when watching people playing, I would then see everyone just essentially start with the first in the list, or one they like the sound of, neither of which is likely to actually be the best map to start off with.&lt;/p&gt;
+&lt;p&gt;Apart from being difficult, most testers play single player, and the first level I saw people playing was actually not completable by a single player.&lt;/p&gt;
+&lt;figure&gt;&lt;img src=&quot;https://locksteparcade.com/devlog/images/mine_blocks_exit.png&quot; alt=&quot;A Spirits level, with a mine blocking the narrow gap to the exit&quot; loading=&quot;lazy&quot;&gt;&lt;/figure&gt;
+&lt;p&gt;In this level, for Spirits, there is a mine blocking the narrow gap leading to the exit at the end of the level. This is a kind of cliché copied from N++. The point is that the level is actually designed for two players. The first player to reach the exit can then detonate this mine, dying in the process, but opening up the way for the second player to complete the level.&lt;/p&gt;
+&lt;p&gt;To make things worse, the config let me specify the different player counts the level was intended for, but the actual interface you would see would just tell you something about the level &#x27;not being eligible for highscores&#x27;.&lt;/p&gt;
+&lt;p&gt;Of course, that interface could be improved, and a mechanism could be added to prevent you playing this level single player, but that&#x27;s just more friction, and less possibilities for the player, and I was able to find a much better solution for this.&lt;/p&gt;
+&lt;figure&gt;&lt;img src=&quot;https://locksteparcade.com/devlog/images/conditional_placement.png&quot; alt=&quot;The level editor, with the mine given the condition players&amp;gt;=2&quot; loading=&quot;lazy&quot;&gt;&lt;/figure&gt;
+&lt;p&gt;The solution, as shown in this screenshot of the level editor was to add the possibility to make things placed in the world conditional. So, in this case, that mine is only actually added if there is actually more than one player. (This way, the map actually becomes playable in this case.)&lt;/p&gt;
+&lt;p&gt;I also added the possibility to make placed items conditional on difficulty, since this also fits well with the idea of conditional placement. Taken together, these two conditional placement conditions then really help with generating a set of different maps to fill out a campaign, without having to do things like copying and modifying maps for these kinds of detail tweaks.&lt;/p&gt;
+&lt;h2&gt;Campaign mode&lt;/h2&gt;
+&lt;p&gt;The new campaign mode is very strongly inspired by the grid of levels in the N++ campaign, and I like the idea, in particular, that you get a kind of branching structure from this, and some choice about how exactly you prefer to proceed through the levels in the campaign.&lt;/p&gt;
+&lt;p&gt;So you start off with only the top left level in a grid being unlocked, and as you start to complete levels, the levels to the right and below the completed levels then also become available to play.&lt;/p&gt;
+&lt;p&gt;I recently added a thumbnail generation feature, which does a trick with creating a temporary game session, calling the normal render() method for the game, and capturing the resulting image in a texture for use as a thumbnail.&lt;/p&gt;
+&lt;p&gt;I modified this to add some caching and limit the number of new thumbnails that can be generated on any frame to 2, and then a thumbnail image can be rendered for each grid element in the campaign. (Locked elements get no thumbnail, and you just see a grey rectangle with a question mark, for these.)&lt;/p&gt;
+&lt;p&gt;The actual lobby mechanism didn&#x27;t need any modifications to support this, initially. (I had previously added the possibility to change map selection in an active game room, which was actually the main prerequisite for this.)&lt;/p&gt;
+&lt;p&gt;I did add the possibility to create &#x27;invite only&#x27; rooms, since there is a good chance you want to be able to choose who you want to play with, for an online co-op campaign. This was fairly complicated, but is also now available for &#x27;normal&#x27; multiplayer rooms, and is a good thing to have, I think.&lt;/p&gt;
+&lt;h2&gt;Fast retry loop after failed attempts&lt;/h2&gt;
+&lt;p&gt;Apart from that, one thing I really wanted to improve was to make it much easier for players to retry a level after failure.&lt;/p&gt;
+&lt;p&gt;The point is that, as with N++, there is an intention that the levels can get pretty hard, but they don&#x27;t take long to play, and then it really is supposed to be &quot;if at first you don&#x27;t succeed, try, try again&quot;.&lt;/p&gt;
+&lt;p&gt;In the previous release, after dying, you would get:&lt;/p&gt;
+&lt;ol&gt;&lt;li&gt;The game end screen with the results, shown in game (click to move on)&lt;/li&gt;&lt;li&gt;A post game results screen showing things like highscore updates (very nice to have if you actually got a highscore, but a pain when you just failed, click again to move on)&lt;/li&gt;&lt;li&gt;Back in the game lobby, but you need to indicate you are ready, before the host can retry (if they actually agree)&lt;/li&gt;&lt;li&gt;The host then needs to actually start the game&lt;/li&gt;&lt;/ol&gt;
+&lt;p&gt;It took a lot of thinking to find some way to really cut back that sequence, without redesigning all the lobby server and client interactions, but now, on the client side you get the following shown after a game ending in failure:&lt;/p&gt;
+&lt;figure&gt;&lt;img src=&quot;https://locksteparcade.com/devlog/images/retry_client_side.png&quot; alt=&quot;The game over screen for a player who isn&#x27;t the host, saying that the host&#x27;s current choice is to retry&quot; loading=&quot;lazy&quot;&gt;&lt;/figure&gt;
+&lt;p&gt;And then, on the host side, after a short delay to give other players the chance to quit out if they want, you get:&lt;/p&gt;
+&lt;figure&gt;&lt;img src=&quot;https://locksteparcade.com/devlog/images/retry_host_side.png&quot; alt=&quot;The game over screen for the host, with buttons to retry the map or return to the campaign room&quot; loading=&quot;lazy&quot;&gt;&lt;/figure&gt;
+&lt;h2&gt;Map &#x27;nominations&#x27;&lt;/h2&gt;
+&lt;p&gt;The one thing left for the campaign rooms, to make things work for co-op players &lt;em&gt;not&lt;/em&gt; also on voice chat, was to give non-host players some way of indicating which map/level they would like to play next.&lt;/p&gt;
+&lt;p&gt;The design chosen for this was for non-host players to be able to &#x27;nominate&#x27; which map &lt;em&gt;they&lt;/em&gt; would like to play. This nomination is then purely informational, and the host can choose to take it into account or ignore it, but the non-host players nevertheless remain able to click ready or not click ready.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
