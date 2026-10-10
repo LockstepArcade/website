@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starting a devlog - Lockstep Arcade devlog</title>
+    <meta name="description" content="First post in the devlog.">
+    <meta property="og:title" content="Starting a devlog">
+    <meta property="og:description" content="First post in the devlog.">
+    <meta property="og:url" content="https://locksteparcade.com/devlog/starting-devlog/">
+    <meta name="twitter:title" content="Starting a devlog">
+    <meta name="twitter:description" content="First post in the devlog.">
+    <meta property="og:image" content="https://locksteparcade.com/devlog/images/wrapped-cauldrons.png">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://locksteparcade.com/devlog/images/wrapped-cauldrons.png">
+
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="alternate" type="application/rss+xml" title="Lockstep Arcade devlog" href="../feed.xml">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">Lockstep Arcade</div>
+            <div class="nav-links">
+                <a href="../../index.html">Home</a>
+                <a href="../../challenges/">Testing Challenges</a>
+                <a href="../../signup/">Signup</a>
+                <a href="../../spirits/">Spirits</a>
+                <a href="../../serpents/">Serpents</a>
+                <a href="../../pilots/">Pilots</a>
+                <a href="../../neonswarm/">Neon Swarm</a>
+                <a href="../../devlog/">Devlog</a>
+                <a href="../../changelog/">Changelog</a>
+            </div>
+        </div>
+    </nav>
+
+
+    <article class="post content-wrapper">
+        <h1>Starting a devlog</h1>
+        <p class="post-date">24 April 2026</p>
+        <div class="prose">
+<figure><img src="../images/wrapped-cauldrons.png" alt="A zoomed out screenshot of the Cauldrons map, showing the world wrapping." loading="lazy"></figure>
+<p>Ok, so I've been meaning to start a devlog, and I got a bit of an extra push to do this since this is required for <a href="https://itch.io/jam/improve-my-game-jam-44">the Improve my Game jam</a>.</p>
+<p>I'll be writing about:</p>
+<ol><li>game design issues that come up in the specific context of multiplayer gaming using a lockstep networking architecture with deterministic simulation</li><li>other game design issues completely unrelated to that :)</li><li>multiplayer lobby development</li><li>technical issues that come up with a project that uses SDL3 on emscripten</li><li>technical and design issues that come up when developing a phone game</li></ol>
+<p>Don't hesitate to let me know if there is some specific aspect of Lockstep Arcade you would be interested in reading about.</p>
+<p>and,</p>
+<p>Watch this space!</p>
+        </div>
+        <div class="post-end">
+            <a href="../../Client" class="btn btn-primary">Play in your browser</a>
+            <p><a href="../">All devlog posts</a></p>
+        </div>
+    </article>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" class="lightbox-img" src="" alt="Enlarged screenshot">
+    </div>
+
+    <script>
+    function openLightbox(src) {
+        document.getElementById('lightbox-img').src = src;
+        document.getElementById('lightbox').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        document.getElementById('lightbox').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeLightbox();
+    });
+
+    document.querySelectorAll('.screenshot img').forEach(function(img) {
+        img.addEventListener('click', function() {
+            openLightbox(this.src);
+        });
+    });
+    </script>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Lockstep Arcade</h4>
+                    <p>Idiosyncratic multiplayer games built around rock solid netcode</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Games</h4>
+                    <ul>
+                        <li><a href="../../spirits/">Spirits</a></li>
+                        <li><a href="../../serpents/">Serpents</a></li>
+                        <li><a href="../../pilots/">Pilots</a></li>
+                        <li><a href="../../neonswarm/">Neon Swarm</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Links</h4>
+                    <ul>
+                        <li><a href="../../devlog/">Devlog</a></li>
+                        <li><a href="../../changelog/">Changelog</a></li>
+                        <li><a href="../../signup/">Signup</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+
+</body>
+</html>

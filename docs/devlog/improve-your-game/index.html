@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Improve your game - Lockstep Arcade devlog</title>
+    <meta name="description" content="Changes for a submission to the &#x27;Improve your game&#x27; jam.">
+    <meta property="og:title" content="Improve your game">
+    <meta property="og:description" content="Changes for a submission to the &#x27;Improve your game&#x27; jam.">
+    <meta property="og:url" content="https://locksteparcade.com/devlog/improve-your-game/">
+    <meta name="twitter:title" content="Improve your game">
+    <meta name="twitter:description" content="Changes for a submission to the &#x27;Improve your game&#x27; jam.">
+    <meta property="og:image" content="https://locksteparcade.com/assets/banner.jpg">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://locksteparcade.com/assets/banner.jpg">
+
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="alternate" type="application/rss+xml" title="Lockstep Arcade devlog" href="../feed.xml">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">Lockstep Arcade</div>
+            <div class="nav-links">
+                <a href="../../index.html">Home</a>
+                <a href="../../challenges/">Testing Challenges</a>
+                <a href="../../signup/">Signup</a>
+                <a href="../../spirits/">Spirits</a>
+                <a href="../../serpents/">Serpents</a>
+                <a href="../../pilots/">Pilots</a>
+                <a href="../../neonswarm/">Neon Swarm</a>
+                <a href="../../devlog/">Devlog</a>
+                <a href="../../changelog/">Changelog</a>
+            </div>
+        </div>
+    </nav>
+
+
+    <article class="post content-wrapper">
+        <h1>Improve your game</h1>
+        <p class="post-date">30 April 2026</p>
+        <div class="prose">
+<p>(Changes for a submission to the 'Improve your game' jam.)</p>
+<p>As it often works out, I started out with a number of improvements in mind very much targetting the gameplay side, and ended up spending a lot of time on in depth work on the underlying platform.</p>
+<p>I wanted to make a number of improvements to the Serpents game with the theme of helping the game to play out more often in a way where players actually end up moving around the tails of other serpents.</p>
+<p>(In play testing, instead, people would tend to collide a lot, not really build up a long tail, and then, when players did build up a long tail they would tend to just then be moving around the arena mostly by themselves.)</p>
+<p>The basic ideas for these improvements are:</p>
+<ol><li>Make it easier for players to control the Serpents (so that they collide less, and then tend to build up longer tails)</li><li>'Close' the player exits until players build up a tail of a given minimum length (so players <em>can't</em> just collect a couple of stars and cash this in directly)</li><li>Take actions to encourage players to be in the same part of the arena more</li></ol>
+<p>For the first point, there turned out to be a very simple change that could help with this a bit, which is to reduce the maximum speed of serpents. Serpents that move slower are easier to control, and will collide less, and, while it was already possible to get your serpent to move more slowly, this takes a bit of finesse, and it is easy for the serpent speed to get out of control when you are trying to manoeuvre.</p>
+<p>Because I kind of like the skill involved in moving the serpent around at higher speeds, I didn't then want to lose this completely, so I felt the need to add in a speedup pickup, which gradually enables you serpent to get back to the previous maximum speed (and then go a bit faster than this, even). There were some tricky technical details to work out for this, but more on this later..</p>
+<p>Closing the player exits until a threshold minimum tail length is reached was also quite a trivial change (but is still a good change for the theme of the improvements).</p>
+<p>For the last point, my daughter suggested the idea of having parts of the map coloured in grey or red, as kind of no-go or penalty areas, to encourage players to congregate more in the remaining non-penalised areas. I really like the idea of doing something like this, and I think this will add more things that are going on in the game, and general interest, as well as encouraging players to congregate more, but this can get quite involved, and needs a lot of thought, whereas I was able to come up with a much easier change which also achieves the same fundamental purpose.</p>
+<p>The trick here was just to move the exits, which were previously next to the player start positions in each corner of the arena, all next to each other in the centre.</p>
+<p>Coming back to the speedup pickups, there turned out to some tricky details in implementing even something simple like this, due to the lockstep architecture, with delay.</p>
+<p>The pickups are collected by the front of the serpent tail which is synchronised network state. The tail cannot immediately speed up, however, because the local serpent head has already moved a number of frames in front of the tail, and if the movement characteristics of the tail change immediately, the tail will no longer follow directly along the path taken by the head.</p>
+<p>(It's kind of a recurring theme of working on these games, with the lockstep architecture, that something that should be quite simple turns out to need a fair amount of thought, and some tricksy solution.)</p>
+<p>The solution, in this case, is to queue up the speed change for application to the tail 'delay frames' later. The local head gets this speed change immediately, however. The tail will then catch up to the head delay frames later on, and get the same speed change applied at that point, keeping things in synch..</p>
+        </div>
+        <div class="post-end">
+            <a href="../../Client" class="btn btn-primary">Play in your browser</a>
+            <p><a href="../">All devlog posts</a></p>
+        </div>
+    </article>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" class="lightbox-img" src="" alt="Enlarged screenshot">
+    </div>
+
+    <script>
+    function openLightbox(src) {
+        document.getElementById('lightbox-img').src = src;
+        document.getElementById('lightbox').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        document.getElementById('lightbox').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeLightbox();
+    });
+
+    document.querySelectorAll('.screenshot img').forEach(function(img) {
+        img.addEventListener('click', function() {
+            openLightbox(this.src);
+        });
+    });
+    </script>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Lockstep Arcade</h4>
+                    <p>Idiosyncratic multiplayer games built around rock solid netcode</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Games</h4>
+                    <ul>
+                        <li><a href="../../spirits/">Spirits</a></li>
+                        <li><a href="../../serpents/">Serpents</a></li>
+                        <li><a href="../../pilots/">Pilots</a></li>
+                        <li><a href="../../neonswarm/">Neon Swarm</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Links</h4>
+                    <ul>
+                        <li><a href="../../devlog/">Devlog</a></li>
+                        <li><a href="../../changelog/">Changelog</a></li>
+                        <li><a href="../../signup/">Signup</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+
+</body>
+</html>
